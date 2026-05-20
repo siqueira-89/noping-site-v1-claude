@@ -1,0 +1,105 @@
+/* ===== Buttons ===== */
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 22px;
+  border-radius: var(--r-pill);
+  font-family: var(--font-sans);
+  font-weight: 600; font-size: 14px; letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  transition: transform .2s var(--ease-out), background .2s, box-shadow .3s, border-color .2s;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary {
+  background: var(--green);
+  color: #04120a;
+  box-shadow: 0 0 0 1px rgba(156,255,46,0.4), 0 12px 30px -8px var(--green-glow);
+}
+.btn--primary:hover { box-shadow: 0 0 0 1px var(--green), 0 16px 40px -8px var(--green-glow); }
+
+.btn--ghost {
+  background: rgba(255,255,255,0.04);
+  color: var(--fg);
+  border-color: var(--line-strong);
+}
+.btn--ghost:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.25); }
+
+.btn--dark {
+  background: #0b1f3d;
+  color: #bbd7ff;
+  border: 1px solid rgba(90,140,255,0.3);
+}
+.btn--dark:hover { background: #0e2856; }
+
+.btn--lg { padding: 16px 28px; font-size: 15px; }
+.btn--sm { padding: 9px 16px; font-size: 12px; }
+
+/* ===== Pill / Tag ===== */
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.pill--good {
+  background: var(--green-soft);
+  border-color: rgba(156,255,46,0.4);
+  color: var(--green);
+}
+.pill--bad {
+  background: var(--bad-soft);
+  border-color: rgba(255,122,26,0.4);
+  color: var(--bad-hi);
+}
+
+/* ===== Card ===== */
+.card {
+  background: linear-gradient(180deg, #0f1316 0%, #0a0d10 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.card::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(1200px 200px at 50% -50%, rgba(156,255,46,0.08), transparent);
+  pointer-events: none;
+  opacity: 0; transition: opacity .4s;
+}
+.card:hover::after { opacity: 1; }
+
+/* ===== HUD mini panel (floating glass) ===== */
+.hud {
+  background: rgba(12,15,17,0.82);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  padding: 12px 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 20px 60px -30px rgba(0,0,0,0.9);
+  position: relative;
+}
+.hud--bad {
+  border-color: rgba(255,122,26,0.5);
+  box-shadow: 0 0 0 1px rgba(255,122,26,0.2), 0 20px 60px -20px rgba(255,122,26,0.25);
+}
+.hud--good {
+  border-color: rgba(156,255,46,0.5);
+  box-shadow: 0 0 0 1px rgba(156,255,46,0.2), 0 20px 60px -20px var(--green-glow);
+}
+
+/* ticker bar on HUD */
+.hud-tick {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  opacity: 0.5;
+}

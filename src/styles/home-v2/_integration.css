@@ -1,0 +1,389 @@
+/* ============================================================
+   Home v2 — site integration bridge + section sizing
+   Loaded LAST after all home-v2 + global styles.
+
+   Goals:
+   1. Make every section ~100vh-ish for a deck-like flow
+      (Hero+Stats merged, Tech/FPS/MultiGame/AppDash/Coverage/
+      Pros/Media/FAQ each occupy ~100vh).
+   2. Scale down Hero so the 4 stats sit inside 100vh w/ header.
+   3. Pull in the global affiliate-card + faq-accordion styles
+      so the Pro Players / FAQ sections look identical to the
+      /affiliates page reference.
+   4. Redesigned Media section.
+   5. Hide the design Tweaks panel (production build).
+   ============================================================ */
+
+/* --- base body ------------------------------------------------ */
+body { min-width: 0; }
+#root { padding-top: var(--np-header-height, 72px); }
+.section-footer { margin-top: 0; }
+
+/* --- Section sizing -----------------------------------------------
+   First .section after #root = Hero (contains hero-grid + stats).
+   Every direct child .section is forced to viewport-height so the
+   layout reads like a deck. Inner content centers vertically. */
+#root > .section,
+#root > .hero {
+  min-height: calc(100vh - var(--np-header-height, 72px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+/* The .section-sm modifier (Stats / Media) tightens vertical rhythm. */
+#root > .section-sm { min-height: 0; padding: 48px 0; }
+#root > .divider-rule { display: none; } /* visual noise removed */
+
+/* --- HERO (Section 1) -------------------------------------------
+   Pack the hero copy + globe + 4 stat cards into one 100vh block. */
+.hero {
+  padding: 16px 0 24px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero .container { display: flex; flex-direction: column; gap: 24px; height: 100%; justify-content: center; }
+.hero-grid { gap: 32px; }
+.hero-copy h1 { font-size: clamp(40px, 4.4vw, 60px); margin-bottom: 16px; }
+.hero-copy p.lead { font-size: 15px; margin-bottom: 24px; }
+.hero-badge-row { margin-bottom: 16px; }
+.hero-rail { display: none; }   /* hide the inner rail — Stats grid is now the closer */
+
+/* Globe shrinks to fit */
+.hero .globe-wrap { width: clamp(380px, 38vw, 520px) !important; height: clamp(380px, 38vw, 520px) !important; }
+.hero .globe-svg  { width: 100% !important; height: 100% !important; }
+
+/* HUD floats — shrink + reposition to stay within the smaller globe */
+.hero .hud-float { width: 180px; }
+.hero .hud-float .ping { font-size: 28px; }
+.hero .hud-float .sub { font-size: 10px; }
+
+/* Stats grid sits inside the same 100vh — shrink the cards */
+.stats-grid { gap: 12px; }
+.stat-card  { padding: 18px 20px 16px; }
+.stat-card .prefix { font-size: 10px; letter-spacing: 0.16em; }
+.stat-card .value  { font-size: clamp(34px, 3.4vw, 48px); margin-top: 4px; }
+.stat-card .label  { font-size: 11px; margin-top: 6px; letter-spacing: 0.08em; }
+
+/* Stats riding inside the hero — flatten the spacing */
+.hero + .section.section-sm { margin-top: -32px; padding-top: 0; padding-bottom: 16px; min-height: 0; }
+
+/* --- TECH (Section 2) — leave intact, just tighten ---------- */
+.tech-head { margin-bottom: 32px; }
+.features-grid { font-size: 14px; }
+.feature-cell { padding: 24px 26px 26px; }
+
+/* --- FPS BOOSTER (Section 3) — scale to fit ------------------ */
+.fps-section { gap: 56px; }
+.fps-visual { padding: 28px; aspect-ratio: 5/3.4; }
+.fps-bars { height: 140px; }
+.fps-number { font-size: 92px; margin-top: 14px; }
+.fps-number .unit { font-size: 26px; }
+
+/* --- MULTIGAME (Section 4) — real game art slots ----------- */
+.game-tile { aspect-ratio: 3/4; border-radius: var(--r-md); overflow: hidden; }
+.game-tile .art {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-2);
+}
+.game-tile .art-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.85) 100%);
+  z-index: 1;
+}
+.game-tile .label { z-index: 2; }
+/* keep the 4×3 grid tight at smaller scale */
+.multigame { gap: 56px; }
+
+/* --- APP DASHBOARD (Section 5) — keep intact ----------------- */
+.app-section { gap: 56px; }
+.app-frame { aspect-ratio: 16/9.6; }
+
+/* --- COVERAGE (Section 6) — bump dot visibility -------------- */
+.coverage-map { margin-top: 32px; aspect-ratio: 1920/780; }
+.coverage-map svg circle { fill: #B9FF5E; }
+
+/* --- PRO PLAYERS (Section 7) — affiliate-card carousel ---------
+   Uses the EXACT same markup + JS as /affiliates: container with
+   horizontal scroll, track of cards, progress thumb beneath.
+   Reused via window.NoPingCarousel.init (see ProPlayers.jsx). */
+.hero-affiliates-cards {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.affiliates-carousel-container {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 5px 0 10px;
+  display: flex;
+  justify-content: flex-start;
+  scrollbar-width: none;
+}
+.affiliates-carousel-container::-webkit-scrollbar { display: none; }
+.affiliates-track {
+  display: flex;
+  gap: 24px;
+  padding: 0;
+}
+.affiliates-progress-bar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+.affiliates-progress-bar-track {
+  width: 200px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  position: relative;
+  overflow: hidden;
+}
+.affiliates-progress-bar-thumb {
+  height: 100%;
+  background: var(--green);
+  border-radius: 99px;
+  width: 30%;
+  position: absolute;
+  left: 0;
+  transition: left 0.15s cubic-bezier(0.25, 1, 0.5, 1), width 0.15s ease;
+  box-shadow: 0 0 10px var(--green-glow);
+}
+
+.affiliate-card {
+  width: 306px;
+  height: 420px;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, rgba(29, 32, 40, 0.65) 0%, rgba(10, 12, 14, 0.96) 100%);
+  border-radius: var(--r-md);
+  border: 1.5px solid rgba(147, 255, 24, 0.18);
+  backdrop-filter: blur(20px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 15px 35px -10px rgba(0, 0, 0, 0.6),
+    0 0 15px rgba(147, 255, 24, 0.04);
+  transition: all 0.3s var(--ease);
+  position: relative;
+}
+.affiliate-card:hover {
+  border-color: rgba(147, 255, 24, 0.45);
+  transform: translateY(-4px);
+  box-shadow:
+    0 25px 45px -15px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(147, 255, 24, 0.12);
+}
+.affiliate-card .card-image-container {
+  height: 194px; width: 100%;
+  overflow: hidden; position: relative;
+  background: #060709;
+  display: flex; align-items: center; justify-content: center;
+}
+.affiliate-card .card-image-container::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 55%, rgba(29, 32, 40, 0.85) 100%);
+  z-index: 2;
+}
+.affiliate-card .affiliate-avatar {
+  width: 100%; height: 100%;
+  object-fit: contain; object-position: center top;
+  transition: transform 0.5s ease;
+}
+.affiliate-card:hover .affiliate-avatar { transform: scale(1.05); }
+.affiliate-card .card-content {
+  padding: 12px 18px 10px; flex: 1;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.affiliate-card .card-header {
+  display: flex; flex-direction: column;
+  gap: 6px; align-items: flex-start;
+}
+.affiliate-card .affiliate-name {
+  font-family: var(--font-display);
+  font-size: 15px; font-weight: 800; color: #fff;
+  letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: 8px;
+}
+.affiliate-card .affiliate-flag {
+  width: 16px; height: 12px; object-fit: cover; border-radius: 2px;
+  display: inline-block; vertical-align: middle;
+}
+.affiliate-card .affiliate-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 8px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--fg-dim);
+}
+.affiliate-card .affiliate-badge svg { flex-shrink: 0; }
+.affiliate-card .affiliate-badge.highlight {
+  background: var(--green); border: none; color: #000;
+  font-weight: 800; font-size: 8.5px; letter-spacing: 0.05em;
+}
+.affiliate-card .affiliate-badge.highlight svg { fill: #000; stroke: #000; }
+.affiliate-card .affiliate-text {
+  font-family: var(--font-display);
+  font-size: 11.5px; line-height: 1.5;
+  color: rgba(255,255,255,0.70); margin: 10px 0;
+  flex: 1; display: -webkit-box;
+  -webkit-line-clamp: 4; -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.affiliate-card .affiliate-text::before { content: '“'; color: var(--green); font-size: 16px; font-weight: 700; line-height: 0; vertical-align: -2px; margin-right: 2px; }
+.affiliate-card .affiliate-text::after  { content: '”'; color: var(--green); font-size: 16px; font-weight: 700; line-height: 0; vertical-align: -2px; margin-left: 2px; }
+.affiliate-card .card-divider { height: 1px; background: rgba(255, 255, 255, 0.08); margin: 10px 0; }
+.affiliate-card .card-footer { display: flex; justify-content: space-between; align-items: center; }
+.affiliate-card .affiliate-game {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 10px; color: rgba(255,255,255,0.50);
+  letter-spacing: 0.08em;
+}
+.affiliate-card .affiliate-game svg { color: var(--green); opacity: 0.9; }
+.affiliate-card .affiliate-socials { display: flex; gap: 10px; }
+.affiliate-card .social-icon-link {
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: flex;
+}
+.affiliate-card .social-icon-link:hover { color: var(--green); transform: translateY(-2px); }
+
+/* --- MEDIA (Section 8) — redesigned card grid ---------------- */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 12px;
+  margin-top: 32px;
+}
+.media-card {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(10,12,14,0.6) 100%);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px;
+  transition: all 0.3s var(--ease);
+}
+.media-card::before {
+  content: ""; position: absolute; inset: 0;
+  border-radius: var(--r-md);
+  background: radial-gradient(60% 60% at 50% 0%, rgba(156,255,46,0.08), transparent 70%);
+  opacity: 0; transition: opacity 0.3s;
+  pointer-events: none;
+}
+.media-card:hover { border-color: rgba(156,255,46,0.4); transform: translateY(-3px); }
+.media-card:hover::before { opacity: 1; }
+.media-card .media-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--fg-faint);
+}
+.media-card .media-name {
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  text-align: center;
+  line-height: 1.1;
+}
+.media-card:hover .media-name { color: var(--green); }
+
+/* --- FAQ (Section 9) — global FAQ layout ---------------------
+   Replicated from /affiliates page so the React Faq renders the
+   exact same chrome. Tone-mapped to the home-v2 token system.
+
+   The FAQ section ALWAYS sits on a hard black background, no
+   matter which page hosts it. This is a GLOBAL rule so the
+   component looks identical on any future page that reuses it. */
+.section-four { background: #000 !important; }
+.section-four > .container { background: transparent; }
+.faq-grid {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 48px;
+  align-items: center;
+}
+.faq-left { display: flex; flex-direction: column; justify-content: center; }
+.faq-title {
+  font-family: var(--font-display);
+  font-size: 36px; font-weight: 800;
+  color: #fff; letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+.faq-desc { font-size: 13px; line-height: 1.6; color: var(--fg-mute); margin-bottom: 32px; }
+.faq-btn-group { display: flex; gap: 16px; flex-wrap: wrap; }
+.faq-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 14px 24px; font-family: var(--font-display);
+  font-weight: 700; font-size: 12px; letter-spacing: 0.08em;
+  text-transform: uppercase; border-radius: var(--r-sm);
+  text-decoration: none; transition: all 0.2s var(--ease);
+  border: none; cursor: pointer;
+}
+.faq-btn.green  { background: var(--green); color: #000; }
+.faq-btn.green:hover  { background: var(--green-hi); box-shadow: 0 0 20px rgba(156,255,46,0.35); }
+.faq-btn.purple { background: #543eff; color: #fff; }
+.faq-btn.purple:hover { background: #412deb; box-shadow: 0 0 20px rgba(84,62,255,0.45); }
+
+.faq-accordion {
+  display: flex; flex-direction: column;
+  gap: 12px; max-height: 520px;
+  overflow-y: auto; padding-right: 8px;
+}
+.faq-accordion::-webkit-scrollbar { width: 6px; }
+.faq-accordion::-webkit-scrollbar-track { background: transparent; }
+.faq-accordion::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+.faq-item {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+  transition: all 0.25s var(--ease);
+}
+.faq-item.active {
+  border-color: var(--green);
+  box-shadow: 0 0 15px rgba(156,255,46,0.05);
+  background: rgba(156,255,46,0.01);
+}
+.faq-trigger {
+  width: 100%; padding: 18px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  background: transparent; border: none; cursor: pointer; text-align: left;
+}
+.faq-question {
+  font-family: var(--font-display);
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-weight: 700; color: #fff;
+}
+.faq-icon-indicator {
+  color: rgba(255,255,255,0.4);
+  font-size: 16px; font-weight: 300;
+  transition: transform 0.2s;
+}
+.faq-item.active .faq-icon-indicator { color: var(--green); transform: rotate(45deg); }
+.faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1); }
+.faq-item.active .faq-content { max-height: 240px; }
+.faq-answer-inner {
+  padding: 0 24px 20px; font-size: 12px; line-height: 1.6;
+  color: var(--fg-dim);
+}
+
+/* --- TWEAKS PANEL — hidden in production --------------------- */
+.tweaks-panel { display: none !important; }

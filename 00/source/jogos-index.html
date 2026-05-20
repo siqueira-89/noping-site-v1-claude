@@ -1,0 +1,656 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NoPing · Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ═══ Header (Replicated from download-noping) ═══ */
+  .header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 72px;
+    background: rgba(5, 7, 10, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .header__left { display: flex; align-items: center; gap: 40px; }
+  .header__logo-noping { height: 28px; width: auto; }
+  .header__nav-left { display: flex; align-items: center; gap: 32px; }
+  .header__nav-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(244, 246, 247, 0.72);
+    transition: color 0.2s ease;
+    position: relative;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+  }
+  .header__nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .header__nav-link:hover { color: #ffffff; }
+  .header__nav-link:hover::after { transform: scaleX(1); }
+  
+  @keyframes subtlePulse {
+    0% { text-shadow: 0 0 4px rgba(147, 255, 24, 0.1); opacity: 0.85; }
+    50% { text-shadow: 0 0 12px rgba(147, 255, 24, 0.4); opacity: 1; }
+    100% { text-shadow: 0 0 4px rgba(147, 255, 24, 0.1); opacity: 0.85; }
+  }
+  .header__nav-link.highlight-pulse {
+    color: var(--green) !important;
+    animation: subtlePulse 2s infinite ease-in-out;
+  }
+  .header__right { display: flex; align-items: center; gap: 24px; }
+  .header__lang {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(244, 246, 247, 0.72);
+    transition: border-color 0.25s ease;
+    cursor: pointer;
+    background: transparent;
+  }
+  .header__lang:hover { border-color: rgba(255, 255, 255, 0.4); }
+  .header__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #000;
+    background: var(--green);
+    border-radius: 8px;
+    letter-spacing: 0.06em;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .header__cta-btn:hover {
+    background: #6bbd10;
+    box-shadow: 0 0 20px rgba(147, 255, 24, 0.25);
+  }
+
+  /* ═══ Hero Layout ═══ */
+  .hero-wrapper{min-height:calc(100vh - 64px);display:flex;flex-direction:column;justify-content:center;padding:20px 0 60px;position:relative}
+  .stat-strip-container{margin-bottom:32px;display:flex;justify-content:flex-start;width:100%}
+  .stat-strip{display:flex;justify-content:space-between;width:100%;max-width:520px;gap:12px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--fg-mute);padding:10px 24px;background:rgba(29,32,40,0.4);backdrop-filter:blur(12px);border-radius:var(--r-pill);border:1px solid rgba(255,255,255,0.05)}
+  .stat-strip b{color:var(--green);font-weight:700;font-size:13px;font-family:var(--font-sans);letter-spacing:-0.01em;margin-right:4px}
+  .hero-split{display:flex;align-items:center;gap:40px;width:100%}
+  .hero-left{flex:1.2;text-align:left;padding-right:40px}
+  .hero-right{flex:0.8;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+  .hero-left h1{font-size:clamp(48px,5.2vw,84px);font-weight:700;line-height:0.94;letter-spacing:-0.04em;margin:20px 0 24px;color:var(--fg)}
+  .hero-left h1 em{font-style:normal;color:var(--green);position:relative;display:inline-block}
+  .hero-subtext{font-size:18px;line-height:1.6;color:var(--fg-dim);max-width:520px;margin-bottom:40px}
+  .hero-cta-group{display:flex;gap:16px}
+
+  /* ═══ Card Deck (Hero) ═══ */
+  .deck-stage{perspective:1800px;position:relative;height:660px;width:100%;display:flex;justify-content:center;align-items:center;margin:0}
+  .deck-stack{position:relative;width:320px;height:620px;transform-style:preserve-3d;transform:rotateX(6deg)}
+
+  .gcard{position:absolute;inset:0;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--gt-a),var(--gt-b));box-shadow:0 30px 60px -20px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.04) inset;display:flex;flex-direction:column;justify-content:space-between;padding:24px;transition:transform 500ms var(--ease),opacity 500ms var(--ease)}
+  .gcard::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,255,255,0.16),transparent 55%),linear-gradient(180deg,#000 0,#000 94px,transparent 104px,transparent 520px,#000 530px,#000 100%),repeating-linear-gradient(135deg,rgba(255,255,255,0.025) 0 2px,transparent 2px 9px);pointer-events:none;z-index:1}
+  .gcard .hdr{position:relative;z-index:2;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+  .gcard .tg{font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.75);background:rgba(0,0,0,0.65);padding:5px 10px;border-radius:var(--r-pill);border:1px solid rgba(255,255,255,0.12)}
+  .gcard .rank{position:absolute;top:18px;right:18px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.18em;color:var(--green);background:rgba(0,0,0,0.55);padding:5px 10px;border-radius:var(--r-pill);border:1px solid rgba(156,255,46,0.45)}
+  .gcard .nm{font-size:38px;font-weight:700;line-height:0.95;letter-spacing:-0.02em;text-transform:uppercase;text-shadow:0 2px 16px rgba(0,0,0,0.9);margin:0;position:relative;z-index:2}
+  .gcard .mt{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .gcard .mt .m{padding:10px 12px;background:rgba(0,0,0,0.55);border-radius:var(--r-sm);border:1px solid rgba(255,255,255,0.10)}
+  .gcard .mt .m .l{font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.65)}
+  .gcard .mt .m .v{font-family:var(--font-sans);font-size:22px;font-weight:700;letter-spacing:-0.01em;color:var(--green-hi);line-height:1.1}
+  .gcard .mt .m.bad .v{color:var(--bad-hi)}
+
+  .gcard.s1{transform:translate(-140px,-15px) rotate(-8deg) translateZ(-100px);opacity:0.3;pointer-events:none}
+  .gcard.s2{transform:translate(-70px,-8px) rotate(-4deg) translateZ(-50px);opacity:0.7;pointer-events:none}
+  .gcard.s3{transform:translate(0,0) rotate(0deg);z-index:10}
+  .gcard.s4{transform:translate(70px,-8px) rotate(4deg) translateZ(-50px);opacity:0.7;pointer-events:none}
+  .gcard.s5{transform:translate(140px,-15px) rotate(8deg) translateZ(-100px);opacity:0.3;pointer-events:none}
+
+  /* ═══ Deck Nav (premium lateral) ═══ */
+  .deck-stage{perspective:1800px;position:relative;height:660px;width:100%;display:flex;justify-content:center;align-items:center;margin:0}
+  .deck-nav-lateral{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;align-items:center;transform:translateY(-50%);pointer-events:none;z-index:20;padding:0 0}
+  .deck-nav-lateral .arrow{pointer-events:auto;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,0.10);display:flex;align-items:center;justify-content:center;color:var(--fg-dim);cursor:pointer;background:rgba(0,0,0,0.5);backdrop-filter:blur(10px);transition:all 240ms var(--ease);font-size:18px}
+  .deck-nav-lateral .arrow:hover{border-color:var(--green);color:var(--green);background:rgba(0,0,0,0.7);box-shadow:0 0 20px rgba(156,255,46,0.2)}
+  .deck-idx-strip{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:12px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--fg-mute)}
+  .deck-idx-strip b{color:var(--green);font-weight:700;font-size:14px;font-family:var(--font-sans);letter-spacing:-0.01em}
+  .deck-idx-strip .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 300ms var(--ease);cursor:pointer;border:1px solid transparent}
+  .deck-idx-strip .dot:hover{background:rgba(255,255,255,0.3);border-color:rgba(156,255,46,0.3)}
+  .deck-idx-strip .dot.on{background:var(--green);box-shadow:0 0 12px rgba(156,255,46,0.5);transform:scale(1.2)}
+
+  /* ═══ Section 2 ═══ */
+  .sect{padding:56px 0 24px}
+  .sect-2{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0}
+  .sect h2{font-size:clamp(28px,2.8vw,42px);font-weight:700;letter-spacing:-0.02em;margin:14px 0 12px}
+  .sect h2 em{font-style:normal;color:var(--green)}
+  .sect .lede{color:var(--fg-dim);max-width:680px;font-size:15.5px;line-height:1.6;margin:0 0 32px}
+
+  /* ═══ Search Block ═══ */
+  .search-container{width:100%;margin:0 0 40px}
+  .search-wrapper{display:flex;gap:16px;margin-bottom:0;align-items:center;width:100%}
+  .search-input-box{position:relative;flex:1}
+  .search-input{width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(156,255,46,0.3);border-radius:var(--r-pill);padding:18px 24px 18px 48px;font-family:var(--font-sans);font-size:16px;color:var(--fg);outline:none;box-shadow:0 8px 30px rgba(0,0,0,0.5),inset 0 0 0 1px rgba(255,255,255,0.02);transition:all 240ms var(--ease)}
+  .search-input:focus{border-color:var(--green);box-shadow:0 8px 30px rgba(156,255,46,0.15),inset 0 0 0 1px rgba(156,255,46,0.2);background:rgba(0,0,0,0.6)}
+  .search-input::placeholder{color:var(--fg-mute)}
+  .search-icon-left{position:absolute;left:20px;top:50%;transform:translateY(-50%);color:var(--fg-mute);pointer-events:none;display:flex}
+
+  /* Filter buttons */
+  .filter-btn{position:relative;display:flex;align-items:center;gap:8px;background:rgba(10,12,14,0.6);border:1px solid rgba(255,255,255,0.1);border-radius:var(--r-pill);padding:0 20px;height:56px;color:var(--fg-dim);font-family:var(--font-sans);font-weight:500;font-size:14px;cursor:pointer;transition:all 200ms var(--ease);white-space:nowrap}
+  .filter-btn:hover{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.2);color:var(--fg)}
+  .filter-btn svg{color:var(--green);flex-shrink:0}
+  .filter-btn .chevron{color:var(--fg-mute);margin-left:2px}
+
+  /* Dropdown popup */
+  .filter-dropdown{position:absolute;top:calc(100% + 12px);left:0;min-width:200px;background:rgba(10,12,14,0.98);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-md);padding:8px;box-shadow:0 20px 50px rgba(0,0,0,0.8),0 0 20px rgba(156,255,46,0.05);z-index:100;opacity:0;visibility:hidden;transform:translateY(10px);transition:all 240ms var(--ease)}
+  .filter-dropdown.open{opacity:1;visibility:visible;transform:translateY(0)}
+  #genre-dropdown{left:auto;right:0}
+  .filter-dropdown .opt{display:block;width:100%;padding:10px 14px;font-family:var(--font-sans);font-size:13px;font-weight:600;color:var(--fg-mute);border:none;background:none;text-align:left;cursor:pointer;border-radius:var(--r-sm);transition:all 200ms}
+  .filter-dropdown .opt:hover{background:rgba(255,255,255,0.08);color:var(--fg)}
+  .filter-dropdown .opt.sel{color:var(--green);background:rgba(156,255,46,0.12)}
+
+  /* ═══ Game Grid (25 cards) ═══ */
+  .deck-grid{margin-top:32px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .mini{position:relative;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--gt-a,#2a3340),var(--gt-b,#0a0d10));aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:flex-end;padding:14px;transition:transform 220ms,border-color 220ms;cursor:pointer}
+  .mini::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,0.15),transparent 55%),linear-gradient(180deg,transparent 40%,rgba(0,0,0,0.65) 100%),repeating-linear-gradient(135deg,rgba(255,255,255,0.025) 0 2px,transparent 2px 9px);pointer-events:none}
+  .mini:hover{transform:translateY(-3px);border-color:rgba(156,255,46,0.45)}
+  .mini .info{position:relative;background:rgba(0,0,0,0.65);padding:10px 12px;border-radius:8px;backdrop-filter:blur(4px)}
+  .mini .tg{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.85);background:rgba(0,0,0,0.55);padding:3px 7px;border-radius:var(--r-pill)}
+  .mini .nm{position:relative;font-weight:700;font-size:16px;letter-spacing:-0.01em;line-height:1.05;text-shadow:0 2px 8px rgba(0,0,0,0.65)}
+  .mini .vs{position:relative;display:flex;justify-content:space-between;margin-top:6px;font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.75);letter-spacing:0.06em}
+  .mini .vs .b{color:var(--bad-hi)}
+  .mini .vs .g{color:var(--green)}
+
+  /* ═══ CTA Final ═══ */
+  .ctafinal{margin:64px 0 80px;padding:36px;border:1px solid rgba(156,255,46,0.4);border-radius:var(--r-lg);background:linear-gradient(180deg,rgba(156,255,46,0.05),rgba(156,255,46,0.01));display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .ctafinal h3{margin:0 0 6px;font-size:26px;font-weight:700;letter-spacing:-0.01em}
+  .ctafinal p{margin:0;color:var(--fg-dim);font-size:14px}
+
+  /* ═══ Footer (Replicated from download-noping) ═══ */
+  .footer { padding: 96px 0 40px; background: #05070A; color: #ffffff; }
+  .footer .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+  .footer__top { display: grid; grid-template-columns: 1.4fr repeat(5, 1fr); gap: 40px; padding-bottom: 96px; }
+  .footer__brand { display: flex; flex-direction: column; }
+  .footer__brand-logos { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; }
+  .footer__brand-logo { height: 36px; width: auto; }
+  .footer__brand-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.45); line-height: 1.6; max-width: 260px; }
+  .footer__column-title { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ffffff; margin-bottom: 24px; }
+  .footer__link { display: block; font-size: 0.8rem; color: rgba(255, 255, 255, 0.50); padding: 4px 0; text-decoration: none; transition: color 0.2s ease; }
+  .footer__link:hover { color: var(--green); }
+  .footer__lang-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: rgba(255, 255, 255, 0.70); background: transparent; cursor: pointer; margin-top: 40px; transition: border-color 0.25s ease; }
+  .footer__lang-badge:hover { border-color: rgba(255, 255, 255, 0.40); }
+  .footer__divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin-bottom: 40px; }
+  .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; }
+  .footer__copyright { font-size: 0.75rem; color: rgba(255, 255, 255, 0.35); }
+  .footer__socials { display: flex; align-items: center; gap: 32px; }
+  .footer__social-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .footer__social-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #05070A; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0; transition: all 0.2s; }
+  .footer__social-link:hover .footer__social-icon { border-color: var(--green); background: rgba(255,255,255,0.05); }
+  .footer__social-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; color: rgba(255, 255, 255, 0.50); }
+
+  /* ═══ Responsive ═══ */
+  @media(max-width:1024px){
+    .hero-split{flex-direction:column;text-align:center;gap:60px}
+    .hero-left{text-align:center;padding-right:0}
+    .hero-left h1{font-size:56px}
+    .hero-subtext{margin:0 auto 32px}
+    .hero-cta-group{justify-content:center}
+    .stat-strip-container{margin-bottom:32px;justify-content:center}
+    .stat-strip{max-width:520px;gap:12px;padding:10px 16px;font-size:8px}
+    .deck-grid{grid-template-columns:repeat(3,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  }
+</style>
+
+</head>
+<body>
+<div class="grid-bg"></div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="header__inner">
+      <div class="header__left">
+        <a href="#" class="header__logo" id="header-logo">
+          <img src="logos/logo-noping-dark.svg" alt="NoPing" class="header__logo-noping">
+        </a>
+        <nav class="header__nav-left" id="header-nav">
+          <a href="#" class="header__nav-link on">JOGOS</a>
+          <a href="#" class="header__nav-link highlight-pulse">PREÇOS</a>
+          <a href="#" class="header__nav-link">DOWNLOAD</a>
+          <a href="#" class="header__nav-link">AFILIADOS</a>
+          <a href="#" class="header__nav-link">SUPORTE</a>
+          <a href="#" class="header__nav-link">BLOG</a>
+        </nav>
+      </div>
+      <div class="header__right">
+        <button class="header__lang" id="lang-toggle">
+          <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/1x1/br.svg" alt="BR" style="width:16px; height:16px; border-radius:50%; object-fit:cover;">
+          <span>PT</span>
+          <span>▸</span>
+        </button>
+        <a href="#" class="header__nav-link">LOGIN</a>
+        <a href="#" class="header__cta-btn">TESTE GRÁTIS</a>
+      </div>
+    </div>
+  </header>
+
+<section class="shell hero-wrapper">
+  <div class="hero-split">
+    <div class="hero-left">
+      <div class="stat-strip-container">
+        <div class="stat-strip">
+          <span><b>3.142</b>JOGOS</span>
+          <span><b>156</b>PAÍSES</span>
+          <span><b>2.184</b>NODES</span>
+          <span><b>12 ms</b>MEDIANO</span>
+          <span><b>−66%</b>GANHO</span>
+        </div>
+      </div>
+      <span class="eyebrow">CATÁLOGO DE PERFORMANCE</span>
+      <h1>Escolha o jogo e veja o <em>ganho.</em></h1>
+      <p class="hero-subtext">Otimização inteligente de rotas em tempo real para reduzir o ping, eliminar o jitter e garantir estabilidade total em qualquer servidor do mundo.</p>
+      <div class="hero-cta-group">
+        <a href="#" class="cta">BAIXAR AGORA</a>
+        <a href="#" class="cta ghost">CONHECER PLANOS</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="deck-stage">
+        <div class="deck-stack" id="deck-stack">
+          <div class="gcard s1" style="background-color: #000; background-image: url('images/cards/dota2.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Dota 2">
+            <div class="hdr">
+              <div class="nm">Dota 2</div>
+              <span class="tg">MOBA</span>
+            </div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">58ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">21ms</div></div></div>
+          </div>
+          <div class="gcard s2" style="background-color: #000; background-image: url('images/cards/cs2.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Counter Strike 2">
+            <div class="hdr">
+              <div class="nm">Counter Strike 2</div>
+              <span class="tg">FPS · TÁTICO</span>
+            </div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">62ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">13ms</div></div></div>
+          </div>
+          <div class="gcard s3" style="background-color: #000; background-image: url('images/cards/valorant.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Valorant">
+            <div class="hdr">
+              <div class="nm">Valorant</div>
+              <span class="tg">FPS · TÁTICO · 240Hz</span>
+            </div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">68ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">14ms</div></div></div>
+          </div>
+          <div class="gcard s4" style="background-color: #000; background-image: url('images/cards/fortnite.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Fortnite">
+            <div class="hdr">
+              <div class="nm">Fortnite</div>
+              <span class="tg">BR · BUILD</span>
+            </div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">74ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">18ms</div></div></div>
+          </div>
+          <div class="gcard s5" style="background-color: #000; background-image: url('images/cards/minecraft.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Minecraft">
+            <div class="hdr">
+              <div class="nm">Minecraft</div>
+              <span class="tg">SANDBOX</span>
+            </div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">48ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">22ms</div></div></div>
+          </div>
+        </div>
+        <div class="deck-nav-lateral">
+          <span class="arrow" id="deck-prev">‹</span>
+          <span class="arrow" id="deck-next">›</span>
+        </div>
+      </div>
+      <div class="deck-idx-strip" id="deck-idx-strip">
+        <span class="dot" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
+        <span class="dot on" data-i="2"></span>
+        <span class="dot" data-i="3"></span>
+        <span class="dot" data-i="4"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="shell sect sect-2">
+  <span class="eyebrow">BARALHO COMPLETO · SAMPLE 25 DE 3.142</span>
+  <h2>Cada carta é um match-up. <em>Você vence todos.</em></h2>
+  <p class="lede">Toque para virar a carta e ver as 5 rotas paralelas, o servidor que entrega, e o ganho medido na sua região.</p>
+
+  <div class="search-container">
+    <div class="search-wrapper">
+      <div class="search-input-box">
+        <div class="search-icon-left">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <input type="text" class="search-input" placeholder="Ex: Valorant, League of Legends, CS 2..." />
+      </div>
+      <div class="filter-btn" id="sort-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+        <span id="sort-label">Mais jogados</span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        <div class="filter-dropdown" id="sort-dropdown">
+          <button class="opt sel" data-val="popular">Mais Jogados</button>
+          <button class="opt" data-val="recent">Mais Recentes</button>
+          <button class="opt" data-val="az">A–Z</button>
+          <button class="opt" data-val="za">Z–A</button>
+        </div>
+      </div>
+      <div class="filter-btn" id="genre-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+        <span id="genre-label">Gêneros</span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        <div class="filter-dropdown" id="genre-dropdown">
+          <button class="opt" data-val="fps">FPS</button>
+          <button class="opt" data-val="moba">MOBA</button>
+          <button class="opt" data-val="br">Battle Royale</button>
+          <button class="opt" data-val="mmorpg">MMORPG</button>
+          <button class="opt" data-val="sandbox">Sandbox</button>
+          <button class="opt" data-val="survival">Survival</button>
+          <button class="opt" data-val="racing">Racing</button>
+          <button class="opt" data-val="fighting">Fighting</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deck-grid">
+    <div class="mini" style="background-image: url('images/games/valorant.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">FPS</span><div class="info"><div class="nm">Valorant</div><div class="vs"><span class="b">68ms</span><span class="g">14ms · −79%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/cs2.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">FPS</span><div class="info"><div class="nm">CS 2</div><div class="vs"><span class="b">62ms</span><span class="g">13ms · −71%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/fortnite.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">Fortnite</div><div class="vs"><span class="b">74ms</span><span class="g">18ms · −68%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/lol.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MOBA</span><div class="info"><div class="nm">League of Legends</div><div class="vs"><span class="b">52ms</span><span class="g">16ms · −54%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/apex.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">Apex Legends</div><div class="vs"><span class="b">82ms</span><span class="g">17ms · −74%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/r6.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">FPS</span><div class="info"><div class="nm">R6 Siege</div><div class="vs"><span class="b">72ms</span><span class="g">19ms · −70%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/codwarzone.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">Warzone</div><div class="vs"><span class="b">88ms</span><span class="g">24ms · −66%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/overwatch.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">HERO</span><div class="info"><div class="nm">Overwatch 2</div><div class="vs"><span class="b">66ms</span><span class="g">15ms · −80%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/dota2.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MOBA</span><div class="info"><div class="nm">Dota 2</div><div class="vs"><span class="b">58ms</span><span class="g">21ms · −44%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/pubg.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">PUBG</div><div class="vs"><span class="b">86ms</span><span class="g">26ms · −62%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/escapefromtarkov.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">EXTRACT</span><div class="info"><div class="nm">Tarkov</div><div class="vs"><span class="b">98ms</span><span class="g">42ms · −58%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/marvelrivals.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">HERO</span><div class="info"><div class="nm">Marvel Rivals</div><div class="vs"><span class="b">72ms</span><span class="g">14ms · −82%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/deadbydaylight.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SURV</span><div class="info"><div class="nm">Dead by Daylight</div><div class="vs"><span class="b">62ms</span><span class="g">21ms · −58%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/rust.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SURV</span><div class="info"><div class="nm">Rust</div><div class="vs"><span class="b">68ms</span><span class="g">22ms · −66%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/gta5.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SAND</span><div class="info"><div class="nm">GTA V</div><div class="vs"><span class="b">82ms</span><span class="g">32ms · −62%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/minecraft.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SAND</span><div class="info"><div class="nm">Minecraft</div><div class="vs"><span class="b">42ms</span><span class="g">18ms · −44%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/wow.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">World of Warcraft</div><div class="vs"><span class="b">98ms</span><span class="g">38ms · −34%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/ffxiv.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">FFXIV</div><div class="vs"><span class="b">86ms</span><span class="g">34ms · −28%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/RuneScape.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">RuneScape</div><div class="vs"><span class="b">48ms</span><span class="g">22ms · −40%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/albion.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">Albion Online</div><div class="vs"><span class="b">68ms</span><span class="g">28ms · −52%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/blackdesert.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">Black Desert</div><div class="vs"><span class="b">94ms</span><span class="g">32ms · −66%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/tibia.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">Tibia</div><div class="vs"><span class="b">76ms</span><span class="g">22ms · −68%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/arcraiders.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">EXTRACT</span><div class="info"><div class="nm">Arc Raiders</div><div class="vs"><span class="b">82ms</span><span class="g">16ms · −80%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/warframe.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">LOOTER</span><div class="info"><div class="nm">Warframe</div><div class="vs"><span class="b">68ms</span><span class="g">22ms · −68%</span></div></div></div>
+    <div class="mini" style="background-image: url('images/games/fc26.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SPORTS</span><div class="info"><div class="nm">EA FC 26</div><div class="vs"><span class="b">52ms</span><span class="g">18ms · −66%</span></div></div></div>
+  </div>
+
+  <div class="ctafinal">
+    <div>
+      <h3>Sente o baralho. Pega a sua mão.</h3>
+      <p>NoPing pré-configura os jogos detectados em 90s.</p>
+    </div>
+    <a href="#" class="cta">Iniciar diagnóstico</a>
+  </div>
+</section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-logos">
+            <img src="logos/logo-noping-dark.svg" alt="NoPing" class="footer__brand-logo">
+          </div>
+          <p class="footer__brand-text">NoPing é a solução de otimização de rede para gamers. Disponível como benefício em planos selecionados da Claro.</p>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">NOPING</h4>
+          <a href="#" class="footer__link">Servidores</a>
+          <a href="#" class="footer__link">Jogos</a>
+          <a href="#" class="footer__link">Preços</a>
+          <a href="#" class="footer__link">Download</a>
+          <a href="#" class="footer__link">Teste Grátis</a>
+          <a href="#" class="footer__link">Trabalhe Conosco</a>
+          <a href="#" class="footer__link">Programa de Teste Beta</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">TECNOLOGIA</h4>
+          <a href="#" class="footer__link">Conexão MultiPath</a>
+          <a href="#" class="footer__link">Multi Internets</a>
+          <a href="#" class="footer__link">Boost FPS</a>
+          <a href="#" class="footer__link">Redução de Ping</a>
+          <a href="#" class="footer__link">Correção de Perda de Pacotes</a>
+          <a href="#" class="footer__link">Correção de Desconexão</a>
+          <a href="#" class="footer__link">Correção de Picos de Ping</a>
+          <a href="#" class="footer__link">Melhoria de Velocidade do Teclado</a>
+          <a href="#" class="footer__link">Estatísticas Abrangentes</a>
+          <a href="#" class="footer__link">Monitoramento de Conexão</a>
+          <a href="#" class="footer__link">Troca Manual de Servidor</a>
+          <a href="#" class="footer__link">IP Block</a>
+          <a href="#" class="footer__link">Otimização de DNS</a>
+          <a href="#" class="footer__link">AudioPad</a>
+          <a href="#" class="footer__link">Green Aim</a>
+          <a href="#" class="footer__link">Pro Settings</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">AJUDA</h4>
+          <a href="#" class="footer__link">Tutorial Windows</a>
+          <a href="#" class="footer__link">Tutorial Console</a>
+          <a href="#" class="footer__link">Tutorial IOS</a>
+          <a href="#" class="footer__link">Tutorial Android</a>
+          <a href="#" class="footer__link">Centro de Suporte</a>
+          <a href="#" class="footer__link">Contato B2B</a>
+          <a href="#" class="footer__link">Política de Privacidade</a>
+          <a href="#" class="footer__link">Termos de Uso</a>
+          <a href="#" class="footer__link">Afiliados</a>
+          <a href="#" class="footer__link">FAQ</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">BLOG</h4>
+          <a href="#" class="footer__link">Como Aumentar o FPS</a>
+          <a href="#" class="footer__link">Como Tirar o Lag</a>
+          <a href="#" class="footer__link">Dicas para Gamers</a>
+          <a href="#" class="footer__link">Notícias NoPing</a>
+          <a href="#" class="footer__link">Atualizações do App</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">FEEDBACKS</h4>
+          <a href="#" class="footer__link">Avalie Nossa Plataforma</a>
+          <a href="#" class="footer__link">Sugestão de Funcionalidade</a>
+          <button class="footer__lang-badge">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/1x1/br.svg" alt="BR" style="width:18px; height:18px; border-radius:50%; object-fit:cover;">
+            <span>PT</span>
+            <span>▸</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer__divider"></div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">Direitos autorais 2026 © NOPING - INCRÍVEL SISTEMAS, INC</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-link" aria-label="TikTok">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93ff18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>TIK TOK</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93ff18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>LINKEDIN</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Facebook">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93ff18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>FACEBOOK</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Discord">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93ff18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01M15 12h.01"/><path d="M7.5 4.2c-1.8.8-3.4 2-4.5 3.5-1.5 3.8-1.7 8.5-.6 12.1 1.6 1.4 3.7 2.2 5.6 2.2 0 0 1-1.2 1.8-2-1.5-.4-2.8-1.2-3.8-2.2 2 .5 4 1 6 1s4-.5 6-1c-1 1-2.3 1.8-3.8 2.2.8.8 1.8 2 1.8 2 1.9 0 4-.8 5.6-2.2 1.1-3.6.9-8.3-.6-12.1-1.1-1.5-2.7-2.7-4.5-3.5-1-.2-2-.3-3-.3-1 0-2 .1-3 .3z"/></svg>
+            </span>
+            <span class="footer__social-label">COMUNIDADE<br>NO DISCORD</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Instagram">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93ff18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>INSTAGRAM</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="X / Twitter">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#93ff18" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.73 16h4.27L8.27 4zm16 0L4 20"/></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>X</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const stack = document.getElementById('deck-stack');
+    const cards = Array.from(stack.querySelectorAll('.gcard'));
+    const dots = Array.from(document.querySelectorAll('.deck-idx-strip .dot'));
+
+    const updateUI = () => {
+      const activeCard = cards.find(c => c.classList.contains('s3'));
+      const activeIndex = cards.indexOf(activeCard);
+      
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('on', i === activeIndex);
+      });
+    };
+
+    const rotateClasses = (direction) => {
+      const classes = cards.map(c => c.className.match(/s[1-5]/)[0]);
+      if (direction === 'next') {
+        classes.push(classes.shift());
+      } else {
+        classes.unshift(classes.pop());
+      }
+      cards.forEach((c, i) => {
+        c.className = c.className.replace(/s[1-5]/, classes[i]);
+      });
+      updateUI();
+    };
+
+    document.getElementById('deck-prev').addEventListener('click', () => rotateClasses('prev'));
+    document.getElementById('deck-next').addEventListener('click', () => rotateClasses('next'));
+
+    // Dot interaction
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        const targetIndex = parseInt(dot.getAttribute('data-i'));
+        let activeCard = cards.find(c => c.classList.contains('s3'));
+        let currentIndex = cards.indexOf(activeCard);
+        
+        if (targetIndex === currentIndex) return;
+
+        // Calculate steps and direction
+        // In this carousel: Next moves to smaller index (2->1), Prev moves to larger index (2->3)
+        let diff = targetIndex - currentIndex;
+        
+        // Find shortest path in a circular 5-item array
+        if (diff > 2) diff -= 5;
+        if (diff < -2) diff += 5;
+
+        const steps = Math.abs(diff);
+        const dir = diff > 0 ? 'prev' : 'next';
+
+        for (let i = 0; i < steps; i++) {
+          rotateClasses(dir);
+        }
+      });
+    });
+    
+    updateUI();
+
+    // ═══ Search & Filter Logic ═══
+    const sortBtn = document.getElementById('sort-btn');
+    const genreBtn = document.getElementById('genre-btn');
+    const sortDropdown = document.getElementById('sort-dropdown');
+    const genreDropdown = document.getElementById('genre-dropdown');
+    const sortLabel = document.getElementById('sort-label');
+    const genreLabel = document.getElementById('genre-label');
+
+    const toggleDropdown = (dropdown) => {
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
+      if (!isOpen) dropdown.classList.add('open');
+    };
+
+    sortBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown(sortDropdown);
+    });
+
+    genreBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown(genreDropdown);
+    });
+
+    document.addEventListener('click', () => {
+      document.querySelectorAll('.filter-dropdown').forEach(d => d.classList.remove('open'));
+    });
+
+    // Selection logic
+    [sortDropdown, genreDropdown].forEach(dropdown => {
+      dropdown.querySelectorAll('.opt').forEach(opt => {
+        opt.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const parent = opt.parentElement;
+          const labelId = parent.id === 'sort-dropdown' ? 'sort-label' : 'genre-label';
+          
+          parent.querySelectorAll('.opt').forEach(o => o.classList.remove('sel'));
+          opt.classList.add('sel');
+          
+          document.getElementById(labelId).textContent = opt.textContent;
+          parent.classList.remove('open');
+          
+          // Trigger filter/sort logic here if needed
+          console.log(`Selected: ${opt.getAttribute('data-val')}`);
+        });
+      });
+    });
+  });
+</script>
+</body>
+</html>

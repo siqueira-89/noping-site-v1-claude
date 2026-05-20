@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de jogos suportados pelo NoPing. Mais de 3.000 títulos com rotas otimizadas e ping reduzido.">
+  <title>NoPing · Catálogo de Jogos</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Global -->
+  <link rel="stylesheet" href="../src/styles/global/variables.css">
+  <link rel="stylesheet" href="../src/styles/global/reset.css">
+  <link rel="stylesheet" href="../src/styles/global/typography.css">
+  <link rel="stylesheet" href="../src/styles/global/layout.css">
+  <link rel="stylesheet" href="../src/styles/global/utilities.css">
+  <!-- Components -->
+  <link rel="stylesheet" href="../src/styles/components/header.css">
+  <link rel="stylesheet" href="../src/styles/components/footer.css">
+  <link rel="stylesheet" href="../src/styles/components/buttons.css">
+  <link rel="stylesheet" href="../src/styles/components/cards.css">
+  <link rel="stylesheet" href="../src/styles/components/forms.css">
+  <!-- Page -->
+  <link rel="stylesheet" href="../src/styles/pages/games.css">
+</head>
+<body class="jogos-page" data-page="games" data-screen-label="Games">
+
+<div class="grid-bg"></div>
+
+<!-- ========== HEADER (injected) ========== -->
+<header id="global-header" data-active="games"></header>
+
+<!-- ========== HERO (card deck) ========== -->
+<section class="shell hero-wrapper">
+  <div class="hero-split">
+    <div class="hero-left">
+      <div class="stat-strip-container">
+        <div class="stat-strip">
+          <span><b>3.142</b>JOGOS</span>
+          <span><b>156</b>PAÍSES</span>
+          <span><b>2.184</b>NODES</span>
+          <span><b>12 ms</b>MEDIANO</span>
+          <span><b>−66%</b>GANHO</span>
+        </div>
+      </div>
+      <span class="eyebrow">CATÁLOGO DE PERFORMANCE</span>
+      <h1>Escolha o jogo e veja o <em>ganho.</em></h1>
+      <p class="hero-subtext">Otimização inteligente de rotas em tempo real para reduzir o ping, eliminar o jitter e garantir estabilidade total em qualquer servidor do mundo.</p>
+      <div class="hero-cta-group">
+        <a href="../download/index.html" class="cta">BAIXAR AGORA</a>
+        <a href="../prices/index.html" class="cta ghost">CONHECER PLANOS</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="deck-stage">
+        <div class="deck-stack" id="deck-stack">
+          <div class="gcard s1" style="background-color: #000; background-image: url('../src/assets/games/cards/dota2.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Dota 2">
+            <div class="hdr"><div class="nm">Dota 2</div><span class="tg">MOBA</span></div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">58ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">21ms</div></div></div>
+          </div>
+          <div class="gcard s2" style="background-color: #000; background-image: url('../src/assets/games/cards/cs2.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Counter Strike 2">
+            <div class="hdr"><div class="nm">Counter Strike 2</div><span class="tg">FPS · TÁTICO</span></div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">62ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">13ms</div></div></div>
+          </div>
+          <div class="gcard s3" style="background-color: #000; background-image: url('../src/assets/games/cards/valorant.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Valorant">
+            <div class="hdr"><div class="nm">Valorant</div><span class="tg">FPS · TÁTICO · 240Hz</span></div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">68ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">14ms</div></div></div>
+          </div>
+          <div class="gcard s4" style="background-color: #000; background-image: url('../src/assets/games/cards/fortnite.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Fortnite">
+            <div class="hdr"><div class="nm">Fortnite</div><span class="tg">BR · BUILD</span></div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">74ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">18ms</div></div></div>
+          </div>
+          <div class="gcard s5" style="background-color: #000; background-image: url('../src/assets/games/cards/minecraft.webp'); background-size: contain; background-repeat: no-repeat; background-position: center;" data-name="Minecraft">
+            <div class="hdr"><div class="nm">Minecraft</div><span class="tg">SANDBOX</span></div>
+            <div class="mt"><div class="m bad"><div class="l">SEM NOPING</div><div class="v">48ms</div></div><div class="m"><div class="l">COM NOPING</div><div class="v">22ms</div></div></div>
+          </div>
+        </div>
+        <div class="deck-nav-lateral">
+          <span class="arrow" id="deck-prev">‹</span>
+          <span class="arrow" id="deck-next">›</span>
+        </div>
+      </div>
+      <div class="deck-idx-strip" id="deck-idx-strip">
+        <span class="dot" data-i="0"></span>
+        <span class="dot" data-i="1"></span>
+        <span class="dot on" data-i="2"></span>
+        <span class="dot" data-i="3"></span>
+        <span class="dot" data-i="4"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CATALOG (search + grid + final CTA) ========== -->
+<section class="shell sect sect-2">
+  <span class="eyebrow">BARALHO COMPLETO · SAMPLE 25 DE 3.142</span>
+  <h2>Cada carta é um match-up. <em>Você vence todos.</em></h2>
+  <p class="lede">Toque para virar a carta e ver as 5 rotas paralelas, o servidor que entrega, e o ganho medido na sua região.</p>
+
+  <div class="search-container">
+    <div class="search-wrapper">
+      <div class="search-input-box">
+        <div class="search-icon-left">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <input type="text" class="search-input" placeholder="Ex: Valorant, League of Legends, CS 2..." />
+      </div>
+      <div class="filter-btn" id="sort-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+        <span id="sort-label">Mais jogados</span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        <div class="filter-dropdown" id="sort-dropdown">
+          <button class="opt sel" data-val="popular" type="button">Mais Jogados</button>
+          <button class="opt" data-val="recent" type="button">Mais Recentes</button>
+          <button class="opt" data-val="az" type="button">A–Z</button>
+          <button class="opt" data-val="za" type="button">Z–A</button>
+        </div>
+      </div>
+      <div class="filter-btn" id="genre-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect></svg>
+        <span id="genre-label">Gêneros</span>
+        <svg class="chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        <div class="filter-dropdown" id="genre-dropdown">
+          <button class="opt" data-val="fps" type="button">FPS</button>
+          <button class="opt" data-val="moba" type="button">MOBA</button>
+          <button class="opt" data-val="br" type="button">Battle Royale</button>
+          <button class="opt" data-val="mmorpg" type="button">MMORPG</button>
+          <button class="opt" data-val="sandbox" type="button">Sandbox</button>
+          <button class="opt" data-val="survival" type="button">Survival</button>
+          <button class="opt" data-val="racing" type="button">Racing</button>
+          <button class="opt" data-val="fighting" type="button">Fighting</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="deck-grid">
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/valorant.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">FPS</span><div class="info"><div class="nm">Valorant</div><div class="vs"><span class="b">68ms</span><span class="g">14ms · −79%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/cs2.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">FPS</span><div class="info"><div class="nm">CS 2</div><div class="vs"><span class="b">62ms</span><span class="g">13ms · −71%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/fortnite.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">Fortnite</div><div class="vs"><span class="b">74ms</span><span class="g">18ms · −68%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/lol.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MOBA</span><div class="info"><div class="nm">League of Legends</div><div class="vs"><span class="b">52ms</span><span class="g">16ms · −54%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/apex.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">Apex Legends</div><div class="vs"><span class="b">82ms</span><span class="g">17ms · −74%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/r6.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">FPS</span><div class="info"><div class="nm">R6 Siege</div><div class="vs"><span class="b">72ms</span><span class="g">19ms · −70%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/codwarzone.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">Warzone</div><div class="vs"><span class="b">88ms</span><span class="g">24ms · −66%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/overwatch.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">HERO</span><div class="info"><div class="nm">Overwatch 2</div><div class="vs"><span class="b">66ms</span><span class="g">15ms · −80%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/dota2.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MOBA</span><div class="info"><div class="nm">Dota 2</div><div class="vs"><span class="b">58ms</span><span class="g">21ms · −44%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/pubg.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">BR</span><div class="info"><div class="nm">PUBG</div><div class="vs"><span class="b">86ms</span><span class="g">26ms · −62%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/escapefromtarkov.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">EXTRACT</span><div class="info"><div class="nm">Tarkov</div><div class="vs"><span class="b">98ms</span><span class="g">42ms · −58%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/marvelrivals.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">HERO</span><div class="info"><div class="nm">Marvel Rivals</div><div class="vs"><span class="b">72ms</span><span class="g">14ms · −82%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/deadbydaylight.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SURV</span><div class="info"><div class="nm">Dead by Daylight</div><div class="vs"><span class="b">62ms</span><span class="g">21ms · −58%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/rust.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SURV</span><div class="info"><div class="nm">Rust</div><div class="vs"><span class="b">68ms</span><span class="g">22ms · −66%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/gta5.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SAND</span><div class="info"><div class="nm">GTA V</div><div class="vs"><span class="b">82ms</span><span class="g">32ms · −62%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/minecraft.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SAND</span><div class="info"><div class="nm">Minecraft</div><div class="vs"><span class="b">42ms</span><span class="g">18ms · −44%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/wow.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">World of Warcraft</div><div class="vs"><span class="b">98ms</span><span class="g">38ms · −34%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/ffxiv.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">FFXIV</div><div class="vs"><span class="b">86ms</span><span class="g">34ms · −28%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/RuneScape.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">RuneScape</div><div class="vs"><span class="b">48ms</span><span class="g">22ms · −40%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/albion.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">Albion Online</div><div class="vs"><span class="b">68ms</span><span class="g">28ms · −52%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/blackdesert.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">Black Desert</div><div class="vs"><span class="b">94ms</span><span class="g">32ms · −66%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/tibia.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">MMO</span><div class="info"><div class="nm">Tibia</div><div class="vs"><span class="b">76ms</span><span class="g">22ms · −68%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/arcraiders.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">EXTRACT</span><div class="info"><div class="nm">Arc Raiders</div><div class="vs"><span class="b">82ms</span><span class="g">16ms · −80%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/warframe.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">LOOTER</span><div class="info"><div class="nm">Warframe</div><div class="vs"><span class="b">68ms</span><span class="g">22ms · −68%</span></div></div></div>
+    <div class="mini" style="background-image: url('../src/assets/games/catalog/fc26.webp'); background-size: contain; background-repeat: no-repeat; background-color: #000; background-position: center;"><span class="tg">SPORTS</span><div class="info"><div class="nm">EA FC 26</div><div class="vs"><span class="b">52ms</span><span class="g">18ms · −66%</span></div></div></div>
+  </div>
+
+  <div class="ctafinal">
+    <div>
+      <h3>Sente o baralho. Pega a sua mão.</h3>
+      <p>NoPing pré-configura os jogos detectados em 90s.</p>
+    </div>
+    <a href="../download/index.html" class="cta">Iniciar diagnóstico</a>
+  </div>
+</section>
+
+<!-- ========== FOOTER (injected) ========== -->
+<footer id="global-footer"></footer>
+
+<!-- Components -->
+<script src="../src/components/header.js"></script>
+<script src="../src/components/footer.js"></script>
+<script src="../src/components/faq.js"></script>
+<script src="../src/components/carousel.js"></script>
+<script src="../src/components/buttons.js"></script>
+<!-- Global -->
+<script src="../src/scripts/global/helpers.js"></script>
+<script src="../src/scripts/global/navigation.js"></script>
+<script src="../src/scripts/global/interactions.js"></script>
+<script src="../src/scripts/global/main.js"></script>
+<!-- Page -->
+<script src="../src/scripts/pages/games.js"></script>
+
+</body>
+</html>

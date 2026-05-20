@@ -1,0 +1,14 @@
+{
+  "primary": [
+    { "key": "games",      "label": "JOGOS",     "href": "/games/" },
+    { "key": "prices",     "label": "PREÇOS",    "href": "/prices/",    "highlight": true },
+    { "key": "download",   "label": "DOWNLOAD",  "href": "/download/" },
+    { "key": "affiliates", "label": "AFILIADOS", "href": "/affiliates/" },
+    { "key": "support",    "label": "SUPORTE",   "href": "/support/" },
+    { "key": "blog",      "label": "BLOG",      "href": "https://blog.noping.com" }
+  ],
+  "utility": [
+    { "key": "login", "label": "LOGIN", "href": "#login" },
+    { "key": "trial", "label": "TESTE GRÁTIS", "href": "#trial", "cta": true }
+  ]
+}

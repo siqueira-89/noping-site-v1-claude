@@ -1,0 +1,36 @@
+{
+  "featured": [
+    { "key": "dota2",     "name": "Dota 2",      "image": "src/assets/jogos/cards/dota2.webp" },
+    { "key": "cs2",       "name": "Counter Strike 2", "image": "src/assets/jogos/cards/cs2.webp" },
+    { "key": "valorant",  "name": "Valorant",    "image": "src/assets/jogos/cards/valorant.webp" },
+    { "key": "fortnite",  "name": "Fortnite",    "image": "src/assets/jogos/cards/fortnite.webp" },
+    { "key": "minecraft", "name": "Minecraft",   "image": "src/assets/jogos/cards/minecraft.webp" }
+  ],
+  "catalog": [
+    { "name": "Valorant",         "image": "src/assets/jogos/games/valorant.webp",         "category": "FPS",     "before": "68ms", "after": "14ms", "reduction": "−79%" },
+    { "name": "CS 2",             "image": "src/assets/jogos/games/cs2.webp",              "category": "FPS",     "before": "62ms", "after": "13ms", "reduction": "−71%" },
+    { "name": "Fortnite",         "image": "src/assets/jogos/games/fortnite.webp",         "category": "BR",      "before": "74ms", "after": "18ms", "reduction": "−68%" },
+    { "name": "League of Legends","image": "src/assets/jogos/games/lol.webp",              "category": "MOBA",    "before": "52ms", "after": "16ms", "reduction": "−54%" },
+    { "name": "Apex Legends",     "image": "src/assets/jogos/games/apex.webp",             "category": "BR",      "before": "82ms", "after": "17ms", "reduction": "−74%" },
+    { "name": "R6 Siege",         "image": "src/assets/jogos/games/r6.webp",               "category": "FPS",     "before": "72ms", "after": "19ms", "reduction": "−70%" },
+    { "name": "Warzone",          "image": "src/assets/jogos/games/codwarzone.webp",       "category": "BR",      "before": "88ms", "after": "24ms", "reduction": "−66%" },
+    { "name": "Overwatch 2",      "image": "src/assets/jogos/games/overwatch.webp",        "category": "HERO",    "before": "66ms", "after": "15ms", "reduction": "−80%" },
+    { "name": "Dota 2",           "image": "src/assets/jogos/games/dota2.webp",            "category": "MOBA",    "before": "58ms", "after": "21ms", "reduction": "−44%" },
+    { "name": "PUBG",             "image": "src/assets/jogos/games/pubg.webp",             "category": "BR",      "before": "86ms", "after": "26ms", "reduction": "−62%" },
+    { "name": "Tarkov",           "image": "src/assets/jogos/games/escapefromtarkov.webp", "category": "EXTRACT", "before": "98ms", "after": "42ms", "reduction": "−58%" },
+    { "name": "Marvel Rivals",    "image": "src/assets/jogos/games/marvelrivals.webp",     "category": "HERO",    "before": "72ms", "after": "14ms", "reduction": "−82%" },
+    { "name": "Dead by Daylight", "image": "src/assets/jogos/games/deadbydaylight.webp",   "category": "SURV",    "before": "62ms", "after": "21ms", "reduction": "−58%" },
+    { "name": "Rust",             "image": "src/assets/jogos/games/rust.webp",             "category": "SURV",    "before": "68ms", "after": "22ms", "reduction": "−66%" },
+    { "name": "GTA V",            "image": "src/assets/jogos/games/gta5.webp",             "category": "SAND",    "before": "82ms", "after": "32ms", "reduction": "−62%" },
+    { "name": "Minecraft",        "image": "src/assets/jogos/games/minecraft.webp",        "category": "SAND",    "before": "42ms", "after": "18ms", "reduction": "−44%" },
+    { "name": "World of Warcraft","image": "src/assets/jogos/games/wow.webp",              "category": "MMO",     "before": "98ms", "after": "38ms", "reduction": "−34%" },
+    { "name": "FFXIV",            "image": "src/assets/jogos/games/ffxiv.webp",            "category": "MMO",     "before": "86ms", "after": "34ms", "reduction": "−28%" },
+    { "name": "RuneScape",        "image": "src/assets/jogos/games/RuneScape.webp",        "category": "MMO",     "before": "48ms", "after": "22ms", "reduction": "−40%" },
+    { "name": "Albion Online",    "image": "src/assets/jogos/games/albion.webp",           "category": "MMO",     "before": "68ms", "after": "28ms", "reduction": "−52%" },
+    { "name": "Black Desert",     "image": "src/assets/jogos/games/blackdesert.webp",      "category": "MMO",     "before": "94ms", "after": "32ms", "reduction": "−66%" },
+    { "name": "Tibia",            "image": "src/assets/jogos/games/tibia.webp",            "category": "MMO",     "before": "76ms", "after": "22ms", "reduction": "−68%" },
+    { "name": "Arc Raiders",      "image": "src/assets/jogos/games/arcraiders.webp",       "category": "EXTRACT", "before": "82ms", "after": "16ms", "reduction": "−80%" },
+    { "name": "Warframe",         "image": "src/assets/jogos/games/warframe.webp",         "category": "LOOTER",  "before": "68ms", "after": "22ms", "reduction": "−68%" },
+    { "name": "EA FC 26",         "image": "src/assets/jogos/games/fc26.webp",             "category": "SPORTS",  "before": "52ms", "after": "18ms", "reduction": "−66%" }
+  ]
+}

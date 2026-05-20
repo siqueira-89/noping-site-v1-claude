@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Baixe o NoPing para Windows, Mac, iPhone ou Android. Otimize sua conexão e jogue sem lag.">
+  <title>Download NoPing · Baixe grátis para PC, Mac, iOS e Android</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Global -->
+  <link rel="stylesheet" href="../src/styles/global/variables.css">
+  <link rel="stylesheet" href="../src/styles/global/reset.css">
+  <link rel="stylesheet" href="../src/styles/global/typography.css">
+  <link rel="stylesheet" href="../src/styles/global/layout.css">
+  <link rel="stylesheet" href="../src/styles/global/utilities.css">
+  <!-- Components -->
+  <link rel="stylesheet" href="../src/styles/components/header.css">
+  <link rel="stylesheet" href="../src/styles/components/footer.css">
+  <link rel="stylesheet" href="../src/styles/components/buttons.css">
+  <link rel="stylesheet" href="../src/styles/components/cards.css">
+  <link rel="stylesheet" href="../src/styles/components/forms.css">
+  <!-- Page -->
+  <link rel="stylesheet" href="../src/styles/pages/download.css">
+</head>
+<body class="downloads-page" data-page="download" data-screen-label="Downloads">
+
+  <div class="grid-bg"></div>
+
+  <!-- ========== HEADER (injected) ========== -->
+  <header id="global-header" data-active="download"></header>
+
+  <main>
+    <section class="hero" id="hero">
+      <canvas id="particles-canvas" class="particles-canvas"></canvas>
+
+      <div class="container hero__content">
+        <div class="hero__copy">
+          <span class="eyebrow" style="margin-bottom: 16px;">DOWNLOAD</span>
+          <h1 class="hero__title">Jogue sem lag no <span class="text-primary">Desktop</span> e <span class="text-primary">Mobile</span></h1>
+          <p class="hero__subtitle">
+            A melhor tecnologia de otimização de rotas agora disponível para <strong>Windows</strong>, <strong>Mac</strong>, <strong>iPhone (App Store)</strong> e <strong>Android (Play Store)</strong>.
+          </p>
+
+          <div class="hero__downloads" id="hero-downloads">
+            <div class="hero__downloads-group">
+              <button class="btn active" type="button" data-value="windows">
+                <img src="../src/assets/icons/icon-download.svg" alt="" class="btn-icon">
+                Windows
+              </button>
+              <button class="btn" type="button" data-value="mac">
+                <img src="../src/assets/icons/mac-logo.svg" alt="" class="btn-icon">
+                Mac
+              </button>
+            </div>
+            <div class="hero__downloads-group">
+              <button class="btn" type="button" data-value="ios">
+                <img src="../src/assets/icons/icon-mobile.svg" alt="" class="btn-icon">
+                App Store
+              </button>
+              <button class="btn" type="button" data-value="android">
+                <img src="../src/assets/icons/icon-android.svg" alt="" class="btn-icon">
+                Play Store
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== FOOTER (injected) ========== -->
+  <footer id="global-footer"></footer>
+
+  <!-- Components -->
+  <script src="../src/components/header.js"></script>
+  <script src="../src/components/footer.js"></script>
+  <script src="../src/components/faq.js"></script>
+  <script src="../src/components/carousel.js"></script>
+  <script src="../src/components/buttons.js"></script>
+  <!-- Global -->
+  <script src="../src/scripts/global/helpers.js"></script>
+  <script src="../src/scripts/global/navigation.js"></script>
+  <script src="../src/scripts/global/interactions.js"></script>
+  <script src="../src/scripts/global/main.js"></script>
+  <!-- Page -->
+  <script src="../src/scripts/pages/download.js"></script>
+</body>
+</html>

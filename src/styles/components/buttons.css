@@ -1,0 +1,137 @@
+/* ============================================================
+   Buttons — base + CTAs + variants
+   ============================================================ */
+
+/* ---------- Base button ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: var(--np-font-display);
+  font-weight: var(--np-fw-semibold);
+  font-size: 0.95rem;
+  border-radius: var(--np-radius-sm);
+  transition: all 0.25s var(--np-ease);
+  white-space: nowrap;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--np-primary);
+  color: #000;
+}
+.btn-primary:hover {
+  background: var(--np-primary-dim);
+  box-shadow: 0 0 24px rgba(147, 255, 24, 0.45);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--np-border-strong);
+}
+.btn-outline:hover {
+  border-color: var(--np-border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-lg { padding: 18px 40px; font-size: 1.05rem; }
+.btn-sm { padding: 10px 20px; font-size: 0.8rem; }
+
+.btn-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- CTA (signature, pill, uppercase tracked) ---------- */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  border-radius: var(--np-radius-pill);
+  background: var(--np-primary);
+  color: #04120a;
+  font-weight: var(--np-fw-bold);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow:
+    0 0 0 1px rgba(147, 255, 24, 0.4),
+    0 12px 30px -8px var(--np-primary-glow);
+  transition: transform 200ms var(--np-ease), box-shadow 240ms var(--np-ease);
+  border: none;
+  cursor: pointer;
+}
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 0 0 1px rgba(147, 255, 24, 0.55),
+    0 16px 40px -8px rgba(147, 255, 24, 0.7);
+}
+
+.cta.ghost {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--fg);
+  box-shadow: none;
+  border: 1px solid var(--np-border-strong);
+}
+.cta.ghost:hover {
+  border-color: var(--np-border-hover);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ---------- Inline pill chevron arrow inside buttons ---------- */
+
+.btn .chevron-right,
+.cta .chevron-right { transition: transform 0.25s var(--np-ease); }
+.btn:hover .chevron-right,
+.cta:hover .chevron-right { transform: translateX(4px); }
+
+/* ---------- Tonal CTA variants (used on FAQ section) ---------- */
+
+.faq-btn,
+.btn-tonal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  font-family: var(--np-font-display);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--np-radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+.faq-btn.green,
+.btn-tonal.green {
+  background: var(--np-primary);
+  color: #000;
+}
+.faq-btn.green:hover,
+.btn-tonal.green:hover {
+  background: var(--np-primary-dim);
+  box-shadow: 0 0 20px rgba(147, 255, 24, 0.35);
+}
+.faq-btn.purple,
+.btn-tonal.purple {
+  background: #543eff;
+  color: #ffffff;
+}
+.faq-btn.purple:hover,
+.btn-tonal.purple:hover {
+  background: #412deb;
+  box-shadow: 0 0 20px rgba(84, 62, 255, 0.35);
+}

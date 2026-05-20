@@ -1,0 +1,106 @@
+/* ============================================================
+   Layout primitives — container, sections, grid background
+   ============================================================ */
+
+/* ---------- Container ---------- */
+
+.container,
+.shell {
+  position: relative;
+  width: 100%;
+  max-width: var(--np-container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ---------- Section spacing ---------- */
+
+.section {
+  padding: var(--np-space-2xl) 0;
+  position: relative;
+}
+
+/* Sections that should snap to viewport height (heroes, hero+footer, etc) */
+.section-viewport {
+  min-height: 100vh;
+  padding-top: var(--np-header-height);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.section-fullscreen {
+  height: 100vh;
+  padding-top: var(--np-header-height);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- Page chrome backgrounds (grid + radial halo) ---------- */
+
+/* The Kinetic Pulse — dotted grid masked with a radial fade.
+   Applied as a fixed full-viewport pseudo-element so every page sits
+   on the same canvas. Header / footer / faq opt out by setting their
+   own background or by sitting on the .section-flat surface. */
+body {
+  background:
+    radial-gradient(42% 24% at 50% 0%,  rgba(147,255,24,0.10), transparent 72%),
+    radial-gradient(34% 30% at 50% 44%, rgba(147,255,24,0.04), transparent 70%),
+    linear-gradient(180deg, #1D2028 0%, #0a0c0e 36%, #000000 100%);
+  background-attachment: fixed;
+}
+
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(80% 60% at 50% 20%, #000 30%, transparent 100%);
+  -webkit-mask-image: radial-gradient(80% 60% at 50% 20%, #000 30%, transparent 100%);
+}
+
+/* Optional decorative noise / scanline overlay slot (off by default) */
+.grid-bg--strong {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+}
+
+/* ---------- Grid helpers ---------- */
+
+.grid {
+  display: grid;
+  gap: var(--np-space-md);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ---------- Flex helpers ---------- */
+
+.flex            { display: flex; }
+.flex-col        { display: flex; flex-direction: column; }
+.items-center    { align-items: center; }
+.justify-center  { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.flex-1          { flex: 1; }

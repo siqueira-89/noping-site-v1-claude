@@ -1,0 +1,77 @@
+{
+  "columns": [
+    {
+      "title": "NOPING",
+      "links": [
+        { "label": "Servidores", "href": "#" },
+        { "label": "Jogos", "href": "/games/" },
+        { "label": "Preços", "href": "/prices/" },
+        { "label": "Download", "href": "/download/" },
+        { "label": "Teste Grátis", "href": "#trial" },
+        { "label": "Trabalhe Conosco", "href": "#" },
+        { "label": "Programa de Teste Beta", "href": "#" }
+      ]
+    },
+    {
+      "title": "TECNOLOGIA",
+      "links": [
+        { "label": "Conexão MultiPath", "href": "#" },
+        { "label": "Multi Internets", "href": "#" },
+        { "label": "Boost FPS", "href": "#" },
+        { "label": "Redução de Ping", "href": "#" },
+        { "label": "Correção de Perda de Pacotes", "href": "#" },
+        { "label": "Correção de Desconexão", "href": "#" },
+        { "label": "Correção de Picos de Ping", "href": "#" },
+        { "label": "Melhoria de Velocidade do Teclado", "href": "#" },
+        { "label": "Estatísticas Abrangentes", "href": "#" },
+        { "label": "Monitoramento de Conexão", "href": "#" },
+        { "label": "Troca Manual de Servidor", "href": "#" },
+        { "label": "IP Block", "href": "#" },
+        { "label": "Otimização de DNS", "href": "#" },
+        { "label": "AudioPad", "href": "#" },
+        { "label": "Green Aim", "href": "#" },
+        { "label": "Pro Settings", "href": "#" }
+      ]
+    },
+    {
+      "title": "AJUDA",
+      "links": [
+        { "label": "Tutorial Windows", "href": "#" },
+        { "label": "Tutorial Console", "href": "#" },
+        { "label": "Tutorial IOS", "href": "#" },
+        { "label": "Tutorial Android", "href": "#" },
+        { "label": "Centro de Suporte", "href": "/support/" },
+        { "label": "Contato B2B", "href": "#" },
+        { "label": "Política de Privacidade", "href": "#" },
+        { "label": "Termos de Uso", "href": "#" },
+        { "label": "Afiliados", "href": "/affiliates/" },
+        { "label": "FAQ", "href": "#faq" }
+      ]
+    },
+    {
+      "title": "BLOG",
+      "links": [
+        { "label": "Como Aumentar o FPS", "href": "#" },
+        { "label": "Como Tirar o Lag", "href": "#" },
+        { "label": "Dicas para Gamers", "href": "#" },
+        { "label": "Notícias NoPing", "href": "#" },
+        { "label": "Atualizações do App", "href": "#" }
+      ]
+    },
+    {
+      "title": "FEEDBACKS",
+      "links": [
+        { "label": "Avalie Nossa Plataforma", "href": "#" },
+        { "label": "Sugestão de Funcionalidade", "href": "#" }
+      ]
+    }
+  ],
+  "socials": [
+    { "label": "TikTok",    "href": "#" },
+    { "label": "LinkedIn",  "href": "#" },
+    { "label": "Facebook",  "href": "#" },
+    { "label": "Discord",   "href": "#" },
+    { "label": "Instagram", "href": "#" },
+    { "label": "X",         "href": "#" }
+  ]
+}

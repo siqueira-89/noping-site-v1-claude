@@ -1,0 +1,132 @@
+/* ============================================
+   FEATURES SECTION — NoPing + Claro Landing Page
+   ============================================ */
+
+.features {
+  position: relative;
+  padding: var(--space-2xl) 0;
+  background: transparent;
+}
+
+.features__bg-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  mask-image: linear-gradient(to bottom, transparent, black 2%, black);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 2%, black);
+}
+
+.features__inner {
+  position: relative;
+  z-index: 1;
+}
+
+.features__title {
+  text-align: center;
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  margin-bottom: var(--space-2xl);
+  line-height: 1.2;
+}
+
+/* Feature Card — shared base */
+.feature-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-xl);
+  background: rgba(5, 7, 10, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-lg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease, border-color 0.3s ease;
+  overflow: hidden;
+}
+
+.feature-card:hover {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-ghost-border-hover);
+}
+
+/* Reversed layout: image left, text right */
+.feature-card--reversed {
+  direction: rtl;
+}
+
+.feature-card--reversed > * {
+  direction: ltr;
+}
+
+/* First card: Multi Internet — taller, special layout */
+.feature-card--hero {
+  grid-template-columns: 1fr 1.3fr;
+  min-height: 420px;
+}
+
+/* Feature text content */
+.feature-card__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.feature-card__icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: var(--space-sm);
+}
+
+.feature-card__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+}
+
+.feature-card__desc {
+  color: rgba(255, 255, 255, 0.70);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  max-width: 420px;
+}
+
+/* Sub-feature inside hero card */
+.feature-card__sub {
+  margin-top: var(--space-lg);
+}
+
+.feature-card__sub .feature-card__name {
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+}
+
+/* Feature image */
+.feature-card__media {
+  width: 100%;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.feature-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+}
+
+/* GIF wrapper for first card */
+.feature-card__media--gif {
+  position: relative;
+}
+
+.feature-card__media--gif img {
+  border-radius: var(--radius-md);
+}

@@ -1,0 +1,98 @@
+/* ============================================================
+   Forms — inputs, textareas, language toggle pills
+   ============================================================ */
+
+.input,
+.field {
+  width: 100%;
+  padding: 14px 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--np-border-strong);
+  border-radius: var(--np-radius-sm);
+  color: var(--fg);
+  font-family: var(--np-font-body);
+  font-size: 0.95rem;
+  line-height: var(--np-lh-snug);
+  transition: border-color 0.25s var(--np-ease), background 0.25s var(--np-ease);
+}
+
+.input::placeholder,
+.field::placeholder {
+  color: var(--np-fg-3);
+}
+
+.input:hover,
+.field:hover {
+  border-color: var(--np-border-hover);
+}
+
+.input:focus,
+.field:focus {
+  outline: none;
+  border-color: var(--np-primary);
+  background: rgba(147, 255, 24, 0.04);
+  box-shadow: 0 0 0 3px rgba(147, 255, 24, 0.12);
+}
+
+/* ---------- Field group ---------- */
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field-label {
+  font-family: var(--np-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--np-fg-3);
+}
+
+/* ---------- Language pill (small toggle) ---------- */
+
+.lang-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--np-border-strong);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(244, 246, 247, 0.72);
+  transition: border-color 0.25s ease;
+  cursor: pointer;
+  background: transparent;
+}
+.lang-pill:hover { border-color: var(--np-border-hover); }
+.lang-pill img {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---------- Toggle / checkbox style (signature) ---------- */
+
+.np-check {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--np-border-strong);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.2s var(--np-ease), background 0.2s var(--np-ease);
+}
+.np-check:hover    { border-color: var(--np-border-hover); }
+.np-check:checked  { border-color: var(--np-primary); background: var(--np-primary); }
+.np-check:checked::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background: #000;
+  clip-path: polygon(18% 50%, 38% 70%, 80% 24%, 92% 36%, 38% 92%, 8% 62%);
+}

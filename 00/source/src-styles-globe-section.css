@@ -1,0 +1,198 @@
+/* ============================================
+   DOWNLOAD / CTA SECTION
+   ============================================ */
+
+.download {
+  padding: var(--space-2xl) 0;
+  text-align: center;
+}
+
+.download__badge {
+  display: inline-block;
+  padding: 12px 28px;
+  border: 1px solid var(--color-ghost-border);
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.70);
+  margin-bottom: var(--space-lg);
+}
+
+.download__title {
+  font-size: clamp(1.75rem, 3.2vw, 2.75rem);
+  margin-bottom: var(--space-xl);
+}
+
+.download__buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   PARTNER SECTION
+   ============================================ */
+
+.partner {
+  padding: var(--space-2xl) 0;
+}
+
+.partner__inner {
+  background: var(--color-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.partner__branding {
+  display: flex;
+  flex-direction: column;
+}
+
+.partner__logos {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.partner__logo {
+  height: 36px;
+  width: auto;
+}
+
+.partner__plus {
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.partner__headline {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  margin-bottom: var(--space-sm);
+}
+
+.partner__desc {
+  color: rgba(255, 255, 255, 0.60);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  max-width: 460px;
+}
+
+/* Info Cards grid */
+.partner__info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.info-card {
+  padding: var(--space-md) var(--space-lg);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  transition: background 0.3s ease;
+}
+
+.info-card:hover {
+  background: rgba(147, 255, 24, 0.05);
+}
+
+.info-card__label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: 6px;
+}
+
+.info-card__value {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+/* ============================================
+   CERTIFICATIONS BAR
+   ============================================ */
+
+.certifications {
+  padding: var(--space-lg) 0;
+  background: #05070A;
+}
+
+.certifications__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+}
+
+.certifications__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.certifications__label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.certifications__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.certifications__badge {
+  height: 36px;
+  opacity: 0.8;
+}
+
+.certifications__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.store-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border: 1px solid var(--color-ghost-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  transition: border-color 0.25s ease;
+}
+
+.store-badge:hover {
+  border-color: var(--color-ghost-border-hover);
+}
+
+.store-badge__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.store-badge__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.store-badge__small {
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.50);
+}
+
+.store-badge__name {
+  font-weight: 600;
+}

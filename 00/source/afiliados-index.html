@@ -1,0 +1,2114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NoPing · Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* ═══ Header (Replicated from download-noping) ═══ */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 72px;
+    background: rgba(5, 7, 10, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .header__left { display: contents; }
+  .header__logo-noping { height: 28px; width: auto; }
+  .header__nav-left { display: flex; align-items: center; gap: 32px; }
+  .header__nav-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(244, 246, 247, 0.72);
+    transition: color 0.2s ease;
+    position: relative;
+    text-decoration: none;
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+  }
+  .header__nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 100%;
+    height: 2px;
+    background-color: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  .header__nav-link:hover { color: #ffffff; }
+  .header__nav-link:hover::after { transform: scaleX(1); }
+  
+  @keyframes subtlePulse {
+    0% { text-shadow: 0 0 4px rgba(147, 255, 24, 0.1); opacity: 0.85; }
+    50% { text-shadow: 0 0 12px rgba(147, 255, 24, 0.4); opacity: 1; }
+    100% { text-shadow: 0 0 4px rgba(147, 255, 24, 0.1); opacity: 0.85; }
+  }
+  .header__nav-link.highlight-pulse {
+    color: var(--green) !important;
+    animation: subtlePulse 2s infinite ease-in-out;
+  }
+  .header__right { display: flex; align-items: center; gap: 24px; }
+  .header__lang {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(244, 246, 247, 0.72);
+    transition: border-color 0.25s ease;
+    cursor: pointer;
+    background: transparent;
+  }
+  .header__lang:hover { border-color: rgba(255, 255, 255, 0.4); }
+  .header__cta-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #000;
+    background: var(--green);
+    border-radius: 8px;
+    letter-spacing: 0.06em;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .header__cta-btn:hover {
+    background: #6bbd10;
+    box-shadow: 0 0 20px rgba(147, 255, 24, 0.25);
+  }
+
+  /* ═══ Hero Layout & Core ═══ */
+  .hero-wrapper {
+    height: calc(100vh - 72px);
+    max-height: 840px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ═══ Parte 1: Embaixadores ═══ */
+  .hero-ambassadors {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    position: relative;
+    background: #000000;
+    overflow: hidden;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    box-sizing: border-box;
+  }
+  .hero-ambassadors-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-particles-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .ambassadors-left {
+    flex: 1;
+    max-width: 520px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+    z-index: 4;
+    padding: 0;
+    background: transparent;
+    border-left: none;
+    backdrop-filter: none;
+  }
+  .eyebrow-affiliates {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.20em;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 600;
+  }
+  .eyebrow-affiliates::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 14px var(--green-glow);
+  }
+  .hero-title {
+    font-size: clamp(30px, 3.4vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 14px 0;
+    color: #ffffff;
+  }
+  .hero-title .highlight-green {
+    font-style: normal;
+    color: var(--green);
+    text-shadow: 0 0 30px rgba(147, 255, 24, 0.35);
+  }
+  .hero-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--fg-dim);
+    margin-bottom: 24px;
+    max-width: 480px;
+  }
+  .cta-affiliates {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 28px;
+    border-radius: var(--r-sm);
+    background: var(--green);
+    color: #000000;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(147, 255, 24, 0.25);
+    transition: all 0.25s var(--ease);
+    border: 1px solid transparent;
+  }
+  .cta-affiliates:hover {
+    background: var(--green-hi);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(147, 255, 24, 0.45);
+  }
+  .cta-affiliates .chevron-right {
+    transition: transform 0.25s var(--ease);
+  }
+  .cta-affiliates:hover .chevron-right {
+    transform: translateX(4px);
+  }
+
+  .ambassadors-right {
+    flex: 1.2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  @keyframes pulseGlow {
+    0% { filter: drop-shadow(0 0 30px rgba(147, 255, 24, 0.1)); transform: translate(-50%, -50%) scale(1); opacity: 0.04; }
+    50% { filter: drop-shadow(0 0 50px rgba(147, 255, 24, 0.4)); transform: translate(-50%, -50%) scale(1.02); opacity: 0.08; }
+    100% { filter: drop-shadow(0 0 30px rgba(147, 255, 24, 0.1)); transform: translate(-50%, -50%) scale(1); opacity: 0.04; }
+  }
+  .hero-bg-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 500px;
+    opacity: 0.04;
+    z-index: 1;
+    animation: pulseGlow 4s infinite ease-in-out;
+  }
+  .ambassador-fade-item {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    transform-origin: bottom center;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ambassador-fade-item.active {
+    opacity: 1;
+    z-index: 3;
+    transform: translateX(0) scale(1);
+    filter: drop-shadow(0 0 20px rgba(147, 255, 24, 0.2));
+  }
+  .ambassador-fade-item.next {
+    opacity: 1;
+    z-index: 2;
+    transform: translateX(25%) scale(0.85);
+    filter: blur(2.5px);
+  }
+  .ambassador-fade-item.prev {
+    opacity: 1;
+    z-index: 1;
+    transform: translateX(-25%) scale(0.85);
+    filter: blur(2.5px);
+  }
+  .ambassador-fade-img {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    z-index: 2;
+    position: relative;
+    transform-origin: bottom center;
+  }
+  .ambassador-fade-username {
+    position: absolute;
+    left: 50%;
+    bottom: 60px;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--green);
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transition-delay: 0.2s;
+    z-index: 4;
+    padding: 8px 16px;
+    background: rgba(10, 12, 14, 0.85);
+    border: 1px solid rgba(147, 255, 24, 0.25);
+    border-radius: var(--r-pill);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+  }
+  .ambassador-fade-item.active .ambassador-fade-username {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  .affiliate-flag {
+    width: 16px;
+    height: 12px;
+    object-fit: cover;
+    border-radius: 2px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  /* ═══ Parte 2: Cards de Afiliados ═══ */
+  .hero-affiliates-cards {
+    width: 100%;
+    padding: 10px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .affiliates-carousel-container {
+    width: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 5px 0 10px;
+    display: flex;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+  .affiliates-carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+  .affiliates-track {
+    display: flex;
+    gap: 24px;
+    padding: 0;
+  }
+  .affiliate-card {
+    width: 306px;
+    height: 420px;
+    flex-shrink: 0;
+    background: linear-gradient(180deg, rgba(29, 32, 40, 0.65) 0%, rgba(10, 12, 14, 0.96) 100%);
+    border-radius: var(--r-md);
+    border: 1.5px solid rgba(147, 255, 24, 0.18);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), 0 0 15px rgba(147, 255, 24, 0.04);
+    transition: all 0.3s var(--ease);
+    position: relative;
+  }
+  .affiliate-card:hover {
+    border-color: rgba(147, 255, 24, 0.45);
+    transform: translateY(-4px);
+    box-shadow: 0 25px 45px -15px rgba(0, 0, 0, 0.8), 0 0 25px rgba(147, 255, 24, 0.12);
+  }
+  .card-image-container {
+    height: 194px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: #060709;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card-image-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 55%, rgba(29, 32, 40, 0.85) 100%);
+    z-index: 2;
+  }
+  .affiliate-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center top;
+    transition: transform 0.5s ease;
+  }
+  .affiliate-card:hover .affiliate-avatar {
+    transform: scale(1.05);
+  }
+  .card-content {
+    padding: 12px 18px 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: flex-start;
+  }
+  .affiliate-name {
+    font-family: var(--font-sans);
+    font-size: 15px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .affiliate-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 8px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: var(--r-pill);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--fg-dim);
+  }
+  .affiliate-badge svg {
+    flex-shrink: 0;
+  }
+  .affiliate-badge.highlight {
+    background: var(--green);
+    border: none;
+    color: #000000;
+    font-weight: 800;
+    font-size: 8.5px;
+    letter-spacing: 0.05em;
+  }
+  .affiliate-badge.highlight svg {
+    fill: #000000;
+    stroke: #000000;
+  }
+  .affiliate-text {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.70);
+    font-style: normal;
+    margin: 10px 0;
+    flex: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .affiliate-text::before {
+    content: '“';
+    color: var(--green);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 0;
+    vertical-align: -2px;
+    margin-right: 2px;
+  }
+  .affiliate-text::after {
+    content: '”';
+    color: var(--green);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 0;
+    vertical-align: -2px;
+    margin-left: 2px;
+  }
+  .card-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 10px 0;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .affiliate-game {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: rgba(255,255,255,0.50);
+    letter-spacing: 0.08em;
+  }
+  .affiliate-game svg {
+    color: var(--green);
+    opacity: 0.9;
+  }
+  .affiliate-socials {
+    display: flex;
+    gap: 10px;
+  }
+  .social-icon-link {
+    color: rgba(255,255,255,0.4);
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+  }
+  .social-icon-link:hover {
+    color: var(--green);
+    transform: translateY(-2px);
+  }
+
+  .affiliates-progress-bar-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  .affiliates-progress-bar-track {
+    width: 200px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    position: relative;
+    overflow: hidden;
+  }
+  .affiliates-progress-bar-thumb {
+    height: 100%;
+    background: var(--green);
+    border-radius: 99px;
+    width: 30%;
+    position: absolute;
+    left: 0;
+    transition: left 0.15s cubic-bezier(0.25, 1, 0.5, 1), width 0.15s ease;
+    box-shadow: 0 0 10px var(--green-glow);
+  }
+
+  /* Responsividade da Hero de Afiliados */
+  @media(max-width: 1024px) {
+    .hero-wrapper {
+      padding: 24px 0 32px;
+      gap: 32px;
+      height: auto;
+      max-height: none;
+    }
+    .hero-ambassadors {
+      flex-direction: column;
+      padding: 48px 24px 0 24px;
+      gap: 32px;
+      background: #000000;
+    }
+    .hero-ambassadors-inner {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .ambassadors-left {
+      align-items: center;
+      text-align: center;
+      max-width: 100%;
+    }
+    .hero-desc {
+      text-align: center;
+      margin: 0 auto 24px;
+    }
+    .ambassadors-right {
+      width: 100%;
+      height: 350px;
+      justify-content: center;
+    }
+    .ambassador-fade-img {
+      object-position: center bottom;
+    }
+  }
+
+  /* ═══ Footer Certificates ═══ */
+  .footer__certificates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+  }
+  .footer__certificates-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .footer__certificates-text {
+    font-family: var(--font-mono, monospace);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 0.15em;
+  }
+  .footer__certificates-logos {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .footer__cert-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+  .footer__certificates-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .footer__store-btn {
+    display: inline-flex;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .footer__store-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+  }
+  .footer__store-btn img {
+    height: 42px;
+    width: auto;
+  }
+  .footer__certificates-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  /* ═══ Footer (Replicated from download-noping) ═══ */
+  .footer { background: #000000; color: #ffffff; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+  .footer .container { width: 100%; max-width: 1360px; margin: 0 auto; padding: 0 40px; display: flex; flex-direction: column; height: 100%; }
+  .footer__top { display: grid; grid-template-columns: 2fr repeat(5, 1fr); gap: 32px; padding: 0; flex-grow: 1; align-content: center; }
+  .footer__brand { display: flex; flex-direction: column; }
+  .footer__brand-logos { display: flex; align-items: center; gap: 8px; margin-bottom: 32px; }
+  .footer__brand-logo { height: 36px; width: auto; }
+  .footer__brand-text { font-size: 0.8rem; color: rgba(255, 255, 255, 0.45); line-height: 1.6; max-width: 260px; }
+
+  /* Promo Box Content */
+  .footer__promo {
+    margin-bottom: 32px;
+  }
+  .footer__promo-title {
+    font-family: var(--font-sans);
+    font-size: 22px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+  .footer__promo-text {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    max-width: 360px;
+  }
+  .footer__promo-actions {
+    display: inline-flex;
+    flex-direction: column;
+    width: min-content;
+  }
+  .footer__promo-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 24px;
+    background: var(--green);
+    color: #000;
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(147, 255, 24, 0.25);
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .footer__promo-btn:hover {
+    background: #6bbd10;
+    box-shadow: 0 8px 30px rgba(147, 255, 24, 0.45);
+    transform: translateY(-2px);
+  }
+  .footer__promo-rating {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--r-sm);
+    padding: 16px 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .footer__promo-stars {
+    color: #ffb800;
+    font-size: 14px;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .footer__promo-rating-text {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+  }
+  .footer__promo-rating-text strong {
+    color: #ffffff;
+    font-size: 12px;
+  }
+
+  /* Guides Content */
+  .footer__guides-title {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  .footer__guides-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+    max-width: 420px;
+  }
+  .footer__guides-list a {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    line-height: 1.5;
+    transition: color 0.2s;
+  }
+  .footer__guides-list a:hover {
+    color: var(--green);
+  }
+
+  .footer__column-title { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #ffffff; margin-bottom: 24px; }
+  .footer__link { display: block; font-size: 0.8rem; color: rgba(255, 255, 255, 0.50); padding: 4px 0; text-decoration: none; transition: color 0.2s ease; }
+  .footer__link:hover { color: var(--green); }
+  .footer__lang-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 18px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 100px; font-size: 0.8rem; font-weight: 600; color: rgba(255, 255, 255, 0.70); background: transparent; cursor: pointer; margin-top: 40px; transition: border-color 0.25s ease; }
+  .footer__lang-badge:hover { border-color: rgba(255, 255, 255, 0.40); }
+  .footer__divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin: 0; flex-shrink: 0; }
+  .footer__bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px; padding: 24px 0; }
+  .footer__copyright { font-size: 0.75rem; color: rgba(255, 255, 255, 0.35); }
+  .footer__socials { display: flex; align-items: center; gap: 32px; }
+  .footer__social-link { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .footer__social-icon { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #000000; border: 1px solid rgba(255, 255, 255, 0.1); flex-shrink: 0; transition: all 0.2s; }
+  .footer__social-link:hover .footer__social-icon { border-color: var(--green); background: rgba(255,255,255,0.05); }
+  .footer__social-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; line-height: 1.3; color: rgba(255, 255, 255, 0.50); }
+
+  /* ═══ Seções Viewport ═══ */
+  .section-viewport {
+    min-height: 100vh;
+    padding-top: 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+  }
+  .section-one {
+    min-height: 100vh;
+    padding-top: 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  .section-two {
+    background: transparent;
+  }
+  .section-three {
+    background: transparent;
+  }
+  .section-four {
+    background: #000000;
+  }
+  .section-five {
+    height: 100vh;
+    padding-top: 72px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    background: #000000;
+    z-index: 10;
+  }
+
+  /* ═══ Tutorial Section Styles ═══ */
+  .tutorial-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    margin: 24px 0;
+  }
+  .tutorial-showcase-left {
+    background: linear-gradient(135deg, #1b202a 0%, #0c0e12 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--r-md);
+    height: 280px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-card);
+  }
+  .tutorial-showcase-game {
+    flex: 1;
+    background: radial-gradient(circle at center, rgba(147, 255, 24, 0.05), transparent 70%), #12151c;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 24px;
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .tutorial-showcase-game::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(10, 12, 14, 0.85) 40%, rgba(10, 12, 14, 0.3) 100%);
+  }
+  .tutorial-ow-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .tutorial-ow-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .tutorial-ow-logo {
+    width: 48px;
+    height: 48px;
+  }
+  .tutorial-ow-title {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 24px;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+  .tutorial-ow-status {
+    margin-top: auto;
+    margin-bottom: 16px;
+  }
+  .tutorial-ow-status-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--green);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tutorial-ow-status-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--green-glow);
+  }
+  .tutorial-ow-status-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+    margin-top: 4px;
+  }
+  .tutorial-ow-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background: #ff5e00;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition: background 0.2s;
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba(255, 94, 0, 0.3);
+  }
+  .tutorial-ow-btn:hover {
+    background: #e05300;
+  }
+  .tutorial-showcase-right {
+    flex: 0.8;
+    background: rgba(255, 255, 255, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+  }
+  .tutorial-ow-logo-svg {
+    width: 140px;
+    height: auto;
+    margin-bottom: 4px;
+  }
+  .tutorial-blizzard-logo {
+    opacity: 0.35;
+    height: 18px;
+    width: auto;
+  }
+  
+  .tutorial-steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .tutorial-step-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: 24px;
+    position: relative;
+    background: transparent;
+  }
+  .tutorial-step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .tutorial-step-card::after {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 30%;
+    height: 3px;
+    background: var(--green);
+    border-radius: 99px;
+    box-shadow: 0 0 10px var(--green-glow);
+  }
+  .tutorial-step-num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+    background: rgba(147, 255, 24, 0.1);
+    border: 1px solid rgba(147, 255, 24, 0.2);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+  .tutorial-step-title {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+  .tutorial-step-desc {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--fg-mute);
+  }
+
+  /* ═══ Rank Section Styles ═══ */
+  .rank-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  .rank-title {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    max-width: 600px;
+  }
+  .rank-btn {
+    padding: 10px 24px;
+    background: transparent;
+    border: 1.5px solid var(--green);
+    border-radius: var(--r-pill);
+    color: var(--green);
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .rank-btn:hover {
+    background: var(--green);
+    color: #000000;
+    box-shadow: 0 0 15px var(--green-glow);
+  }
+  .rank-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+  .rank-card-tier {
+    background: linear-gradient(180deg, rgba(20, 24, 30, 0.6) 0%, rgba(10, 12, 14, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--r-lg);
+    padding: 32px 24px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s var(--ease);
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+    position: relative;
+    overflow: hidden;
+  }
+  .rank-card-tier::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: radial-gradient(circle at top, rgba(255,255,255,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .rank-card-tier:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9);
+  }
+  .rank-card-tier.explorer:hover { border-color: rgba(147, 255, 24, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9), 0 0 20px rgba(147, 255, 24, 0.1); }
+  .rank-card-tier.adventure:hover { border-color: rgba(46, 205, 255, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9), 0 0 20px rgba(46, 205, 255, 0.1); }
+  .rank-card-tier.champion:hover { border-color: rgba(138, 91, 255, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9), 0 0 20px rgba(138, 91, 255, 0.1); }
+  .rank-card-tier.hero:hover { border-color: rgba(255, 178, 24, 0.4); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.9), 0 0 20px rgba(255, 178, 24, 0.1); }
+  
+  .rank-badge-img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+    transition: transform 0.3s var(--ease), filter 0.3s var(--ease);
+  }
+  .rank-card-tier:hover .rank-badge-img {
+    transform: scale(1.1) translateY(-4px);
+  }
+  .rank-card-tier.explorer:hover .rank-badge-img { filter: drop-shadow(0 12px 24px rgba(147, 255, 24, 0.4)); }
+  .rank-card-tier.adventure:hover .rank-badge-img { filter: drop-shadow(0 12px 24px rgba(46, 205, 255, 0.4)); }
+  .rank-card-tier.champion:hover .rank-badge-img { filter: drop-shadow(0 12px 24px rgba(138, 91, 255, 0.4)); }
+  .rank-card-tier.hero:hover .rank-badge-img { filter: drop-shadow(0 12px 24px rgba(255, 178, 24, 0.4)); }
+  .rank-tier-name {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .rank-tier-features {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+    width: 100%;
+  }
+  .rank-tier-feature {
+    font-size: 11px;
+    color: var(--fg-mute);
+    line-height: 1.4;
+    text-align: center;
+  }
+  .rank-tier-feature.highlight {
+    font-weight: 700;
+    color: #ffffff;
+  }
+  
+  .rank-benefits-section {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 40px;
+    margin-top: 40px;
+  }
+  .rank-benefits-title {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
+  }
+  .rank-benefits-desc {
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--fg-mute);
+    max-width: 800px;
+    margin-bottom: 32px;
+  }
+  .rank-benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .rank-benefit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: linear-gradient(180deg, rgba(20, 24, 30, 0.4) 0%, transparent 100%);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: var(--r-md);
+    padding: 32px 24px;
+    transition: transform 0.25s, background 0.25s, border-color 0.25s;
+  }
+  .rank-benefit-item:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(180deg, rgba(20, 24, 30, 0.6) 0%, transparent 100%);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+  .rank-benefit-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .rank-benefit-icon {
+    color: #000;
+    background: var(--green);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(147, 255, 24, 0.25);
+    flex-shrink: 0;
+  }
+  .rank-benefit-title {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .rank-benefit-desc {
+    font-size: 10.5px;
+    line-height: 1.5;
+    color: var(--fg-mute);
+  }
+
+  /* ═══ FAQ Section Styles ═══ */
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 48px;
+    align-items: center;
+    height: calc(100vh - 160px);
+  }
+  .faq-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .faq-title {
+    font-family: var(--font-sans);
+    font-size: 36px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .faq-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--fg-mute);
+    margin-bottom: 32px;
+  }
+  .faq-btn-group {
+    display: flex;
+    gap: 16px;
+  }
+  .faq-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--r-sm);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .faq-btn.green {
+    background: var(--green);
+    color: #000000;
+  }
+  .faq-btn.green:hover {
+    background: #6bbd10;
+    box-shadow: 0 0 20px rgba(147, 255, 24, 0.35);
+  }
+  .faq-btn.purple {
+    background: #543eff;
+    color: #ffffff;
+  }
+  .faq-btn.purple:hover {
+    background: #412deb;
+    box-shadow: 0 0 20px rgba(84, 62, 255, 0.35);
+  }
+  
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 520px;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+  .faq-accordion::-webkit-scrollbar {
+    width: 6px;
+  }
+  .faq-accordion::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .faq-accordion::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.1);
+    border-radius: 99px;
+  }
+  
+  .faq-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    transition: all 0.25s var(--ease);
+  }
+  .faq-item.active {
+    border-color: var(--green);
+    box-shadow: 0 0 15px rgba(147, 255, 24, 0.05);
+    background: rgba(147, 255, 24, 0.01);
+  }
+  .faq-trigger {
+    width: 100%;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+  .faq-question {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .faq-icon-indicator {
+    color: rgba(255,255,255,0.4);
+    font-size: 16px;
+    font-weight: 400;
+    transition: transform 0.2s;
+  }
+  .faq-item.active .faq-icon-indicator {
+    color: var(--green);
+    transform: rotate(45deg);
+  }
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .faq-item.active .faq-content {
+    max-height: 160px;
+  }
+  .faq-answer-inner {
+    padding: 0 24px 20px;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--fg-mute);
+    max-height: 140px;
+    overflow-y: auto;
+    padding-right: 12px;
+  }
+  .faq-answer-inner::-webkit-scrollbar {
+    width: 4px;
+  }
+  .faq-answer-inner::-webkit-scrollbar-track {
+    background: rgba(255,255,255,0.02);
+  }
+  .faq-answer-inner::-webkit-scrollbar-thumb {
+    background: var(--green);
+    border-radius: 99px;
+    box-shadow: 0 0 10px var(--green-glow);
+  }
+
+  /* ═══ Responsive ═══ */
+  @media(max-width:1024px){
+    .hero-split{flex-direction:column;text-align:center;gap:60px}
+    .hero-left{text-align:center;padding-right:0}
+    .hero-left h1{font-size:56px}
+    .hero-subtext{margin:0 auto 32px}
+    .hero-cta-group{justify-content:center}
+    .stat-strip-container{margin-bottom:32px;justify-content:center}
+    .stat-strip{max-width:520px;gap:12px;padding:10px 16px;font-size:8px}
+    .deck-grid{grid-template-columns:repeat(3,1fr)}
+    .footer-grid{grid-template-columns:1fr 1fr;gap:32px}
+  }
+</style>
+
+</head>
+<body>
+<div class="grid-bg"></div>
+
+<!-- ========== SEÇÃO 1 (HEADER + HERO) ========== -->
+<section class="section-one">
+  <!-- ========== HEADER ========== -->
+  <header id="global-header"></header>
+
+<main class="hero-wrapper" id="hero">
+  
+  <!-- ========== PARTE 1: EMBAIXADORES ========== -->
+  <div class="hero-ambassadors">
+    <canvas id="hero-particles" class="hero-particles-canvas"></canvas>
+    <div class="shell hero-ambassadors-inner">
+      <!-- Lado Esquerdo: Textos & CTA -->
+      <div class="ambassadors-left">
+        <div class="ambassadors-left-decor">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <span class="eyebrow-affiliates">PROGRAMA DE PARCEIROS</span>
+        <h1 class="hero-title">Faça como as Lendas,<br>use <em class="highlight-green">NoPing!</em></h1>
+        <p class="hero-desc">Participe do programa de afiliados da NoPing e transforme sua rede em um negócio lucrativo. Expanda seu alcance, compartilhe os benefícios de usar a NoPing e ganhe recompensas para cada indicação que você fizer.</p>
+        <a href="#" class="cta-affiliates">
+          <span>TORNE-SE UM AFILIADO AGORA</span>
+          <svg class="chevron-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </a>
+      </div>
+      
+      <!-- Lado Direito: Carrossel Embaixadores -->
+      <div class="ambassadors-right">
+        <img src="logos/NoPing_Icon_Verde.svg" alt="" class="hero-bg-logo">
+        <div class="ambassador-fade-item active">
+          <div class="ambassador-fade-username">@brttOficial</div>
+          <img src="images/ambassadors/brtt-01.png" alt="brTT" class="ambassador-fade-img">
+        </div>
+        <div class="ambassador-fade-item">
+          <div class="ambassador-fade-username">@coldzera</div>
+          <img src="images/ambassadors/coldzera-01.png" alt="Coldzera" class="ambassador-fade-img">
+        </div>
+        <div class="ambassador-fade-item">
+          <div class="ambassador-fade-username">@sacy</div>
+          <img src="images/ambassadors/sacy-01.png" alt="Sacy" class="ambassador-fade-img">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PARTE 2: CARDS DE AFILIADOS ========== -->
+  <div class="hero-affiliates-cards shell">
+    <div class="affiliates-carousel-container" id="affiliates-carousel-container">
+      <div class="affiliates-track" id="affiliates-track">
+        
+        <!-- Card 1: Lestripez -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/lestripez.png" alt="lestripez" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">LESTRIPEZ <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/de.svg" class="affiliate-flag" alt="DE"></span>
+                <div class="affiliate-badge">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                  <span>INFLUENCIADOR</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Minha conexão ficou MUITO mais estável. Parei de sentir lag nas partidas e até notei uma melhora na minha performance. Agora posso focar no jogo sem me preocupar com a latência e queda de FPS."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>FORTNITE</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Vett -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/vett.png" alt="vett" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">VETT <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                <div class="affiliate-badge highlight">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>5X CAMPEÃO BRASILEIRO</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Sem uma conexão boa, não dá pra jogar Point Blank no nível que eu preciso. Com a NoPing, finalmente consigo focar no jogo e esquecer os problemas de latência."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>PB</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9H9V6h2v5zm4 0h-2V6h2v5z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Sacy -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/sacy.png" alt="sacy" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">SACY <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                <div class="affiliate-badge highlight">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path><path d="M12 2a7 7 0 0 0-7 7v4.66a2 2 0 0 0 1.34 1.88l3.66 1.13c.66.2 1.34.2 2 0l3.66-1.13A2 2 0 0 0 19 13.66V9a7 7 0 0 0-7-7z"></path></svg>
+                  <span>CAMPEÃO MUNDIAL VALORANT</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Depois que comecei a usar a NoPing, meu jogo mudou completamente. Como pro player de Valorant, cada frame é decisivo nos duelos e nas execuções de utility, e a diferença na latência é absurda."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>VALORANT</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9H9V6h2v5zm4 0h-2V6h2v5z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Coldzera -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/coldzera.png" alt="coldzera" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">COLDZERA <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                <div class="affiliate-badge highlight">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5v-2z"></path></svg>
+                  <span>2X MELHOR DO MUNDO CS:GO</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Ping alto pode destruir qualquer jogada, por isso a NoPing faz parte da minha rotina. Zero travadas, ping baixo sempre e aquela confiança de que posso focar só na minha mira e estratégia. Principalmente nos clutches e sprays, dá pra sentir a diferença na hora."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>CS2</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9H9V6h2v5zm4 0h-2V6h2v5z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 5: Arkane -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/arkane.png" alt="arkane" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">ARKANE <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                <div class="affiliate-badge">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                  <span>INFLUENCIADOR</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Já joguei com conexões instáveis e sei como isso atrapalha o desempenho. Com a NoPing, posso jogar with mais precisão e sem lag, o que faz toda a diferença quando a pressão aumenta. Não tem como competir sem ela."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>FORTNITE</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 6: Suja -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/suja.png" alt="suja" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">SUJA <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/es.svg" class="affiliate-flag" alt="ES"></span>
+                <div class="affiliate-badge">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                  <span>INFLUENCIADOR</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Para evoluir no Fortnite, você precisa de foco total no jogo, sem distrações ou problemas técnicos. Uma conexão estável faz toda a diferença na hora de aplicar o que você aprende."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>FORTNITE</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 7: brTT -->
+        <div class="affiliate-card">
+          <div class="card-image-container">
+            <img src="images/affiliates/brtt.png" alt="brtt" class="affiliate-avatar">
+          </div>
+          <div class="card-content">
+            <div class="card-content-inner">
+              <div class="card-header">
+                <span class="affiliate-name">BRTT <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                <div class="affiliate-badge highlight">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                  <span>6X CAMPEÃO BRASILEIRO</span>
+                </div>
+              </div>
+              <p class="affiliate-text">"Todo jogador de LoL sabe que o lag vai rolar na pior hora possível. Com a NoPing, minha conexão fica estável e sem aquelas travadas irritantes que podem acabar com a partida. É o tipo de ferramenta que todo jogador competitivo deveria ter no arsenal."</p>
+            </div>
+            <div class="card-footer-wrapper">
+              <div class="card-divider"></div>
+              <div class="card-footer">
+                <span class="affiliate-game">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                  <span>LOL</span>
+                </span>
+                <div class="affiliate-socials">
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9H9V6h2v5zm4 0h-2V6h2v5z"></path></svg></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+    <!-- Barra inferior de navegação do carrossel manual/auto -->
+    <div class="affiliates-progress-bar-container">
+      <div class="affiliates-progress-bar-track">
+        <div class="affiliates-progress-bar-thumb" id="affiliates-progress-thumb"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+</section>
+
+<!-- ========== SEÇÃO 2 (TUTORIAL) ========== -->
+<section class="section-viewport section-two">
+  <div class="shell">
+    <div class="eyebrow" style="margin-bottom: 12px;">PASSO A PASSO</div>
+    <h2 class="hero-title" style="font-size: 28px; margin-bottom: 8px; max-width: 800px;">Como participar do programa de parceria NoPing</h2>
+    <p class="hero-desc" style="max-width: 900px; margin-bottom: 24px; font-size: 12.5px;">Junte-se ao nosso exclusivo Clube de Benefícios para Parceiros! Em apenas três passos, você pode embarcar em uma jornada recompensadora em um mundo sem lag e com alto FPS. Registre-se, gere seu link de compartilhamento exclusivo e comece a aproveitar os benefícios agora mesmo!</p>
+    
+    <!-- Tutorial Showcase Grid -->
+    <div class="tutorial-grid">
+      <!-- Left side: Fake Overwatch 2 Launcher UI in Pure CSS -->
+      <div class="tutorial-showcase-left">
+        <div class="tutorial-showcase-game">
+          <div class="tutorial-ow-content">
+            <div class="tutorial-ow-logo-container">
+              <!-- Overwatch 2 Logo and Text -->
+              <svg class="tutorial-ow-logo-svg" viewBox="0 0 240 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 20C22 13.9249 19.5417 8.42488 15.562 4.43799L19.294 1.48804C24.084 6.27808 27 12.7881 27 20C27 27.2119 24.084 33.722 19.294 38.512L15.562 35.562C19.5417 31.5751 22 26.0751 22 20Z" fill="white"/>
+                <path d="M5 20C5 26.0751 7.45831 31.5751 11.438 35.562L7.70599 38.512C2.91595 33.722 0 27.2119 0 20C0 12.7881 2.91595 6.27808 7.70599 1.48804L11.438 4.43799C7.45831 8.42488 5 13.9249 5 20Z" fill="white"/>
+                <path d="M12 5.5L14 14.5H10L12 5.5Z" fill="white"/>
+                <path d="M7 16H17V18.5H7V16Z" fill="#ff5e00"/>
+                <text x="36" y="28" font-family="'Bai Jamjuree', sans-serif" font-weight="800" font-size="22" fill="white" letter-spacing="1">OVERWATCH</text>
+                <text x="182" y="28" font-family="'Bai Jamjuree', sans-serif" font-weight="800" font-size="26" fill="#ff5e00">2</text>
+              </svg>
+            </div>
+            
+            <div class="tutorial-ow-status">
+              <div class="tutorial-ow-status-label">PROCURANDO SERVIDOR...</div>
+              <div class="tutorial-ow-status-text">Otimizando sua rota em tempo real</div>
+            </div>
+            
+            <a href="#" class="tutorial-ow-btn">CANCELAR</a>
+          </div>
+        </div>
+        
+        <div class="tutorial-showcase-right">
+          <div style="font-family: var(--font-mono); font-size: 10px; color: var(--green); letter-spacing: 0.14em; margin-bottom: 8px;">NOPING CLIENT v4.2</div>
+          <div style="font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 6px;">ROTA EXCLUSIVA PARALELA</div>
+          <div style="font-size: 11px; line-height: 1.5; color: var(--fg-mute); margin-bottom: 24px;">Tecnologia multi-conexão ativada. Seus disparos e movimentos são transmitidos em 5 rotas paralelas ao mesmo tempo para o menor ping do servidor.</div>
+          <img src="logos/blizzard-logo.svg" alt="Blizzard" class="tutorial-blizzard-logo" style="margin-top: auto; align-self: flex-start; height: 16px;">
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Grid Steps -->
+    <div class="tutorial-steps-grid">
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">01</span>
+        <h3 class="tutorial-step-title">Faça sua inscrição</h3>
+        <p class="tutorial-step-desc">Comece sua jornada realizando sua inscrição. Com o NoPing, prepare-se para mergulhar em um mundo de jogos otimizados com menos lag e melhor desempenho.</p>
+      </div>
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">02</span>
+        <h3 class="tutorial-step-title">Encontre seu nível</h3>
+        <p class="tutorial-step-desc">Descubra qual nível de parceria é ideal para você. Nosso sistema de níveis é projetado para corresponder ao seu alcance, garantindo que você maximize os benefícios da nossa parceria.</p>
+      </div>
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">03</span>
+        <h3 class="tutorial-step-title">Compartilhe o link</h3>
+        <p class="tutorial-step-desc">Divulgue seu link exclusivo em todas as suas redes sociais e apresente aos seus seguidores sua experiência de jogo com NoPing: ping lá embaixo e FPS no alto.</p>
+      </div>
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">04</span>
+        <h3 class="tutorial-step-title">Monitore os ganhos</h3>
+        <p class="tutorial-step-desc">Monitore em tempo real cada transação feita por meio do seu link. Mantenha-se informado sobre seus referrals e aproveite para ganhar com cada transação bem-sucedida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SEÇÃO 3 (RANK) ========== -->
+<section class="section-viewport section-three">
+  <div class="shell">
+    <div class="rank-header">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="eyebrow">RECOMPENSAS</div>
+        <h2 class="rank-title">Cada nível oferecendo benefícios e recompensas únicas</h2>
+      </div>
+      <a href="#" class="rank-btn">AFILIE-SE AO NOPING</a>
+    </div>
+    
+    <!-- 4 Tier cards -->
+    <div class="rank-cards-grid">
+      <!-- 1. EXPLORER -->
+      <div class="rank-card-tier explorer">
+        <img src="images/images/medals-rank/Explorer.png" alt="Explorer" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: var(--green);">EXPLORER</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight">10% de comissão</span>
+          <span class="rank-tier-feature">em todas as vendas</span>
+        </div>
+      </div>
+      
+      <!-- 2. ADVENTURE -->
+      <div class="rank-card-tier adventure">
+        <img src="images/images/medals-rank/Adventure.png" alt="Adventure" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: #2ecdff;">ADVENTURE</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight">20% de comissão</span>
+          <span class="rank-tier-feature">NoPing Grátis</span>
+          <span class="rank-tier-feature">Gears NP</span>
+        </div>
+      </div>
+      
+      <!-- 3. CHAMPION -->
+      <div class="rank-card-tier champion">
+        <img src="images/images/medals-rank/Champion.png" alt="Champion" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: #8a5bff;">CHAMPION</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight">30% de comissão</span>
+          <span class="rank-tier-feature">NoPing Grátis</span>
+          <span class="rank-tier-feature">Gears NP</span>
+        </div>
+      </div>
+      
+      <!-- 4. HERO PARTNER -->
+      <div class="rank-card-tier hero">
+        <img src="images/images/medals-rank/Legend.png" alt="Legend" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: #ef9b00;">HERO PARTNER</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight" style="font-size: 10px; line-height: 1.3;">Parceria Oficial NoPing</span>
+          <span class="rank-tier-feature">NoPing Grátis</span>
+          <span class="rank-tier-feature">Led Neon NP</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Bottom Benefits list -->
+    <div class="rank-benefits-section">
+      <h3 class="rank-benefits-title">Benefícios para Parceiros</h3>
+      <p class="rank-benefits-desc">Participar do programa de parceria da NoPing abre um mundo de oportunidades. Desfrute de benefícios exclusivos, como acesso ao NoPing e ao seu clube de vantagens, taxas de comissão personalizadas e suporte personalizado da nossa equipe.</p>
+      
+      <div class="rank-benefits-grid">
+        <div class="rank-benefit-item">
+          <div class="rank-benefit-header">
+            <span class="rank-benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+            <h4 class="rank-benefit-title">Ganhe dinheiro jogando</h4>
+          </div>
+          <p class="rank-benefit-desc">Ao ser nosso parceiro, você pode lucrar oferecendo o NoPing aos seus amigos e seguidores.</p>
+        </div>
+        <div class="rank-benefit-item">
+          <div class="rank-benefit-header">
+            <span class="rank-benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <h4 class="rank-benefit-title">Use o NoPing gratuitamente</h4>
+          </div>
+          <p class="rank-benefit-desc">Todos os afiliados podem usar o NoPing sem custo algum. (a partir do nível Prata)</p>
+        </div>
+        <div class="rank-benefit-item">
+          <div class="rank-benefit-header">
+            <span class="rank-benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></span>
+            <h4 class="rank-benefit-title">Indique seus amigos</h4>
+          </div>
+          <p class="rank-benefit-desc">Convide outros influenciadores a se tornarem parceiros e seja recompensado por cada indicação bem-sucedida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SEÇÃO 4 (FAQ) ========== -->
+<section class="section-viewport section-four">
+  <div class="shell">
+    <div class="faq-grid">
+      <!-- Left Column text + CTAs -->
+      <div class="faq-left">
+        <div class="eyebrow" style="margin-bottom: 12px;">SUPORTE</div>
+        <h2 class="faq-title">Perguntas Frequentes</h2>
+        <p class="faq-desc">Explore nossa seção de perguntas frequentes para encontrar respostas a todas as suas dúvidas. De detalhes sobre assinatura a suporte técnico, cobrimos tudo para garantir uma experiência de jogo tranquila e agradável.</p>
+        <div class="faq-btn-group">
+          <a href="#" class="faq-btn green">TESTE GRATUITO AGORA</a>
+          <a href="#" class="faq-btn purple">FAQ</a>
+        </div>
+      </div>
+      
+      <!-- Right Column Accordion list -->
+      <div class="faq-accordion">
+        <!-- Item 1: Active by default -->
+        <div class="faq-item active">
+          <button class="faq-trigger">
+            <span class="faq-question">O que é NoPing?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              NoPing é um aplicativo avançado de alto desempenho projetado especificamente para melhorar a experiência de jogos online, otimizando tanto a latência (ping) quanto os FPS (frames por segundo). Nossa exclusiva tecnologia patenteada de Multi Conexão permite o uso simultâneo de vários servidores, reduzindo drasticamente a latência e abordando efetivamente qualquer gargalo de conectividade internacional ou local na sua região.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 2 -->
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span class="faq-question">Como ativar o teste gratuito de 1 dia?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Para ativar o seu teste gratuito de 24 horas, basta realizar o download do aplicativo e efetuar o cadastro de uma nova conta de usuário. O sistema liberará o acesso premium completo instantaneamente e sem burocracia ou exigência de cartões de crédito.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 3 -->
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span class="faq-question">Como usar NoPing?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Basta abrir o aplicativo, fazer login, selecionar o seu jogo favorito na barra de pesquisa, escolher o servidor que apresenta o menor ping e menor tempo de resposta na lista e clicar em "Otimizar". O aplicativo configurará tudo automaticamente em segundo plano.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 4 -->
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span class="faq-question">Como saber se meu ping está otimizado?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              A tela de status do aplicativo exibe o gráfico de desempenho e a redução exata da latência alcançada, mostrando o ping antes e depois da ativação. Você também notará que seus comandos e habilidades dentro do jogo respondem com muito mais rapidez e precisão.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 5 -->
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span class="faq-question">Quantos jogos o NoPing suporta?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Suportamos mais de 1000 títulos competitivos e populares, incluindo os principais lançamentos do mercado gamer de PC (ex: Fortnite, League of Legends, Valorant, CS2, WoW, Apex Legends). Atualizamos e testamos novos servidores e otimizações de jogos diariamente.
+            </div>
+          </div>
+        </div>
+        
+        <!-- Item 6 -->
+        <div class="faq-item">
+          <button class="faq-trigger">
+            <span class="faq-question">Como adicionar um jogo ao NoPing?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Caso seu jogo não esteja listado automaticamente, você pode solicitar a inclusão dele diretamente pelo painel do aplicativo ou utilizar a funcionalidade de otimização genérica baseada em portas de tráfego, garantindo aceleração em qualquer jogo ou aplicativo de streaming.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="global-footer"></footer>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================
+    // CARROSSEL 3D DE EMBAIXADORES (PARTE 1)
+    // ==========================================
+    const fadeItems = document.querySelectorAll('.ambassador-fade-item');
+    if (fadeItems.length === 3) {
+      let currentIndex = 0;
+      
+      const updateCarousel = () => {
+        fadeItems.forEach(item => item.classList.remove('active', 'prev', 'next'));
+        const prevIndex = (currentIndex - 1 + 3) % 3;
+        const nextIndex = (currentIndex + 1) % 3;
+        
+        fadeItems[currentIndex].classList.add('active');
+        fadeItems[nextIndex].classList.add('next');
+        fadeItems[prevIndex].classList.add('prev');
+      };
+      
+      updateCarousel();
+      
+      setInterval(() => {
+        currentIndex = (currentIndex + 1) % 3;
+        updateCarousel();
+      }, 4000);
+    }
+
+    // ==========================================
+    // CARROSSEL DE CARDS DE AFILIADOS (PARTE 2)
+    // ==========================================
+    const container = document.getElementById('affiliates-carousel-container');
+    const thumb = document.getElementById('affiliates-progress-thumb');
+    
+    // Configurações do scroll
+    const cardWidthWithGap = 330; // 306px largura do card + 24px gap
+    let autoScrollInterval;
+    let isInteracting = false;
+    let autoScrollDirection = 1; // 1 = direita, -1 = esquerda
+
+    // Função para atualizar a barra de progresso horizontal
+    const updateProgressBar = () => {
+      const scrollLeft = container.scrollLeft;
+      const maxScrollLeft = container.scrollWidth - container.clientWidth;
+      
+      if (maxScrollLeft <= 0) {
+        thumb.style.width = '100%';
+        thumb.style.left = '0%';
+        return;
+      }
+
+      // Proporção de exibição (largura visível em relação ao total)
+      const visibleRatio = container.clientWidth / container.scrollWidth;
+      const thumbWidth = Math.max(visibleRatio * 100, 20); // Mínimo de 20% de largura
+      thumb.style.width = `${thumbWidth}%`;
+
+      // Progresso do scroll de 0 a 1
+      const progress = scrollLeft / maxScrollLeft;
+      
+      // Mapeia o progresso para a posição da thumb (de 0% até a margem restante)
+      const maxLeft = 100 - thumbWidth;
+      thumb.style.left = `${progress * maxLeft}%`;
+    };
+
+    // Função de auto-scroll
+    const startAutoScroll = () => {
+      autoScrollInterval = setInterval(() => {
+        if (isInteracting) return;
+
+        const maxScrollLeft = container.scrollWidth - container.clientWidth;
+        if (maxScrollLeft <= 0) return;
+
+        // Se chegou ao final, inverte o sentido
+        if (container.scrollLeft >= maxScrollLeft - 5) {
+          autoScrollDirection = -1;
+        } else if (container.scrollLeft <= 5) {
+          autoScrollDirection = 1;
+        }
+
+        // Rola suavemente
+        const nextScroll = container.scrollLeft + (cardWidthWithGap * autoScrollDirection);
+        container.scrollTo({
+          left: Math.max(0, Math.min(nextScroll, maxScrollLeft)),
+          behavior: 'smooth'
+        });
+      }, 4000);
+    };
+
+    // Interações do usuário
+    container.addEventListener('scroll', updateProgressBar);
+    
+    // Pausa o auto-scroll quando o mouse está sobre o container ou em interações de toque
+    const pauseScroll = () => {
+      isInteracting = true;
+    };
+
+    const resumeScroll = () => {
+      isInteracting = false;
+    };
+
+    container.addEventListener('mouseenter', pauseScroll);
+    container.addEventListener('mouseleave', resumeScroll);
+    container.addEventListener('touchstart', pauseScroll);
+    container.addEventListener('touchend', resumeScroll);
+
+    // Redimensionamento de janela (para reajustar tamanho do container e thumb)
+    window.addEventListener('resize', updateProgressBar);
+
+    // Inicialização
+    setTimeout(() => {
+      updateProgressBar();
+      startAutoScroll();
+    }, 100);
+
+    // FAQ Accordion Logic
+    document.querySelectorAll('.faq-trigger').forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const item = trigger.closest('.faq-item');
+        const isActive = item.classList.contains('active');
+        
+        // Close all other items
+        document.querySelectorAll('.faq-item').forEach(otherItem => {
+          otherItem.classList.remove('active');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+
+    // ==========================================
+    // HERO PARTICLES BACKGROUND
+    // ==========================================
+    const canvas = document.getElementById('hero-particles');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      const particleCount = 40;
+      
+      const resizeCanvas = () => {
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      };
+      
+      window.addEventListener('resize', resizeCanvas);
+      resizeCanvas();
+      
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          radius: Math.random() * 1.5 + 0.5
+        });
+      }
+      
+      const draw = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = 'rgba(147, 255, 24, 0.4)';
+        ctx.strokeStyle = 'rgba(147, 255, 24, 0.08)';
+        
+        particles.forEach((p, i) => {
+          p.x += p.vx;
+          p.y += p.vy;
+          
+          if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+          
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+          ctx.fill();
+          
+          for (let j = i + 1; j < particleCount; j++) {
+            const p2 = particles[j];
+            const dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+            if (dist < 120) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(p2.x, p2.y);
+              ctx.stroke();
+            }
+          }
+        });
+        requestAnimationFrame(draw);
+      };
+      draw();
+    }
+  });
+</script>
+
+  <script src="src/components/header.js"></script>
+  <script src="src/components/footer.js"></script>
+  <script src="src/main.js"></script>
+</body>
+</html>

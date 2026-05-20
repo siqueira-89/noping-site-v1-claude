@@ -1,0 +1,129 @@
+/* ============================================================
+   Typography — Bai Jamjuree (display + body) + JetBrains Mono
+   ============================================================ */
+
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-ExtraLight.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-Italic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-SemiBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-Bold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url('../../assets/fonts/BaiJamjuree/BaiJamjuree-BoldItalic.ttf') format('truetype');
+}
+
+/* ---------- Headlines ---------- */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--np-font-display);
+  font-weight: var(--np-fw-bold);
+  line-height: var(--np-lh-tight);
+  letter-spacing: var(--np-tracking-tight);
+  color: #ffffff;
+  text-wrap: balance;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3.25rem); }
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
+h4 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; text-transform: uppercase; letter-spacing: var(--np-tracking-wide); }
+
+p {
+  line-height: var(--np-lh-normal);
+  text-wrap: pretty;
+}
+
+strong, b { font-weight: var(--np-fw-bold); }
+em        { font-style: italic; }
+
+/* Italic feature names get the neon highlight per voice rules */
+em.np-highlight,
+.np-highlight em {
+  font-style: italic;
+  color: var(--np-primary);
+}
+
+/* ---------- Inline helpers ---------- */
+
+.text-primary { color: var(--np-primary); }
+.text-muted   { color: var(--np-fg-3); }
+.text-dim     { color: var(--np-fg-2); }
+.text-sm      { font-size: 0.875rem; }
+.text-mono    { font-family: var(--np-font-mono); }
+
+/* ---------- Eyebrow / kicker text ---------- */
+
+.np-eyebrow,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--np-font-mono);
+  font-size: 11px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.np-eyebrow::before,
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--np-primary);
+  box-shadow: 0 0 14px var(--np-primary-glow);
+}
+
+.np-eyebrow--primary,
+.eyebrow.primary {
+  color: var(--np-primary);
+}

@@ -1,0 +1,154 @@
+/* ============================================================
+   /download — Download page
+   Hero = full viewport (100vh) with background image, particles
+   canvas and left-aligned content (Windows / Mac / App Store /
+   Play Store buttons in two horizontal groups).
+   Layout matches the original "download-noping" reference.
+   ============================================================ */
+
+/* ---------- Hero ---------- */
+
+.downloads-page .hero {
+  position: relative;
+  min-height: 100vh;
+  padding-top: var(--np-header-height);
+  background-image: url('../../assets/download/bg-hero.png');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-color: var(--np-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Subtle dark overlay for readability over the bg image */
+.downloads-page .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.15) 40%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Particles canvas — full hero, between overlay and content */
+.particles-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.downloads-page .hero__content {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  min-height: calc(100vh - var(--np-header-height));
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* LEFT-aligned content per original */
+}
+
+/* ---------- Hero copy ---------- */
+
+.downloads-page .hero__copy {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--np-space-md);
+}
+
+.downloads-page .hero__title {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #ffffff;
+  margin-bottom: var(--np-space-xs);
+  letter-spacing: -0.02em;
+}
+
+.downloads-page .hero__subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  max-width: 440px;
+}
+.downloads-page .hero__subtitle strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* ---------- Download button groups ---------- */
+
+.downloads-page .hero__downloads {
+  display: flex;
+  flex-direction: column;
+  gap: var(--np-space-sm);
+  margin-top: var(--np-space-md);
+}
+
+.downloads-page .hero__downloads-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--np-space-sm);
+}
+
+.downloads-page .hero__downloads .btn {
+  min-width: 180px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid var(--np-border-strong);
+  font-family: var(--np-font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--np-radius-sm);
+  cursor: pointer;
+  transition: all 0.25s var(--np-ease);
+}
+
+.downloads-page .hero__downloads .btn:hover {
+  border-color: var(--np-border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.downloads-page .hero__downloads .btn.active {
+  background: var(--np-primary);
+  color: #000000;
+  border-color: var(--np-primary);
+  box-shadow: 0 0 24px var(--np-primary-glow);
+}
+
+.downloads-page .hero__downloads .btn .btn-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.25s ease;
+}
+
+.downloads-page .hero__downloads .btn.active .btn-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 720px) {
+  .downloads-page .hero__content { justify-content: center; text-align: center; }
+  .downloads-page .hero__copy    { align-items: center; }
+  .downloads-page .hero__downloads-group { flex-direction: column; align-items: stretch; width: 100%; }
+  .downloads-page .hero__downloads .btn  { min-width: 0; width: 100%; justify-content: center; }
+}

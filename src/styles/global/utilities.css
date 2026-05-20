@@ -1,0 +1,91 @@
+/* ============================================================
+   Utilities — chips, glass, glow dots, motion helpers
+   ============================================================ */
+
+/* ---------- Chip / tag ---------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--np-font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: var(--np-radius-pill);
+  border: 1px solid var(--np-border-strong);
+  color: var(--np-fg-2);
+  background: rgba(255, 255, 255, 0.02);
+}
+.chip.green  { color: var(--np-primary);  border-color: rgba(156, 255, 46, 0.40); background: rgba(156, 255, 46, 0.06); }
+.chip.cyan   { color: var(--c-network);   border-color: rgba(46, 205, 255, 0.35); background: rgba(46, 205, 255, 0.06); }
+.chip.purple { color: var(--c-tools);     border-color: rgba(138, 91, 255, 0.40); background: rgba(138, 91, 255, 0.06); }
+.chip.bad    { color: var(--c-danger);    border-color: rgba(255, 122, 26, 0.40); background: rgba(255, 122, 26, 0.06); }
+
+/* ---------- Glow dot (status) ---------- */
+
+.glow-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--np-primary);
+  box-shadow: 0 0 4px var(--np-primary), 0 0 12px var(--np-primary-glow);
+}
+
+@keyframes np-pulse {
+  0%, 100% { box-shadow: 0 0 4px var(--np-primary), 0 0 8px var(--np-primary-glow); opacity: 0.85; }
+  50%      { box-shadow: 0 0 8px var(--np-primary), 0 0 22px var(--np-primary-glow); opacity: 1; }
+}
+.glow-dot--pulse { animation: np-pulse var(--np-pulse-dur) ease-in-out infinite; }
+
+/* ---------- Glass surface helper ---------- */
+
+.glass {
+  background: var(--np-glass-bg);
+  backdrop-filter: blur(var(--np-glass-blur));
+  -webkit-backdrop-filter: blur(var(--np-glass-blur));
+  border: 1px solid var(--np-border-strong);
+  border-radius: var(--np-radius-lg);
+}
+
+.glass--light {
+  background: var(--np-glass-bg-light);
+}
+
+/* ---------- Visually hidden ---------- */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Spacing helpers ---------- */
+
+.mt-xs { margin-top: var(--np-space-xs); }
+.mt-sm { margin-top: var(--np-space-sm); }
+.mt-md { margin-top: var(--np-space-md); }
+.mt-lg { margin-top: var(--np-space-lg); }
+.mt-xl { margin-top: var(--np-space-xl); }
+
+.mb-xs { margin-bottom: var(--np-space-xs); }
+.mb-sm { margin-bottom: var(--np-space-sm); }
+.mb-md { margin-bottom: var(--np-space-md); }
+.mb-lg { margin-bottom: var(--np-space-lg); }
+.mb-xl { margin-bottom: var(--np-space-xl); }
+
+/* ---------- Motion fallback (respect reduced-motion) ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

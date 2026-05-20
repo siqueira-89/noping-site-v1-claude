@@ -1,0 +1,404 @@
+/* ============================================================
+   Footer — global NoPing footer
+   Layout strategy mirrored from /footer-noping reference:
+   - .section-footer is exactly (100vh - headerHeight) tall
+   - .footer fills it via flex-grow: 1
+   - .footer__container is 100% height flex column
+   - .footer__top grows to fill the middle, centers content
+   - .footer__certificates anchors at the top
+   - .footer__bottom anchors at the bottom
+
+   This produces: cert strip on top → columns vertically
+   centered in remaining space → copyright + socials at bottom.
+   No empty gaps, no stretching artefacts.
+   ============================================================ */
+
+/* ---------- Section wrapper ----------
+   Locked to (100vh - headerHeight) so the footer occupies
+   exactly one viewport screen below the fixed header. */
+
+.section-footer {
+  height: 100vh;
+  padding-top: var(--np-header-height);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  background: #000000;
+  z-index: 10;
+}
+
+.footer {
+  background: #000000;
+  color: #ffffff;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* ---------- Centered container ----------
+   100% of footer height; flex column so its children
+   distribute: certificates at top, top-grid in the middle
+   (grows + centers), divider + bottom at the natural bottom. */
+
+.footer__container {
+  width: 100%;
+  max-width: var(--np-container-max);
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ---------- Certificates strip (top of footer) ---------- */
+
+.footer__certificates {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+
+.footer__certificates-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.footer__certificates-text {
+  font-family: var(--np-font-mono);
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.footer__certificates-logos {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer__cert-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+}
+
+.footer__certificates-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer__store-btn {
+  display: inline-flex;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.footer__store-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+.footer__store-btn img {
+  height: 42px;
+  width: auto;
+}
+
+.footer__certificates-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+/* ---------- Top grid (brand + 5 link columns) ----------
+   The middle of the footer. Grows to fill remaining height
+   between cert strip and bottom row; columns center vertically
+   in that space (align-content: center). */
+
+.footer__top {
+  display: grid;
+  grid-template-columns: 2fr repeat(5, 1fr);
+  gap: 32px;
+  padding: 0;
+  flex-grow: 1;
+  align-content: center;
+}
+
+.footer__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__brand-logos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 32px;
+}
+
+.footer__brand-logo {
+  height: 36px;
+  width: auto;
+}
+
+.footer__brand-text {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.6;
+  max-width: 260px;
+}
+
+/* ---------- Promo box ---------- */
+
+.footer__promo { margin-bottom: 32px; }
+
+.footer__promo-title {
+  font-family: var(--np-font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.footer__promo-text {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+  margin-bottom: 24px;
+  max-width: 360px;
+}
+
+.footer__promo-actions {
+  display: inline-flex;
+  flex-direction: column;
+  width: min-content;
+}
+
+.footer__promo-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  background: var(--np-primary);
+  color: #000;
+  font-family: var(--np-font-display);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.05em;
+  border-radius: var(--np-radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 20px rgba(147, 255, 24, 0.25);
+  white-space: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+  text-transform: uppercase;
+}
+.footer__promo-btn:hover {
+  background: var(--np-primary-dim);
+  box-shadow: 0 8px 30px rgba(147, 255, 24, 0.45);
+  transform: translateY(-2px);
+}
+
+.footer__promo-rating {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--np-radius-sm);
+  padding: 16px 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.footer__promo-stars {
+  color: #ffb800;
+  font-size: 14px;
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+.footer__promo-rating-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.5;
+}
+.footer__promo-rating-text strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+/* ---------- Performance guides links ---------- */
+
+.footer__guides-title {
+  font-family: var(--np-font-display);
+  font-size: 12px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.footer__guides-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 24px;
+  max-width: 420px;
+}
+
+.footer__guides-list a {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  line-height: 1.5;
+  transition: color 0.2s;
+}
+.footer__guides-list a:hover { color: var(--np-primary); }
+
+/* ---------- Link columns ---------- */
+
+.footer__column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.footer__column-title {
+  font-family: var(--np-font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.footer__link {
+  display: block;
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.50);
+  padding: 4px 0;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer__link:hover { color: var(--np-primary); }
+
+.footer__lang-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.70);
+  background: transparent;
+  cursor: pointer;
+  margin-top: 40px;
+  align-self: flex-start;
+  transition: border-color 0.25s ease;
+}
+.footer__lang-badge:hover { border-color: rgba(255, 255, 255, 0.40); }
+.footer__lang-badge img {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ---------- Bottom (copy + socials) ---------- */
+
+.footer__divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.footer__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+
+.footer__copyright {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.footer__social-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #000000;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+.footer__social-link:hover .footer__social-icon {
+  border-color: var(--np-primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.footer__social-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.3;
+  color: rgba(255, 255, 255, 0.50);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 1280px) {
+  .footer__top {
+    grid-template-columns: 1.6fr repeat(5, minmax(0, 1fr));
+    gap: 24px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .section-footer { height: auto; min-height: 100vh; }
+  .footer__top {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px 32px;
+    padding: 24px 0;
+  }
+  .footer__brand { grid-column: 1 / -1; }
+}
+
+@media (max-width: 720px) {
+  .footer__top { grid-template-columns: repeat(2, 1fr); }
+  .footer__certificates { flex-direction: column; align-items: flex-start; }
+  .footer__bottom       { flex-direction: column; align-items: flex-start; }
+  .footer__socials      { gap: 16px; }
+}

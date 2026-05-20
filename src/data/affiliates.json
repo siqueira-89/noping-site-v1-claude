@@ -1,0 +1,87 @@
+{
+  "ambassadors": [
+    { "name": "brTT",     "username": "@brttOficial", "image": "src/assets/afiliados/ambassadors/brtt-01.png" },
+    { "name": "Coldzera", "username": "@coldzera",    "image": "src/assets/afiliados/ambassadors/coldzera-01.png" },
+    { "name": "Sacy",     "username": "@sacy",        "image": "src/assets/afiliados/ambassadors/sacy-01.png" }
+  ],
+  "affiliates": [
+    {
+      "name": "LESTRIPEZ",
+      "country": "de",
+      "image": "src/assets/afiliados/affiliates/lestripez.png",
+      "badge":   { "label": "INFLUENCIADOR" },
+      "quote":   "Minha conexão ficou MUITO mais estável. Parei de sentir lag nas partidas e até notei uma melhora na minha performance. Agora posso focar no jogo sem me preocupar com a latência e queda de FPS.",
+      "game":    "FORTNITE"
+    },
+    {
+      "name": "VETT",
+      "country": "br",
+      "image": "src/assets/afiliados/affiliates/vett.png",
+      "badge":   { "label": "5X CAMPEÃO BRASILEIRO", "highlight": true },
+      "quote":   "Sem uma conexão boa, não dá pra jogar Point Blank no nível que eu preciso. Com a NoPing, finalmente consigo focar no jogo e esquecer os problemas de latência.",
+      "game":    "PB"
+    },
+    {
+      "name": "SACY",
+      "country": "br",
+      "image": "src/assets/afiliados/affiliates/sacy.png",
+      "badge":   { "label": "CAMPEÃO MUNDIAL VALORANT", "highlight": true },
+      "quote":   "Depois que comecei a usar a NoPing, meu jogo mudou completamente. Como pro player de Valorant, cada frame é decisivo nos duelos e nas execuções de utility, e a diferença na latência é absurda.",
+      "game":    "VALORANT"
+    },
+    {
+      "name": "COLDZERA",
+      "country": "br",
+      "image": "src/assets/afiliados/affiliates/coldzera.png",
+      "badge":   { "label": "2X MELHOR DO MUNDO CS:GO", "highlight": true },
+      "quote":   "Ping alto pode destruir qualquer jogada, por isso a NoPing faz parte da minha rotina. Zero travadas, ping baixo sempre e aquela confiança de que posso focar só na minha mira e estratégia.",
+      "game":    "CS2"
+    },
+    {
+      "name": "ARKANE",
+      "country": "br",
+      "image": "src/assets/afiliados/affiliates/arkane.png",
+      "badge":   { "label": "INFLUENCIADOR" },
+      "quote":   "Já joguei com conexões instáveis e sei como isso atrapalha o desempenho. Com a NoPing, posso jogar com mais precisão e sem lag, o que faz toda a diferença quando a pressão aumenta.",
+      "game":    "FORTNITE"
+    },
+    {
+      "name": "SUJA",
+      "country": "es",
+      "image": "src/assets/afiliados/affiliates/suja.png",
+      "badge":   { "label": "INFLUENCIADOR" },
+      "quote":   "Para evoluir no Fortnite, você precisa de foco total no jogo, sem distrações ou problemas técnicos. Uma conexão estável faz toda a diferença na hora de aplicar o que você aprende.",
+      "game":    "FORTNITE"
+    },
+    {
+      "name": "BRTT",
+      "country": "br",
+      "image": "src/assets/afiliados/affiliates/brtt.png",
+      "badge":   { "label": "6X CAMPEÃO BRASILEIRO", "highlight": true },
+      "quote":   "Todo jogador de LoL sabe que o lag vai rolar na pior hora possível. Com a NoPing, minha conexão fica estável e sem aquelas travadas irritantes que podem acabar com a partida.",
+      "game":    "LOL"
+    }
+  ],
+  "tiers": [
+    {
+      "key": "explorer", "label": "EXPLORER", "color": "#93FF18",
+      "image": "src/assets/afiliados/medals-rank/Explorer.png",
+      "features": [{ "label": "10% de comissão", "highlight": true }, { "label": "em todas as vendas" }]
+    },
+    {
+      "key": "adventure", "label": "ADVENTURE", "color": "#2ecdff",
+      "image": "src/assets/afiliados/medals-rank/Adventure.png",
+      "features": [{ "label": "20% de comissão", "highlight": true }, { "label": "NoPing Grátis" }, { "label": "Gears NP" }]
+    },
+    {
+      "key": "champion", "label": "CHAMPION", "color": "#8a5bff",
+      "image": "src/assets/afiliados/medals-rank/Champion.png",
+      "features": [{ "label": "30% de comissão", "highlight": true }, { "label": "NoPing Grátis" }, { "label": "Gears NP" }]
+    },
+    {
+      "key": "hero", "label": "HERO PARTNER", "color": "#ef9b00",
+      "image": "src/assets/afiliados/medals-rank/Legend.png",
+      "features": [{ "label": "Parceria Oficial NoPing", "highlight": true }, { "label": "NoPing Grátis" }, { "label": "Led Neon NP" }]
+    }
+  ]
+}

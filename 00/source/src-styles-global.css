@@ -1,0 +1,242 @@
+/* ============================================
+   GLOBAL STYLES — NoPing + Claro Landing Page
+   Design System: "The Kinetic Pulse"
+   ============================================ */
+
+/* ---------- Custom Fonts ---------- */
+@font-face {
+  font-family: 'Bai Jamjuree';
+  src: url('../../public/fonts/BaiJamjuree/BaiJamjuree-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  src: url('../../public/fonts/BaiJamjuree/BaiJamjuree-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  src: url('../../public/fonts/BaiJamjuree/BaiJamjuree-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Bai Jamjuree';
+  src: url('../../public/fonts/BaiJamjuree/BaiJamjuree-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* ---------- Design Tokens ---------- */
+:root {
+  /* Colors */
+  --color-primary: #93FF18;
+  --color-primary-dim: #6bbd10;
+  --color-primary-glow: rgba(147, 255, 24, 0.25);
+  --color-secondary: #05070A;
+  --color-tertiary: #ffffff;
+  --color-neutral: #000000;
+
+  /* Surface / Ghost */
+  --color-surface: #1D2028;
+  --color-surface-elevated: #12141a;
+  --color-ghost-border: rgba(255, 255, 255, 0.15);
+  --color-ghost-border-hover: rgba(255, 255, 255, 0.40);
+
+  /* Typography */
+  --font-display: 'Bai Jamjuree', sans-serif;
+  --font-body: 'Bai Jamjuree', sans-serif;
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+  --space-2xl: 96px;
+  --space-3xl: 128px;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(29, 32, 40, 0.60);
+  --glass-blur: 16px;
+
+  /* Layout */
+  --max-width: 1280px;
+  --header-height: 72px;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--color-tertiary);
+  background-color: #1D2028;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+input {
+  font-family: inherit;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* ---------- Typography ---------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+h1 { font-size: clamp(2rem, 4vw, 3.25rem); }
+h2 { font-size: clamp(1.75rem, 3.2vw, 2.75rem); }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.75rem); }
+h4 { font-size: clamp(1rem, 1.5vw, 1.25rem); }
+
+.text-primary {
+  color: var(--color-primary);
+}
+
+.text-muted {
+  color: rgba(255, 255, 255, 0.60);
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+/* ---------- Layout Utilities ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.section {
+  padding: var(--space-2xl) 0;
+}
+
+/* ---------- Button Variants ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: var(--radius-sm);
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-neutral);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dim);
+  box-shadow: 0 0 24px var(--color-primary-glow);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-tertiary);
+  border: 1px solid var(--color-ghost-border);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-ghost-border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.btn-lg {
+  padding: 18px 40px;
+  font-size: 1.05rem;
+}
+
+/* ---------- Card Base ---------- */
+.card {
+  background: var(--color-secondary);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  border: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  background: var(--color-surface-elevated);
+  border-color: var(--color-ghost-border-hover);
+}
+
+/* ---------- Glassmorphism ---------- */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--color-ghost-border);
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- Status Glow ---------- */
+.glow-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  box-shadow: 0 0 4px var(--color-primary), 0 0 12px var(--color-primary-glow);
+}
+
+/* ---------- Selection ---------- */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-neutral);
+}

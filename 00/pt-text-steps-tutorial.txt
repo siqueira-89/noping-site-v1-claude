@@ -1,0 +1,68 @@
+WEB -
+
+1. Acesse o site
+Entre em noping.com e clique em “Download” no menu superior.
+
+2. Baixe o instalador
+Clique no botão de “Download” e aguarde o arquivo ser baixado.
+
+3. Execute o instalador
+Abra o arquivo baixado para iniciar o processo.
+
+4. Instale o NoPing
+Siga as instruções na tela para concluir a instalação.
+
+5. Abra o programa
+Após instalar, execute o NoPing pelo desktop ou menu iniciar.
+
+6. Acesse como provedor
+Na tela de login, clique em “Entrar com provedor”.
+
+7. Escolha a operadora
+Você será redirecionado para a nossa página de parceiros. Selecione “Claro” e clique em “Continue”.
+
+8. Confirme seu número
+Insira seu número de celular e clique em “Enviar código” para receber o SMS.
+
+9. Confirme o código
+Insira o código recebido e clique em “Verificar”.
+Se não funcionar ou expirar, clique em “Reenviar código”.
+
+10. Comece a usar
+Você será redirecionado para a tela inicial do NoPing.
+Pronto! Agora é só escolher o jogo ou app e clicar em “Otimizar jogo”.
+
+MOBILE - 
+
+1. Baixe o aplicativo
+Acesse a loja do seu celular, procure por “NoPing” e instale o app.
+
+2. Abra o NoPing
+Após a instalação, abra o aplicativo no seu celular.
+
+3. Acesse como provedor
+Na tela de login, toque em “Entrar com provedor”.
+
+4. Escolha a operadora
+Você será redirecionado para a nossa página de parceiros. Selecione “Claro” e clique em “Continue”.
+
+5. Confirme seu número
+Insira seu número de celular para receber o SMS.
+
+6. Confirme o código
+Insira o código recebido e toque em “Verificar”.
+Se não funcionar ou expirar, toque em “Reenviar código”.
+
+7. Acesse o app
+Você será redirecionado para a tela inicial do NoPing.
+
+8. Escolha seu jogo ou app
+Toque no jogo ou app que você deseja otimizar.
+
+9. Escolha o servidor
+Toque no servidor com menor latência.
+
+10. Comece a jogar
+Toque em “Otimizar jogo”.
+Pronto! Agora é só jogar com menos lag.
+

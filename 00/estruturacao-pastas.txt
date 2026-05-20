@@ -1,0 +1,49 @@
+├── public/
+│   ├── images/
+│   │   ├── hero/
+│   │   ├── features/
+│   │   ├── globe/
+│   │   └── shared/
+│   │
+│   ├── icons/
+│   └── fonts/
+src/
+├── components/
+│   ├── layout/
+│   │   ├── header/
+│   │   ├── footer/
+│   │   └── container/
+│
+├── scripts/
+│   ├── hero/
+│   │   └── hero-background.js
+│   │
+│   ├── features/
+│   │   ├── feature-01.js
+│   │   ├── feature-02.js
+│   │   ├── feature-03.js
+│   │   ├── feature-04.js
+│   │   ├── feature-05.js
+│   │   ├── feature-06.js
+│   │   ├── feature-07.js
+│   │   ├── feature-08.js
+│   │   ├── feature-09.js
+│   │   ├── feature-10.js
+│   │   └── features-shared.js
+│   │
+│   ├── globe/
+│   │   └── globe-scene.js
+│   │
+│   └── shared/
+│       ├── animation-utils.js
+│       ├── resize-handler.js
+│       └── performance-manager.js
+│
+├── styles/
+│   ├── hero.css
+│   ├── features.css
+│   ├── globe-section.css
+│   └── global.css
+│
+├── main.js
+└── app.js

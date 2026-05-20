@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NoPing ativado no seu plano Claro. Baixe o app e siga o tutorial para reduzir seu ping e jogar sem lag.">
+  <title>Tutorial NoPing + Claro | Como ativar e configurar</title>
+  <link rel="stylesheet" href="src/styles/global.css">
+  <link rel="stylesheet" href="src/styles/layout.css">
+  <link rel="stylesheet" href="src/styles/tutorial.css">
+  <link rel="stylesheet" href="src/styles/lightbox.css">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <nav class="header__nav-left" id="header-nav">
+        <a href="#" class="header__nav-link">JOGOS</a>
+        <a href="#" class="header__nav-link highlight-pulse">PREÇOS</a>
+        <a href="#" class="header__nav-link">DOWNLOAD</a>
+        <a href="#" class="header__nav-link">AFILIADOS</a>
+        <a href="#" class="header__nav-link">SUPORTE</a>
+        <a href="#" class="header__nav-link">BLOG</a>
+      </nav>
+      <a href="#" class="header__logo" id="header-logo">
+        <img src="public/logo/logo-noping-dark.svg" alt="NoPing" class="header__logo-noping">
+      </a>
+      <div class="header__right">
+        <button class="header__lang" id="lang-toggle">
+          <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/1x1/br.svg" alt="BR" style="width:16px; height:16px; border-radius:50%; object-fit:cover;">
+          <span>PT</span>
+          <span>▸</span>
+        </button>
+        <a href="#" class="header__nav-link">LOGIN</a>
+        <a href="#" class="header__cta-btn">TESTE GRÁTIS</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========== HERO / TUTORIAL ========== -->
+    <section class="hero" id="hero">
+      <!-- Partnership Banner -->
+      <div class="hero__banner">
+        <div class="container hero__banner-inner">
+          <img src="public/logo/logo-claro-noping.svg" alt="NoPing + Claro" class="hero__banner-logo">
+          <span class="hero__banner-divider">|</span>
+          <span class="hero__banner-text">PARCEIROS OFICIAIS</span>
+        </div>
+      </div>
+
+      <div class="container hero__content">
+        <!-- Title Block -->
+        <div class="hero__title-block">
+          <h1 class="hero__title"><span class="text-primary">NoPing ativado.</span><br>Baixe o app e siga o tutorial para reduzir seu ping e jogar sem lag.</h1>
+          <p class="hero__subtitle">Sua ativação como parceiro Claro já está liberada. Escolha sua plataforma abaixo e siga os 6 passos — leva menos de 3 minutos.</p>
+        </div>
+
+        <!-- Platform Selector -->
+        <div class="platform-selector" id="platform-selector">
+          <button class="platform-selector__btn platform-selector__btn--active" data-platform="desktop">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            Desktop (Windows)
+          </button>
+          <button class="platform-selector__btn" data-platform="mobile">
+            <svg width="18" height="18" viewBox="0 0 216.47 359.89"><path fill="currentColor" d="M177.13,0c2.79.75,5.62,1.37,8.37,2.26a44.9,44.9,0,0,1,30.86,40.43c.08,1.4.1,2.81.1,4.21q0,133,0,266c0,19.6-8.58,34.13-26.36,42.84a41.9,41.9,0,0,1-18.71,4.08c-42.06,0-84.12.13-126.18,0C19.52,359.7.08,339.7,0,313.62Q-.06,252,0,190.28q0-72,0-144.08c0-22.5,13.9-40.1,35.34-45.15,1.33-.31,2.65-.7,4-1Zm18.69,268.15V60.38H20.73V268.15Zm-67,42.23A20.11,20.11,0,0,0,108.62,290a20.41,20.41,0,1,0,20.17,20.38Z"/></svg>
+            Mobile (iPhone / Android)
+          </button>
+        </div>
+
+        <!-- Tutorial Area -->
+        <div class="tutorial" id="tutorial">
+          <!-- Steps Sidebar -->
+          <div class="tutorial__sidebar">
+            <div class="tutorial__steps" id="tutorial-steps">
+              <!-- Steps will be dynamically injected by JS based on platform -->
+            </div>
+
+            <!-- Help Card -->
+            <div class="tutorial__help">
+              <p class="tutorial__help-title">PRECISA DE AJUDA?</p>
+              <p class="tutorial__help-text">Se perdeu o PINCODE, volte para a tela de SMS e toque em "Reenviar código".</p>
+            </div>
+          </div>
+
+          <!-- Step Content Area -->
+          <div class="tutorial__content">
+            <!-- Step indicator -->
+            <div class="tutorial__content-header">
+              <span class="tutorial__step-badge">PASSO <span id="current-step-num">1</span>/6</span>
+              <div class="tutorial__dots">
+                <span class="tutorial__dot tutorial__dot--active" data-dot="1"></span>
+                <span class="tutorial__dot" data-dot="2"></span>
+                <span class="tutorial__dot" data-dot="3"></span>
+                <span class="tutorial__dot" data-dot="4"></span>
+                <span class="tutorial__dot" data-dot="5"></span>
+                <span class="tutorial__dot" data-dot="6"></span>
+              </div>
+            </div>
+
+            <!-- Steps Content Wrapper -->
+            <div class="tutorial__panels" id="tutorial-panels">
+              <!-- Panels will be dynamically injected by JS based on platform -->
+            </div>
+
+            <!-- Navigation -->
+            <div class="tutorial__nav">
+              <button class="tutorial__nav-btn tutorial__nav-btn--prev" id="btn-prev">
+                <span>←</span> Passo anterior
+              </button>
+              <button class="tutorial__nav-btn tutorial__nav-btn--next" id="btn-next">
+                Próximo Passo <span>→</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download Buttons Row -->
+        <div class="hero__downloads" id="downloads">
+          <a href="#" class="hero__download-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+            <div class="hero__download-info">
+              <span class="hero__download-name">BAIXAR PARA WINDOWS</span>
+              <span class="hero__download-url">noping.com/download</span>
+            </div>
+            <img src="public/icons/icon-download.svg" alt="" class="hero__download-icon">
+          </a>
+          <a href="#" class="hero__download-card">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div class="hero__download-info">
+              <span class="hero__download-name">BAIXAR PARA APP STORE</span>
+              <span class="hero__download-url">iPhone - IOS 14+</span>
+            </div>
+            <img src="public/icons/icon-download.svg" alt="" class="hero__download-icon">
+          </a>
+          <a href="#" class="hero__download-card">
+            <svg width="24" height="24" viewBox="0 0 383.48 216.27" fill="currentColor"><path d="M383.48,216.13c-1.62.05-3.24.14-4.86.14H0C7.5,149.39,39.68,99.17,97.71,65.08c-.58-1.06-1.18-2.23-1.83-3.36Q81.22,36.25,66.54,10.79c-1.57-2.72-2.24-5.74,0-8C68.14,1.31,71.05,0,73,.41S77.22,3,78.38,5c9.8,16.67,19.38,33.47,29,50.23.74,1.29,1.54,2.54,2.36,3.9,54.66-23.17,109.22-23.23,164.14,0,.62-1,1.33-2.14,2-3.29l29-50.27a25.27,25.27,0,0,1,1.77-2.86A6.47,6.47,0,0,1,315,.82a6.52,6.52,0,0,1,3.08,8,20.78,20.78,0,0,1-1.73,3.3Q302.19,36.8,288,61.45c-.67,1.17-1.29,2.37-2,3.72,1.1.69,2,1.3,3,1.86q79.08,47,93.23,138.07c.39,2.44.88,4.86,1.33,7.28ZM103.64,161.51A15.9,15.9,0,1,0,87.76,145.6,15.78,15.78,0,0,0,103.64,161.51Zm192.3-15.94a15.9,15.9,0,1,0-15.86,15.94A15.75,15.75,0,0,0,295.94,145.57Z"/></svg>
+            <div class="hero__download-info">
+              <span class="hero__download-name">BAIXAR PARA GOOGLE PLAY</span>
+              <span class="hero__download-url">Android 8+</span>
+            </div>
+            <img src="public/icons/icon-download.svg" alt="" class="hero__download-icon">
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========== CERTIFICATIONS ========== -->
+  <section class="certifications" id="certifications">
+    <div class="container certifications__inner">
+      <div class="certifications__left">
+        <span class="certifications__label">Certificado por</span>
+        <div class="certifications__badges" style="display:flex; gap: 32px; align-items: center;">
+          <img src="public/footer/svg_microsoft_certified.svg" alt="Microsoft Certified" style="height: 36px; width: auto;">
+          <img src="public/footer/svg_digicert.svg" alt="DigiCert Secured" style="height: 36px; width: auto;">
+          <img src="public/footer/svg_googlecloud.svg" alt="Google Cloud" style="height: 36px; width: auto;">
+        </div>
+      </div>
+      <div class="certifications__right">
+        <a href="#" class="store-badge">
+          <img src="public/footer/app-store.svg" alt="Disponível na App Store">
+        </a>
+        <a href="#" class="store-badge">
+          <img src="public/footer/google-play.svg" alt="Disponível no Google Play">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <div class="footer__brand-logos">
+            <img src="public/logo/logo-claro-noping.svg" alt="NoPing + Claro" class="footer__brand-logo" style="height: 36px;">
+          </div>
+          <p class="footer__brand-text">NoPing é a solução de otimização de rede para gamers. Disponível como benefício em planos selecionados da Claro.</p>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">NOPING</h4>
+          <a href="#" class="footer__link">Servidores</a>
+          <a href="#" class="footer__link">Jogos</a>
+          <a href="#" class="footer__link">Preços</a>
+          <a href="#" class="footer__link">Download</a>
+          <a href="#" class="footer__link">Teste Grátis</a>
+          <a href="#" class="footer__link">Trabalhe Conosco</a>
+          <a href="#" class="footer__link">Programa de Teste Beta</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">TECNOLOGIA</h4>
+          <a href="#" class="footer__link">Conexão MultiPath</a>
+          <a href="#" class="footer__link">Multi Internets</a>
+          <a href="#" class="footer__link">Boost FPS</a>
+          <a href="#" class="footer__link">Redução de Ping</a>
+          <a href="#" class="footer__link">Correção de Perda de Pacotes</a>
+          <a href="#" class="footer__link">Correção de Desconexão</a>
+          <a href="#" class="footer__link">Correção de Picos de Ping</a>
+          <a href="#" class="footer__link">Melhoria de Velocidade do Teclado</a>
+          <a href="#" class="footer__link">Estatísticas Abrangentes</a>
+          <a href="#" class="footer__link">Monitoramento de Conexão</a>
+          <a href="#" class="footer__link">Troca Manual de Servidor</a>
+          <a href="#" class="footer__link">IP Block</a>
+          <a href="#" class="footer__link">Otimização de DNS</a>
+          <a href="#" class="footer__link">AudioPad</a>
+          <a href="#" class="footer__link">Green Aim</a>
+          <a href="#" class="footer__link">Pro Settings</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">AJUDA</h4>
+          <a href="#" class="footer__link">Tutorial Windows</a>
+          <a href="#" class="footer__link">Tutorial Console</a>
+          <a href="#" class="footer__link">Tutorial IOS</a>
+          <a href="#" class="footer__link">Tutorial Android</a>
+          <a href="#" class="footer__link">Centro de Suporte</a>
+          <a href="#" class="footer__link">Contato B2B</a>
+          <a href="#" class="footer__link">Política de Privacidade</a>
+          <a href="#" class="footer__link">Termos de Uso</a>
+          <a href="#" class="footer__link">Afiliados</a>
+          <a href="#" class="footer__link">FAQ</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">BLOG</h4>
+          <a href="#" class="footer__link">Como Aumentar o FPS</a>
+          <a href="#" class="footer__link">Como Tirar o Lag</a>
+          <a href="#" class="footer__link">Dicas para Gamers</a>
+          <a href="#" class="footer__link">Notícias NoPing</a>
+          <a href="#" class="footer__link">Atualizações do App</a>
+        </div>
+        <div class="footer__column">
+          <h4 class="footer__column-title">FEEDBACKS</h4>
+          <a href="#" class="footer__link">Avalie Nossa Plataforma</a>
+          <a href="#" class="footer__link">Sugestão de Funcionalidade</a>
+          <button class="footer__lang-badge">
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/1x1/br.svg" alt="BR" style="width:18px; height:18px; border-radius:50%; object-fit:cover;">
+            <span>PT</span>
+            <span>▸</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="footer__divider"></div>
+
+      <div class="footer__bottom">
+        <p class="footer__copyright">Direitos autorais 2026 © NOPING - INCRÍVEL SISTEMAS, INC</p>
+        <div class="footer__socials">
+          <a href="#" class="footer__social-link" aria-label="TikTok">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aef55c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>TIK TOK</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="LinkedIn">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aef55c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>LINKEDIN</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Facebook">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aef55c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>FACEBOOK</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Discord">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aef55c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h.01M15 12h.01"/><path d="M7.5 4.2c-1.8.8-3.4 2-4.5 3.5-1.5 3.8-1.7 8.5-.6 12.1 1.6 1.4 3.7 2.2 5.6 2.2 0 0 1-1.2 1.8-2-1.5-.4-2.8-1.2-3.8-2.2 2 .5 4 1 6 1s4-.5 6-1c-1 1-2.3 1.8-3.8 2.2.8.8 1.8 2 1.8 2 1.9 0 4-.8 5.6-2.2 1.1-3.6.9-8.3-.6-12.1-1.1-1.5-2.7-2.7-4.5-3.5-1-.2-2-.3-3-.3-1 0-2 .1-3 .3z"/></svg>
+            </span>
+            <span class="footer__social-label">COMUNIDADE<br>NO DISCORD</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="Instagram">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aef55c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>INSTAGRAM</span>
+          </a>
+          <a href="#" class="footer__social-link" aria-label="X / Twitter">
+            <span class="footer__social-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#aef55c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l11.73 16h4.27L8.27 4zm16 0L4 20"/></svg>
+            </span>
+            <span class="footer__social-label">SIGA-NOS NO<br>X</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="src/main.js"></script>
+</body>
+</html>

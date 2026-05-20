@@ -1,0 +1,93 @@
+/* ============================================================
+   Cards — surfaces, hover states, variant tokens
+   ============================================================ */
+
+/* ---------- Solid surface card (default) ---------- */
+
+.card {
+  background: var(--np-surface);
+  border-radius: var(--np-radius-md);
+  padding: var(--np-space-lg);
+  border: 1px solid transparent;
+  box-shadow: var(--np-shadow-card);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  background: var(--np-surface-elev);
+  border-color: var(--np-border-hover);
+}
+
+/* ---------- Glass card ---------- */
+
+.card--glass {
+  background: var(--np-glass-bg);
+  backdrop-filter: blur(var(--np-glass-blur));
+  -webkit-backdrop-filter: blur(var(--np-glass-blur));
+  border: 1px solid var(--np-border-strong);
+  border-radius: var(--np-radius-lg);
+}
+
+/* ---------- Neon card (emphasis) ---------- */
+
+.card--neon {
+  background: var(--np-surface);
+  border: 1px solid var(--np-primary);
+  border-radius: var(--np-radius-md);
+  box-shadow: 0 0 24px var(--np-primary-glow);
+}
+
+/* ---------- Help card (soft green halo) ---------- */
+
+.card--help {
+  background: rgba(147, 255, 24, 0.04);
+  border: 1px solid rgba(147, 255, 24, 0.12);
+  border-radius: var(--np-radius-md);
+  padding: var(--np-space-md);
+}
+
+/* ---------- Game tile placeholder (used in /games hero) ---------- */
+
+.gtile {
+  position: relative;
+  border-radius: var(--np-radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--np-border-strong);
+  background: linear-gradient(135deg, var(--gt-a, #1a2330), var(--gt-b, #0a0d10));
+  aspect-ratio: 3 / 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+  transition: transform 220ms var(--np-ease), box-shadow 280ms var(--np-ease), border-color 240ms var(--np-ease);
+}
+.gtile::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.10), transparent 60%),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.025) 0 2px, transparent 2px 9px);
+  pointer-events: none;
+}
+.gtile .nm {
+  position: relative;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+.gtile .cat {
+  position: relative;
+  margin-top: 6px;
+  font-family: var(--np-font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.gtile:hover {
+  transform: translateY(-3px);
+  border-color: rgba(156, 255, 46, 0.45);
+  box-shadow: 0 16px 40px -16px rgba(156, 255, 46, 0.40);
+}

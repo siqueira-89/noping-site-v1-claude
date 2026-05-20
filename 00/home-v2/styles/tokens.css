@@ -1,0 +1,74 @@
+/* ============================================================
+   NoPing Design Tokens
+   Base: preto profundo + verde neon NoPing. Estado "ruim" = laranja.
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --bg-0: #050607;          /* deepest */
+  --bg-1: #0a0c0e;          /* page */
+  --bg-2: #0f1215;          /* card */
+  --bg-3: #171b1f;          /* raised */
+  --bg-4: #1f252a;          /* hover */
+  --line: rgba(255,255,255,0.08);
+  --line-strong: rgba(255,255,255,0.14);
+
+  /* Brand */
+  --green: #9CFF2E;         /* signature NoPing green */
+  --green-hi: #C6FF6E;
+  --green-lo: #6FCF1E;
+  --green-glow: rgba(156,255,46,0.55);
+  --green-soft: rgba(156,255,46,0.10);
+
+  /* States */
+  --bad: #FF7A1A;           /* laranja "sem NoPing" */
+  --bad-hi: #FFA25E;
+  --bad-glow: rgba(255,122,26,0.55);
+  --bad-soft: rgba(255,122,26,0.10);
+
+  --good: #1AE5A0;          /* ciano-verde "com NoPing" (complemento) */
+  --good-hi: #6CF7C6;
+
+  --cyan: #2EE6FF;          /* accent data */
+  --purple: #8A5BFF;        /* accent influencers/media */
+
+  /* Text */
+  --fg: #F4F6F7;
+  --fg-dim: rgba(244,246,247,0.72);
+  --fg-mute: rgba(244,246,247,0.52);
+  --fg-faint: rgba(244,246,247,0.34);
+
+  /* Type */
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Radii */
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 0 rgba(255,255,255,0.02) inset, 0 20px 40px -20px rgba(0,0,0,0.6);
+  --shadow-green: 0 0 40px rgba(156,255,46,0.25);
+  --shadow-bad: 0 0 40px rgba(255,122,26,0.30);
+
+  /* Layout */
+  --page-max: 1360px;
+  --gutter: 32px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* Typography direction variants */
+body[data-type="display"] {
+  --font-display: "Rajdhani", ui-sans-serif, system-ui, sans-serif;
+}
+body[data-type="mono-stats"] {
+  /* body stays grotesk, stats/numbers use mono */
+}

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Programa de afiliados NoPing. Torne-se parceiro, divulgue seu link exclusivo e ganhe comissões a cada indicação.">
+  <title>NoPing · Programa de Afiliados</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Global -->
+  <link rel="stylesheet" href="../src/styles/global/variables.css">
+  <link rel="stylesheet" href="../src/styles/global/reset.css">
+  <link rel="stylesheet" href="../src/styles/global/typography.css">
+  <link rel="stylesheet" href="../src/styles/global/layout.css">
+  <link rel="stylesheet" href="../src/styles/global/utilities.css">
+  <!-- Components -->
+  <link rel="stylesheet" href="../src/styles/components/header.css">
+  <link rel="stylesheet" href="../src/styles/components/footer.css">
+  <link rel="stylesheet" href="../src/styles/components/buttons.css">
+  <link rel="stylesheet" href="../src/styles/components/cards.css">
+  <link rel="stylesheet" href="../src/styles/components/forms.css">
+  <!-- Page -->
+  <link rel="stylesheet" href="../src/styles/pages/affiliates.css">
+</head>
+<body data-page="affiliates" data-screen-label="Affiliates">
+
+<div class="grid-bg"></div>
+
+<!-- ========== SECTION 1 — HEADER + HERO (ambassadors + cards) ========== -->
+<section class="section-one">
+  <header id="global-header" data-active="affiliates"></header>
+
+  <main class="hero-wrapper" id="hero">
+    <!-- Part 1: Ambassadors ---------------------------------------------- -->
+    <div class="hero-ambassadors">
+      <canvas id="hero-particles" class="hero-particles-canvas"></canvas>
+      <div class="shell hero-ambassadors-inner">
+        <div class="ambassadors-left">
+          <span class="eyebrow-affiliates">PROGRAMA DE PARCEIROS</span>
+          <h1 class="hero-title">Faça como as Lendas,<br>use <em class="highlight-green">NoPing!</em></h1>
+          <p class="hero-desc">Participe do programa de afiliados da NoPing e transforme sua rede em um negócio lucrativo. Expanda seu alcance, compartilhe os benefícios de usar a NoPing e ganhe recompensas para cada indicação que você fizer.</p>
+          <a href="#trial" class="cta-affiliates">
+            <span>TORNE-SE UM AFILIADO AGORA</span>
+            <svg class="chevron-right" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </div>
+
+        <div class="ambassadors-right">
+          <img src="../src/assets/logos/NoPing_Icon_Verde.svg" alt="" class="hero-bg-logo">
+          <div class="ambassador-fade-item active">
+            <div class="ambassador-fade-username">@brttOficial</div>
+            <img src="../src/assets/affiliates/ambassadors/brtt-01.png" alt="brTT" class="ambassador-fade-img">
+          </div>
+          <div class="ambassador-fade-item">
+            <div class="ambassador-fade-username">@coldzera</div>
+            <img src="../src/assets/affiliates/ambassadors/coldzera-01.png" alt="Coldzera" class="ambassador-fade-img">
+          </div>
+          <div class="ambassador-fade-item">
+            <div class="ambassador-fade-username">@sacy</div>
+            <img src="../src/assets/affiliates/ambassadors/sacy-01.png" alt="Sacy" class="ambassador-fade-img">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Part 2: Affiliate cards carousel -------------------------------- -->
+    <div class="hero-affiliates-cards shell">
+      <div class="affiliates-carousel-container" id="affiliates-carousel-container">
+        <div class="affiliates-track" id="affiliates-track">
+
+          <!-- Card: LESTRIPEZ -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/lestripez.png" alt="lestripez" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">LESTRIPEZ <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/de.svg" class="affiliate-flag" alt="DE"></span>
+                  <div class="affiliate-badge">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                    <span>INFLUENCIADOR</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Minha conexão ficou MUITO mais estável. Parei de sentir lag nas partidas e até notei uma melhora na minha performance. Agora posso focar no jogo sem me preocupar com a latência e queda de FPS."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>FORTNITE</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: VETT -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/vett.png" alt="vett" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">VETT <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                  <div class="affiliate-badge highlight">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <span>5X CAMPEÃO BRASILEIRO</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Sem uma conexão boa, não dá pra jogar Point Blank no nível que eu preciso. Com a NoPing, finalmente consigo focar no jogo e esquecer os problemas de latência."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>PB</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: SACY -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/sacy.png" alt="sacy" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">SACY <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                  <div class="affiliate-badge highlight">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"></path><path d="M12 2a7 7 0 0 0-7 7v4.66a2 2 0 0 0 1.34 1.88l3.66 1.13c.66.2 1.34.2 2 0l3.66-1.13A2 2 0 0 0 19 13.66V9a7 7 0 0 0-7-7z"></path></svg>
+                    <span>CAMPEÃO MUNDIAL VALORANT</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Depois que comecei a usar a NoPing, meu jogo mudou completamente. Como pro player de Valorant, cada frame é decisivo nos duelos e nas execuções de utility, e a diferença na latência é absurda."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>VALORANT</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: COLDZERA -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/coldzera.png" alt="coldzera" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">COLDZERA <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                  <div class="affiliate-badge highlight">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14v2H5v-2z"></path></svg>
+                    <span>2X MELHOR DO MUNDO CS:GO</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Ping alto pode destruir qualquer jogada, por isso a NoPing faz parte da minha rotina. Zero travadas, ping baixo sempre e aquela confiança de que posso focar só na minha mira e estratégia."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>CS2</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: ARKANE -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/arkane.png" alt="arkane" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">ARKANE <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                  <div class="affiliate-badge">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                    <span>INFLUENCIADOR</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Já joguei com conexões instáveis e sei como isso atrapalha o desempenho. Com a NoPing, posso jogar com mais precisão e sem lag, o que faz toda a diferença quando a pressão aumenta."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>FORTNITE</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: SUJA -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/suja.png" alt="suja" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">SUJA <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/es.svg" class="affiliate-flag" alt="ES"></span>
+                  <div class="affiliate-badge">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M12 12h.01"></path><path d="M17 12h.01"></path><path d="M7 12h.01"></path></svg>
+                    <span>INFLUENCIADOR</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Para evoluir no Fortnite, você precisa de foco total no jogo, sem distrações ou problemas técnicos. Uma conexão estável faz toda a diferença na hora de aplicar o que você aprende."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>FORTNITE</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card: BRTT -->
+          <div class="affiliate-card">
+            <div class="card-image-container">
+              <img src="../src/assets/affiliates/cards/brtt.png" alt="brtt" class="affiliate-avatar">
+            </div>
+            <div class="card-content">
+              <div class="card-content-inner">
+                <div class="card-header">
+                  <span class="affiliate-name">BRTT <img src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.6/flags/4x3/br.svg" class="affiliate-flag" alt="BR"></span>
+                  <div class="affiliate-badge highlight">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <span>6X CAMPEÃO BRASILEIRO</span>
+                  </div>
+                </div>
+                <p class="affiliate-text">"Todo jogador de LoL sabe que o lag vai rolar na pior hora possível. Com a NoPing, minha conexão fica estável e sem aquelas travadas irritantes que podem acabar com a partida."</p>
+              </div>
+              <div class="card-footer-wrapper">
+                <div class="card-divider"></div>
+                <div class="card-footer">
+                  <span class="affiliate-game">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"></rect><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"></path></svg>
+                    <span>LOL</span>
+                  </span>
+                  <div class="affiliate-socials">
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+                    <a href="#" class="social-icon-link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="affiliates-progress-bar-container">
+        <div class="affiliates-progress-bar-track">
+          <div class="affiliates-progress-bar-thumb" id="affiliates-progress-thumb"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</section>
+
+<!-- ========== SECTION 2 — TUTORIAL ========== -->
+<section class="section-viewport section-two">
+  <div class="shell">
+    <div class="eyebrow" style="margin-bottom: 12px;">PASSO A PASSO</div>
+    <h2 class="hero-title" style="font-size: 28px; margin-bottom: 8px; max-width: 800px;">Como participar do programa de parceria NoPing</h2>
+    <p class="hero-desc" style="max-width: 900px; margin-bottom: 24px; font-size: 12.5px;">Junte-se ao nosso exclusivo Clube de Benefícios para Parceiros! Em apenas três passos, você pode embarcar em uma jornada recompensadora em um mundo sem lag e com alto FPS. Registre-se, gere seu link de compartilhamento exclusivo e comece a aproveitar os benefícios agora mesmo!</p>
+
+    <div class="tutorial-grid">
+      <div class="tutorial-showcase-left">
+        <div class="tutorial-showcase-game">
+          <div class="tutorial-ow-content">
+            <div class="tutorial-ow-logo-container">
+              <svg class="tutorial-ow-logo-svg" viewBox="0 0 240 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 20C22 13.9249 19.5417 8.42488 15.562 4.43799L19.294 1.48804C24.084 6.27808 27 12.7881 27 20C27 27.2119 24.084 33.722 19.294 38.512L15.562 35.562C19.5417 31.5751 22 26.0751 22 20Z" fill="white"/>
+                <path d="M5 20C5 26.0751 7.45831 31.5751 11.438 35.562L7.70599 38.512C2.91595 33.722 0 27.2119 0 20C0 12.7881 2.91595 6.27808 7.70599 1.48804L11.438 4.43799C7.45831 8.42488 5 13.9249 5 20Z" fill="white"/>
+                <path d="M12 5.5L14 14.5H10L12 5.5Z" fill="white"/>
+                <path d="M7 16H17V18.5H7V16Z" fill="#ff5e00"/>
+                <text x="36" y="28" font-family="'Bai Jamjuree', sans-serif" font-weight="800" font-size="22" fill="white" letter-spacing="1">OVERWATCH</text>
+                <text x="182" y="28" font-family="'Bai Jamjuree', sans-serif" font-weight="800" font-size="26" fill="#ff5e00">2</text>
+              </svg>
+            </div>
+            <div class="tutorial-ow-status">
+              <div class="tutorial-ow-status-label">PROCURANDO SERVIDOR...</div>
+              <div class="tutorial-ow-status-text">Otimizando sua rota em tempo real</div>
+            </div>
+            <a href="#" class="tutorial-ow-btn">CANCELAR</a>
+          </div>
+        </div>
+
+        <div class="tutorial-showcase-right">
+          <div style="font-family: var(--np-font-mono); font-size: 10px; color: var(--np-primary); letter-spacing: 0.14em; margin-bottom: 8px;">NOPING CLIENT v4.2</div>
+          <div style="font-size: 16px; font-weight: 800; color: #ffffff; margin-bottom: 6px;">ROTA EXCLUSIVA PARALELA</div>
+          <div style="font-size: 11px; line-height: 1.5; color: var(--fg-mute); margin-bottom: 24px;">Tecnologia multi-conexão ativada. Seus disparos e movimentos são transmitidos em 5 rotas paralelas ao mesmo tempo para o menor ping do servidor.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tutorial-steps-grid">
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">01</span>
+        <h3 class="tutorial-step-title">Faça sua inscrição</h3>
+        <p class="tutorial-step-desc">Comece sua jornada realizando sua inscrição. Com o NoPing, prepare-se para mergulhar em um mundo de jogos otimizados com menos lag e melhor desempenho.</p>
+      </div>
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">02</span>
+        <h3 class="tutorial-step-title">Encontre seu nível</h3>
+        <p class="tutorial-step-desc">Descubra qual nível de parceria é ideal para você. Nosso sistema de níveis é projetado para corresponder ao seu alcance, garantindo que você maximize os benefícios da nossa parceria.</p>
+      </div>
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">03</span>
+        <h3 class="tutorial-step-title">Compartilhe o link</h3>
+        <p class="tutorial-step-desc">Divulgue seu link exclusivo em todas as suas redes sociais e apresente aos seus seguidores sua experiência de jogo com NoPing: ping lá embaixo e FPS no alto.</p>
+      </div>
+      <div class="tutorial-step-card">
+        <span class="tutorial-step-num">04</span>
+        <h3 class="tutorial-step-title">Monitore os ganhos</h3>
+        <p class="tutorial-step-desc">Monitore em tempo real cada transação feita por meio do seu link. Mantenha-se informado sobre seus referrals e aproveite para ganhar com cada transação bem-sucedida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 3 — RANK ========== -->
+<section class="section-viewport section-three">
+  <div class="shell">
+    <div class="rank-header">
+      <div style="display: flex; flex-direction: column; gap: 4px;">
+        <div class="eyebrow">RECOMPENSAS</div>
+        <h2 class="rank-title">Cada nível oferecendo benefícios e recompensas únicas</h2>
+      </div>
+      <a href="#" class="rank-btn">AFILIE-SE AO NOPING</a>
+    </div>
+
+    <div class="rank-cards-grid">
+      <div class="rank-card-tier explorer">
+        <img src="../src/assets/affiliates/medals-rank/Explorer.png" alt="Explorer" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: var(--np-primary);">EXPLORER</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight">10% de comissão</span>
+          <span class="rank-tier-feature">em todas as vendas</span>
+        </div>
+      </div>
+      <div class="rank-card-tier adventure">
+        <img src="../src/assets/affiliates/medals-rank/Adventure.png" alt="Adventure" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: #2ecdff;">ADVENTURE</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight">20% de comissão</span>
+          <span class="rank-tier-feature">NoPing Grátis</span>
+          <span class="rank-tier-feature">Gears NP</span>
+        </div>
+      </div>
+      <div class="rank-card-tier champion">
+        <img src="../src/assets/affiliates/medals-rank/Champion.png" alt="Champion" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: #8a5bff;">CHAMPION</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight">30% de comissão</span>
+          <span class="rank-tier-feature">NoPing Grátis</span>
+          <span class="rank-tier-feature">Gears NP</span>
+        </div>
+      </div>
+      <div class="rank-card-tier hero">
+        <img src="../src/assets/affiliates/medals-rank/Legend.png" alt="Legend" class="rank-badge-img">
+        <span class="rank-tier-name" style="color: #ef9b00;">HERO PARTNER</span>
+        <div class="rank-tier-features">
+          <span class="rank-tier-feature highlight" style="font-size: 10px; line-height: 1.3;">Parceria Oficial NoPing</span>
+          <span class="rank-tier-feature">NoPing Grátis</span>
+          <span class="rank-tier-feature">Led Neon NP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rank-benefits-section">
+      <h3 class="rank-benefits-title">Benefícios para Parceiros</h3>
+      <p class="rank-benefits-desc">Participar do programa de parceria da NoPing abre um mundo de oportunidades. Desfrute de benefícios exclusivos, como acesso ao NoPing e ao seu clube de vantagens, taxas de comissão personalizadas e suporte personalizado da nossa equipe.</p>
+
+      <div class="rank-benefits-grid">
+        <div class="rank-benefit-item">
+          <div class="rank-benefit-header">
+            <span class="rank-benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></span>
+            <h4 class="rank-benefit-title">Ganhe dinheiro jogando</h4>
+          </div>
+          <p class="rank-benefit-desc">Ao ser nosso parceiro, você pode lucrar oferecendo o NoPing aos seus amigos e seguidores.</p>
+        </div>
+        <div class="rank-benefit-item">
+          <div class="rank-benefit-header">
+            <span class="rank-benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+            <h4 class="rank-benefit-title">Use o NoPing gratuitamente</h4>
+          </div>
+          <p class="rank-benefit-desc">Todos os afiliados podem usar o NoPing sem custo algum. (a partir do nível Prata)</p>
+        </div>
+        <div class="rank-benefit-item">
+          <div class="rank-benefit-header">
+            <span class="rank-benefit-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg></span>
+            <h4 class="rank-benefit-title">Indique seus amigos</h4>
+          </div>
+          <p class="rank-benefit-desc">Convide outros influenciadores a se tornarem parceiros e seja recompensado por cada indicação bem-sucedida.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 4 — FAQ ========== -->
+<section class="section-viewport section-four" id="faq">
+  <div class="shell">
+    <div class="faq-grid">
+      <div class="faq-left">
+        <div class="eyebrow" style="margin-bottom: 12px;">SUPORTE</div>
+        <h2 class="faq-title">Perguntas Frequentes</h2>
+        <p class="faq-desc">Explore nossa seção de perguntas frequentes para encontrar respostas a todas as suas dúvidas. De detalhes sobre assinatura a suporte técnico, cobrimos tudo para garantir uma experiência de jogo tranquila e agradável.</p>
+        <div class="faq-btn-group">
+          <a href="#trial" class="faq-btn green">TESTE GRATUITO AGORA</a>
+          <a href="../support/index.html" class="faq-btn purple">CENTRAL DE AJUDA</a>
+        </div>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item active">
+          <button class="faq-trigger" type="button">
+            <span class="faq-question">O que é NoPing?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              NoPing é um aplicativo avançado de alto desempenho projetado especificamente para melhorar a experiência de jogos online, otimizando tanto a latência (ping) quanto os FPS (frames por segundo). Nossa exclusiva tecnologia patenteada de Multi Conexão permite o uso simultâneo de vários servidores, reduzindo drasticamente a latência.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" type="button">
+            <span class="faq-question">Como ativar o teste gratuito de 1 dia?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Para ativar o seu teste gratuito de 24 horas, basta realizar o download do aplicativo e efetuar o cadastro de uma nova conta de usuário. O sistema liberará o acesso premium completo instantaneamente e sem burocracia ou exigência de cartões de crédito.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" type="button">
+            <span class="faq-question">Como usar NoPing?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Basta abrir o aplicativo, fazer login, selecionar o seu jogo favorito na barra de pesquisa, escolher o servidor que apresenta o menor ping e menor tempo de resposta na lista e clicar em "Otimizar". O aplicativo configurará tudo automaticamente em segundo plano.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" type="button">
+            <span class="faq-question">Como saber se meu ping está otimizado?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              A tela de status do aplicativo exibe o gráfico de desempenho e a redução exata da latência alcançada, mostrando o ping antes e depois da ativação. Você também notará que seus comandos e habilidades dentro do jogo respondem com muito mais rapidez e precisão.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-trigger" type="button">
+            <span class="faq-question">Quantos jogos o NoPing suporta?</span>
+            <span class="faq-icon-indicator">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-answer-inner">
+              Suportamos mais de 3.000 títulos competitivos e populares, incluindo os principais lançamentos. Você pode consultar o catálogo completo em <a href="../games/index.html" style="color:var(--np-primary)">/jogos</a>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER (injected) ========== -->
+<footer id="global-footer"></footer>
+
+<!-- Components -->
+<script src="../src/components/header.js"></script>
+<script src="../src/components/footer.js"></script>
+<script src="../src/components/faq.js"></script>
+<script src="../src/components/carousel.js"></script>
+<script src="../src/components/buttons.js"></script>
+<!-- Global -->
+<script src="../src/scripts/global/helpers.js"></script>
+<script src="../src/scripts/global/navigation.js"></script>
+<script src="../src/scripts/global/interactions.js"></script>
+<script src="../src/scripts/global/main.js"></script>
+<!-- Page -->
+<script src="../src/scripts/pages/affiliates.js"></script>
+
+</body>
+</html>

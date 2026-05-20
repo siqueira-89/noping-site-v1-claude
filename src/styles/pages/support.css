@@ -1,0 +1,224 @@
+/* ============================================================
+   /support — Support page
+   Structure: hero (title + collapsible topics + 2 contact cards)
+   → global FAQ section (.section-four, black background)
+   → global footer.
+   The topic buttons reuse the FAQ accordion behaviour (.faq-item
+   / .faq-trigger / .faq-content) so faq.js wires them automatically.
+   ============================================================ */
+
+/* ---------- Hero ---------- */
+
+.support-page .hero {
+  position: relative;
+  padding: calc(var(--np-header-height) + 32px) 0 96px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.support-page .hero__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.support-page .hero__title {
+  font-family: var(--np-font-display);
+  font-size: clamp(2rem, 3.6vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #ffffff;
+  margin: 0 auto;
+  max-width: 720px;
+  text-wrap: balance;
+}
+.support-page .hero__title em {
+  font-style: normal;
+  color: var(--np-primary);
+}
+
+/* ---------- Tópicos (collapsible) ----------
+   The container reuses the .faq-accordion behaviour but with
+   extra heading + a slightly different visual rhythm. The
+   underlying items are .faq-item / .faq-trigger / .faq-content
+   so the global FAQ JS (src/components/faq.js) handles them. */
+
+.support-topics {
+  text-align: left;
+}
+
+.support-topics__heading {
+  display: block;
+  font-family: var(--np-font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+.support-topics__list {
+  /* Reset the affiliates-page scroll constraints — topics list is
+     vertical and not in a scrollable container here. */
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+  gap: 14px;
+}
+
+/* Topic FAQ items: tighter, taller targets, with a green icon */
+.support-topics__list .faq-item {
+  background: var(--np-surface, #1D2028);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--np-radius-sm);
+}
+.support-topics__list .faq-item.active {
+  border-color: var(--np-primary);
+  background: rgba(147, 255, 24, 0.04);
+  box-shadow: 0 0 18px rgba(147, 255, 24, 0.08);
+}
+.support-topics__list .faq-trigger {
+  padding: 18px 22px;
+}
+.support-topics__list .faq-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--np-font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.support-topic-icon {
+  color: var(--np-primary);
+  flex-shrink: 0;
+}
+.support-topics__list .faq-icon-indicator {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 18px;
+  font-weight: 300;
+}
+.support-topics__list .faq-item.active .faq-icon-indicator {
+  color: var(--np-primary);
+}
+.support-topics__list .faq-item.active .support-topic-icon {
+  color: var(--np-primary);
+}
+.support-topics__list .faq-answer-inner {
+  padding: 4px 22px 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+  text-align: left;
+}
+.support-topics__list .faq-answer-inner strong { color: #ffffff; }
+.support-topics__list .faq-answer-inner em {
+  font-style: normal;
+  color: var(--np-primary);
+}
+
+/* ---------- Contact cards (Discord + ticket) ---------- */
+
+.support-contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.support-contact-card {
+  position: relative;
+  padding: 32px 36px 28px;
+  border-radius: var(--np-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s var(--np-ease), box-shadow 0.25s var(--np-ease);
+  overflow: hidden;
+  isolation: isolate;
+}
+.support-contact-card:hover {
+  transform: translateY(-3px);
+}
+
+.support-contact-card--purple {
+  background: #6326e0;
+  color: #ffffff;
+}
+.support-contact-card--purple:hover {
+  box-shadow: 0 24px 60px -20px rgba(99, 38, 224, 0.55);
+}
+
+.support-contact-card--blue {
+  background: #19c1f4;
+  color: #0a1014;
+}
+.support-contact-card--blue:hover {
+  box-shadow: 0 24px 60px -20px rgba(25, 193, 244, 0.55);
+}
+
+.support-contact-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  margin-bottom: 18px;
+}
+.support-contact-card--purple .support-contact-card__icon { color: #ffffff; }
+.support-contact-card--blue   .support-contact-card__icon { color: #0a1014; background: rgba(0, 0, 0, 0.18); }
+
+.support-contact-card__title {
+  font-family: var(--np-font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 10px;
+}
+
+.support-contact-card__copy {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  margin: 0 0 24px;
+  max-width: 36ch;
+}
+.support-contact-card--purple .support-contact-card__copy { color: rgba(255, 255, 255, 0.82); }
+.support-contact-card--blue   .support-contact-card__copy { color: rgba(10, 16, 20, 0.78); }
+
+.support-contact-card__cta {
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  font-weight: 800;
+}
+/* Override the default FAQ button hover so the contact-card CTA
+   doesn't fight the card hover — keep it crisp. */
+.support-contact-card:hover .faq-btn.green  { box-shadow: 0 0 18px rgba(147, 255, 24, 0.45); }
+.support-contact-card:hover .faq-btn.purple { box-shadow: 0 0 18px rgba(84, 62, 255, 0.55); }
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 900px) {
+  .support-contact-grid { grid-template-columns: 1fr; }
+  .support-page .hero { padding-bottom: 64px; }
+  .support-page .hero__content { gap: 36px; }
+}
+
+/* ---------- FAQ section background — always black ---------- */
+/* Belt-and-suspenders: the global .section-four already paints
+   #000, but enforce it here so the support page is bulletproof. */
+.support-page .section-four { background: #000000; }

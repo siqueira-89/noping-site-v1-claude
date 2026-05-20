@@ -1,0 +1,6 @@
+{
+  "_comment": "Placeholder pricing data — populate when the /precos page is designed.",
+  "currency": "BRL",
+  "trial": { "days": 1, "requiresCard": false },
+  "plans": []
+}
