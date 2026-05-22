@@ -1,0 +1,139 @@
+/* ============================================================
+   NoPing — CSS complementar (exceções fora do Tailwind)
+   ============================================================
+   Arquivo central de CSS customizado que NÃO pode ser
+   replicado de forma limpa em Tailwind. Use com parcimônia.
+
+   O que cabe aqui:
+     - @keyframes específicos do projeto (pulses, shimmers…)
+     - Combinações de pseudo-elementos (::before/::after) que
+       gerariam markup desnecessário só para virar utilitário
+     - Filtros / clip-path / mask-image avançados
+     - Estilos sobre elementos gerados por JS quando não dá
+       para tocar no JS
+
+   O que NÃO cabe:
+     - Espaçamento, cor, tipografia ou layout que tem token
+       direto no Tailwind (use `bg-np-primary`, `p-np-lg`, etc.)
+     - Variações de página que cabem em utilitários inline
+     - Reset / base — já temos em src/styles/global/reset.css
+   ============================================================ */
+
+/* (vazio por enquanto — adicionar somente quando uma página
+   migrada precisar de algo que Tailwind não cobre) */
+
+/* ============================================================
+   /suporte — overrides do FAQ usado como lista de "tópicos"
+   ------------------------------------------------------------
+   O bloco de tópicos reusa o markup do FAQ (.faq-item /
+   .faq-trigger / .faq-content) para herdar o JS de abertura.
+   Esses overrides ajustam o visual sem mexer no JS.
+   ============================================================ */
+
+.support-topics__list {
+  /* Reset das restrições do scroll do FAQ original. */
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+  gap: 14px;
+}
+.support-topics__list .faq-item {
+  background: var(--np-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--np-radius-sm);
+}
+.support-topics__list .faq-item.active {
+  border-color: var(--np-primary);
+  background: rgba(147, 255, 24, 0.04);
+  box-shadow: 0 0 18px rgba(147, 255, 24, 0.08);
+}
+.support-topics__list .faq-trigger { padding: 18px 22px; }
+.support-topics__list .faq-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--np-font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.support-topics__list .faq-icon-indicator {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 18px;
+  font-weight: 300;
+}
+.support-topics__list .faq-item.active .faq-icon-indicator,
+.support-topics__list .faq-item.active .support-topic-icon { color: var(--np-primary); }
+.support-topics__list .faq-answer-inner {
+  padding: 4px 22px 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+  text-align: left;
+}
+.support-topics__list .faq-answer-inner strong { color: #ffffff; }
+.support-topics__list .faq-answer-inner em {
+  font-style: normal;
+  color: var(--np-primary);
+}
+.support-topic-icon { color: var(--np-primary); flex-shrink: 0; }
+
+/* Hover glows dos cards de contato (Discord + ticket) — somam ao
+   transform/shadow controlados via Tailwind utilities. */
+.support-contact-card:hover .faq-btn.green  { box-shadow: 0 0 18px rgba(147, 255, 24, 0.45); }
+.support-contact-card:hover .faq-btn.purple { box-shadow: 0 0 18px rgba(84, 62, 255, 0.55); }
+
+/* ============================================================
+   /download — botões de plataforma (.btn .active)
+   ------------------------------------------------------------
+   Estilos disparados pelo JS via classe .active. Sobrescrevem
+   o .btn global (buttons.css) com altura/min-width próprios
+   e estado ativo neon. Mantidos como CSS porque o toggle de
+   .active é controlado por JS — usar Tailwind exigiria
+   `[&.active]:` com vários `!important` por causa do .btn base.
+   ============================================================ */
+
+.downloads-page .hero__downloads .btn {
+  min-width: 180px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid var(--np-border-strong);
+  font-family: var(--np-font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--np-radius-sm);
+  cursor: pointer;
+  transition: all 0.25s var(--np-ease);
+}
+.downloads-page .hero__downloads .btn:hover {
+  border-color: var(--np-border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+.downloads-page .hero__downloads .btn.active {
+  background: var(--np-primary);
+  color: #000000;
+  border-color: var(--np-primary);
+  box-shadow: 0 0 24px var(--np-primary-glow);
+}
+.downloads-page .hero__downloads .btn .btn-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.25s ease;
+}
+.downloads-page .hero__downloads .btn.active .btn-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+@media (max-width: 720px) {
+  .downloads-page .hero__downloads-group { flex-direction: column; align-items: stretch; width: 100%; }
+  .downloads-page .hero__downloads .btn  { min-width: 0; width: 100%; justify-content: center; }
+}
+

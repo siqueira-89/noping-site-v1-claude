@@ -43,19 +43,36 @@ function ProPlayers() {
   const base = knownPages.has(segments[segments.length - 1] || '') ? '../' : '';
 
   // Boot the GLOBAL carousel (the exact same animation as /affiliates).
-  // Once the refs are in DOM, NoPingCarousel.init wires auto-scroll +
-  // progress thumb + pause-on-interact behavior. Identical UX.
+  // Polls for window.NoPingCarousel availability — on slow networks
+  // (e.g. GitHub Pages cold loads) the global script might land
+  // AFTER React has already mounted. Retrying every 200ms guarantees
+  // we still wire the auto-scroll + progress thumb once carousel.js
+  // arrives. Stops as soon as it succeeds or the component unmounts.
   React.useEffect(() => {
-    if (!window.NoPingCarousel || !window.NoPingCarousel.init) return;
-    if (!containerRef.current || !trackRef.current || !thumbRef.current) return;
-    const handle = window.NoPingCarousel.init({
-      container: containerRef.current,
-      track:     trackRef.current,
-      thumb:     thumbRef.current,
-      autoDelay: 4000,
-      scrollAmount: 330
-    });
-    return () => { if (handle && handle.stop) handle.stop(); };
+    let cancelled = false;
+    let handle = null;
+    let attempts = 0;
+    function tryInit() {
+      if (cancelled) return;
+      attempts += 1;
+      const ready =
+        window.NoPingCarousel &&
+        typeof window.NoPingCarousel.init === 'function' &&
+        containerRef.current && trackRef.current && thumbRef.current;
+      if (!ready) {
+        if (attempts < 50) setTimeout(tryInit, 200);
+        return;
+      }
+      handle = window.NoPingCarousel.init({
+        container: containerRef.current,
+        track:     trackRef.current,
+        thumb:     thumbRef.current,
+        autoDelay: 4000,
+        scrollAmount: 330
+      });
+    }
+    tryInit();
+    return () => { cancelled = true; if (handle && handle.stop) handle.stop(); };
   }, []);
 
   return (
@@ -75,7 +92,18 @@ function ProPlayers() {
               {HOME_PROS.map((p, i) => (
                 <div key={i} className="affiliate-card">
                   <div className="card-image-container">
-                    <img src={base + p.img} alt={p.handle} className="affiliate-avatar"/>
+                    <img
+                      src={base + p.img}
+                      alt={p.handle}
+                      className="affiliate-avatar"
+                      loading="lazy"
+                      onError={(e) => {
+                        // Bulletproof fallback for case-sensitive servers
+                        // (GitHub Pages) or asset path drift. Hides the
+                        // broken-image icon so the card layout stays clean.
+                        e.currentTarget.style.visibility = 'hidden';
+                      }}
+                    />
                   </div>
                   <div className="card-content">
                     <div className="card-content-inner">

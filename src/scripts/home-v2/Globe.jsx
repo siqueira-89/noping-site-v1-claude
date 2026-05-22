@@ -463,10 +463,13 @@ function Globe({ state = "bad", style = "realistic", size = 560, className = "",
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
     >
-      {/* Starfield + speed particles (warp effect when goodRoutesOn) */}
+      {/* Starfield + speed particles (warp effect when goodRoutesOn).
+          Reduced star counts (was 140 / 700) — keeps the cinematic
+          look but cuts SVG cost. The `speedParticles` warp mode also
+          uses fewer streaks for the same reason. */}
       <svg viewBox={`0 0 ${size} ${size}`} width={size} height={size}
         style={{position:'absolute',inset:0,pointerEvents:'none'}}>
-        {[...Array(speedParticles ? 700 : 140)].map((_,i) => {
+        {[...Array(speedParticles ? 250 : 80)].map((_,i) => {
           const seed = (i * 9301 + 49297) % 233280;
           const rx = (seed % 1000) / 1000;
           const ry = ((seed * 7) % 1000) / 1000;
@@ -551,41 +554,27 @@ function Globe({ state = "bad", style = "realistic", size = 560, className = "",
         <circle cx={cx} cy={cy} r={R_CLIP} fill="url(#sphereHighlight)"/>
 
         <g clipPath="url(#sphereClip)">
-          {/* Realistic: Kaspersky-style solid continents w/ extruded 3D feel */}
+          {/* Realistic continents — was 5 stacked passes (3 shadows +
+              main + highlight). Reduced to 2 passes (one drop-shadow
+              + main body) for ~60% fewer SVG ops per frame while
+              keeping the extruded 3D feel and the green edge stroke. */}
           {style === "realistic" && (
             <g>
-              {/* Deep shadow below — gives extrusion depth */}
+              {/* Single drop-shadow underneath — gives the extrusion */}
               {landPaths.map((d, i) => (
-                <path key={`s3-${i}`} d={d}
-                  fill="rgba(0,0,0,0.9)"
-                  transform="translate(3.5, 3.5)"/>
+                <path key={`sh-${i}`} d={d}
+                  fill="rgba(0,0,0,0.7)"
+                  transform="translate(2, 2)"
+                  strokeLinejoin="round" strokeLinecap="round"/>
               ))}
-              {landPaths.map((d, i) => (
-                <path key={`s2-${i}`} d={d}
-                  fill="rgba(0,0,0,0.75)"
-                  transform="translate(2.2, 2.2)"/>
-              ))}
-              {landPaths.map((d, i) => (
-                <path key={`s1-${i}`} d={d}
-                  fill="rgba(0,0,0,0.55)"
-                  transform="translate(1, 1)"/>
-              ))}
-              {/* Main solid continent body */}
+              {/* Main solid continent body with state-tinted edge */}
               {landPaths.map((d, i) => (
                 <path key={i} d={d}
                   fill="#14181c"
                   stroke={state === "bad" ? "rgba(255,140,60,0.45)" : "rgba(170,255,70,0.5)"}
                   strokeWidth="0.5"
-                  strokeLinejoin="round"/>
-              ))}
-              {/* Top-left highlight rim — 3D lift */}
-              {landPaths.map((d, i) => (
-                <path key={`hl-${i}`} d={d}
-                  fill="none"
-                  stroke={state === "bad" ? "rgba(255,200,140,0.28)" : "rgba(210,255,150,0.32)"}
-                  strokeWidth="0.6"
                   strokeLinejoin="round"
-                  transform="translate(-0.8, -0.8)"/>
+                  strokeLinecap="round"/>
               ))}
             </g>
           )}

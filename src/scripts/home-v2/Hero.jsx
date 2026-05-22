@@ -315,8 +315,8 @@ function Hero({ tweaks }) {
             </div>
 
             <div className="hero-toggle">
-              <button className={state === "bad" ? "active" : ""} onClick={() => set("bad")}>Sem NoPing</button>
-              <button className={state === "good" ? "active" : ""} onClick={() => set("good")}>Com NoPing</button>
+              <button className={state === "bad" ? "active" : ""} data-state="bad"  onClick={() => set("bad")}>Sem NoPing</button>
+              <button className={state === "good" ? "active" : ""} data-state="good" onClick={() => set("good")}>Com NoPing</button>
             </div>
           </div>
         </div>
