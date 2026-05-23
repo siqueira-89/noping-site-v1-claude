@@ -10,35 +10,39 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Tailwind CSS (Play CDN) + projeto config (tokens --np-* mapeados) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../src/scripts/global/tailwind-config.js"></script>
+
   <!-- Global -->
   <link rel="stylesheet" href="../src/styles/global/variables.css">
   <link rel="stylesheet" href="../src/styles/global/reset.css">
   <link rel="stylesheet" href="../src/styles/global/typography.css">
   <link rel="stylesheet" href="../src/styles/global/layout.css">
   <link rel="stylesheet" href="../src/styles/global/utilities.css">
-  <!-- Components -->
+  <!-- Components (globais — não mexer, dependem do JS injetor) -->
   <link rel="stylesheet" href="../src/styles/components/header.css">
   <link rel="stylesheet" href="../src/styles/components/footer.css">
   <link rel="stylesheet" href="../src/styles/components/buttons.css">
   <link rel="stylesheet" href="../src/styles/components/cards.css">
   <link rel="stylesheet" href="../src/styles/components/forms.css">
-  <!-- Page -->
-  <link rel="stylesheet" href="../src/styles/pages/prices.css">
+  <!-- Overrides (exceções fora do Tailwind — keyframes, glow, blur, canvas) -->
+  <link rel="stylesheet" href="../src/styles/overrides.css">
 </head>
-<body class="prices-page" data-page="prices" data-screen-label="Preços">
+<body class="prices-page min-h-[100svh] flex flex-col" data-page="prices" data-screen-label="Preços">
 
   <div class="grid-bg"></div>
 
   <!-- ========== HEADER (injected) ========== -->
   <header id="global-header" data-active="prices"></header>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero__content">
-        <span class="eyebrow">PLANOS E PREÇOS</span>
-        <h1 class="hero__title">Quanto custa<br>jogar <em>sem lag?</em></h1>
-        <p class="hero__subtitle">Estamos finalizando os detalhes dos planos. Em breve você vai escolher o que combina com seu setup — do casual ao competitivo profissional.</p>
-        <span class="placeholder-note">Página em construção · base pronta para conteúdo</span>
+  <main class="flex-1 flex flex-col pt-header">
+    <section id="hero" class="relative min-h-[calc(100svh-theme(spacing.header))] flex items-center justify-center text-center overflow-hidden">
+      <div class="relative z-[2] w-full max-w-[720px] mx-auto px-5 md:px-8 py-np-md">
+        <span class="eyebrow justify-center mb-np-md">PLANOS E PREÇOS</span>
+        <h1 class="mb-np-md">Quanto custa<br>jogar <em class="not-italic text-np-primary">sem lag?</em></h1>
+        <p class="text-np-fg-dim text-[1.05rem] leading-relaxed mx-auto mb-np-lg max-w-[540px]">Estamos finalizando os detalhes dos planos. Em breve você vai escolher o que combina com seu setup — do casual ao competitivo profissional.</p>
+        <span class="inline-flex items-center gap-[10px] px-[18px] py-[10px] rounded-np-pill border border-dashed border-np-primary/25 bg-np-primary/[0.04] font-np-mono text-[11px] tracking-[0.18em] uppercase text-np-primary">Página em construção · base pronta para conteúdo</span>
       </div>
     </section>
   </main>

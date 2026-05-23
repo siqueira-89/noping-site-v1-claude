@@ -23,6 +23,8 @@
   <link rel="stylesheet" href="src/styles/components/footer.css">
   <!-- Integration bridge (loaded LAST — resolves home-v2 vs global conflicts) -->
   <link rel="stylesheet" href="src/styles/home-v2/_integration.css">
+  <!-- Overrides (page-scoped exceções fora dos CSS de página) -->
+  <link rel="stylesheet" href="src/styles/overrides.css">
 
   <!-- Tweak defaults for the home v2 design tweaks panel -->
   <script type="application/json" id="tweak-defaults">
@@ -39,8 +41,20 @@
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <!-- Anchor the page at the top during the (potentially slow) Babel-
+       transpile boot so the user never momentarily sees the footer. The
+       React app mounts into #root after this fires; `min-height` on
+       #root (set in _integration.css) reserves a full viewport so the
+       footer can never appear in the first paint. -->
+  <script>
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+    window.scrollTo(0, 0);
+  </script>
 </head>
-<body data-page="home" data-screen-label="Home v2 · NoPing">
+<body class="home-page" data-page="home" data-screen-label="Home v2 · NoPing">
+
+  <div class="grid-bg"></div>
 
   <!-- ========== GLOBAL HEADER (injected) ========== -->
   <header id="global-header" data-active="home"></header>

@@ -16,8 +16,21 @@
 
 /* --- base body ------------------------------------------------ */
 body { min-width: 0; }
-#root { padding-top: var(--np-header-height, 72px); }
+
+/* #root must reserve at least one full viewport (minus header) so
+   the footer never appears in the initial paint while the (slow)
+   Babel transpile + React mount is still in flight. This kills the
+   "page starts at footer, scrolls to hero" flash on first load. */
+#root {
+  padding-top: var(--np-header-height, 72px);
+  min-height: calc(100vh - var(--np-header-height, 72px));
+  background: var(--bg-1);
+}
 .section-footer { margin-top: 0; }
+
+/* Subtler ambient overlays — keep the home-v2 atmospheric look
+   but cut the GPU cost (mix-blend overlay scanline + bright grid). */
+body::after { opacity: 0.5; }
 
 /* --- Section sizing -----------------------------------------------
    First .section after #root = Hero (contains hero-grid + stats).

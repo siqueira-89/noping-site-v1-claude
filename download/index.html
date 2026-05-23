@@ -10,42 +10,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Tailwind CSS (Play CDN) + projeto config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="../src/scripts/global/tailwind-config.js"></script>
+
   <!-- Global -->
   <link rel="stylesheet" href="../src/styles/global/variables.css">
   <link rel="stylesheet" href="../src/styles/global/reset.css">
   <link rel="stylesheet" href="../src/styles/global/typography.css">
   <link rel="stylesheet" href="../src/styles/global/layout.css">
   <link rel="stylesheet" href="../src/styles/global/utilities.css">
-  <!-- Components -->
+  <!-- Components (globais — não mexer) -->
   <link rel="stylesheet" href="../src/styles/components/header.css">
   <link rel="stylesheet" href="../src/styles/components/footer.css">
   <link rel="stylesheet" href="../src/styles/components/buttons.css">
   <link rel="stylesheet" href="../src/styles/components/cards.css">
   <link rel="stylesheet" href="../src/styles/components/forms.css">
-  <!-- Page -->
-  <link rel="stylesheet" href="../src/styles/pages/download.css">
+  <!-- Overrides (exceções fora do Tailwind) -->
+  <link rel="stylesheet" href="../src/styles/overrides.css">
 </head>
-<body class="downloads-page" data-page="download" data-screen-label="Downloads">
+<body class="downloads-page min-h-[100svh] flex flex-col" data-page="download" data-screen-label="Downloads">
 
   <div class="grid-bg"></div>
 
   <!-- ========== HEADER (injected) ========== -->
   <header id="global-header" data-active="download"></header>
 
-  <main>
-    <section class="hero" id="hero">
-      <canvas id="particles-canvas" class="particles-canvas"></canvas>
+  <main class="flex-1 flex flex-col pt-header">
+    <section
+      id="hero"
+      class="relative min-h-[calc(100svh-theme(spacing.header))] overflow-hidden flex items-center justify-center bg-np-bg bg-cover bg-top bg-no-repeat bg-[url('../src/assets/download/bg-hero.png')] before:content-[''] before:absolute before:inset-0 before:z-[1] before:pointer-events-none before:bg-[linear-gradient(180deg,rgba(0,0,0,0.35)_0%,rgba(0,0,0,0.15)_40%,rgba(0,0,0,0.25)_100%)]"
+    >
+      <canvas id="particles-canvas" class="absolute inset-0 w-full h-full z-[2] pointer-events-none"></canvas>
 
-      <div class="container hero__content">
-        <div class="hero__copy">
-          <span class="eyebrow" style="margin-bottom: 16px;">DOWNLOAD</span>
-          <h1 class="hero__title">Jogue sem lag no <span class="text-primary">Desktop</span> e <span class="text-primary">Mobile</span></h1>
-          <p class="hero__subtitle">
+      <div class="relative z-[3] w-full max-w-[1280px] mx-auto px-5 md:px-8 flex items-center justify-start max-[720px]:justify-center max-[720px]:text-center">
+        <div class="max-w-[640px] flex flex-col gap-np-md max-[720px]:items-center">
+          <span class="eyebrow mb-4">DOWNLOAD</span>
+          <h1 class="text-[clamp(2.5rem,4vw,3.5rem)] font-bold leading-[1.1] text-white mb-np-xs tracking-np-tight">
+            Jogue sem lag no <span class="text-np-primary">Desktop</span> e <span class="text-np-primary">Mobile</span>
+          </h1>
+          <p class="text-[1.125rem] text-white/70 leading-[1.6] max-w-[440px] [&_strong]:text-white [&_strong]:font-semibold">
             A melhor tecnologia de otimização de rotas agora disponível para <strong>Windows</strong>, <strong>Mac</strong>, <strong>iPhone (App Store)</strong> e <strong>Android (Play Store)</strong>.
           </p>
 
-          <div class="hero__downloads" id="hero-downloads">
-            <div class="hero__downloads-group">
+          <div class="hero__downloads flex flex-col gap-np-sm mt-np-md w-full" id="hero-downloads">
+            <div class="hero__downloads-group flex flex-wrap gap-np-sm">
               <button class="btn active" type="button" data-value="windows">
                 <img src="../src/assets/icons/icon-download.svg" alt="" class="btn-icon">
                 Windows
@@ -55,7 +64,7 @@
                 Mac
               </button>
             </div>
-            <div class="hero__downloads-group">
+            <div class="hero__downloads-group flex flex-wrap gap-np-sm">
               <button class="btn" type="button" data-value="ios">
                 <img src="../src/assets/icons/icon-mobile.svg" alt="" class="btn-icon">
                 App Store

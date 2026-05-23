@@ -1,0 +1,329 @@
+/* ============================================================
+   NoPing — CSS complementar (exceções fora do Tailwind)
+   ============================================================
+   Arquivo central de CSS customizado que NÃO pode ser
+   replicado de forma limpa em Tailwind. Use com parcimônia.
+
+   O que cabe aqui:
+     - @keyframes específicos do projeto (pulses, shimmers…)
+     - Combinações de pseudo-elementos (::before/::after) que
+       gerariam markup desnecessário só para virar utilitário
+     - Filtros / clip-path / mask-image avançados
+     - Estilos sobre elementos gerados por JS quando não dá
+       para tocar no JS
+
+   O que NÃO cabe:
+     - Espaçamento, cor, tipografia ou layout que tem token
+       direto no Tailwind (use `bg-np-primary`, `p-np-lg`, etc.)
+     - Variações de página que cabem em utilitários inline
+     - Reset / base — já temos em src/styles/global/reset.css
+   ============================================================ */
+
+/* (vazio por enquanto — adicionar somente quando uma página
+   migrada precisar de algo que Tailwind não cobre) */
+
+/* ============================================================
+   /suporte — overrides do FAQ usado como lista de "tópicos"
+   ------------------------------------------------------------
+   O bloco de tópicos reusa o markup do FAQ (.faq-item /
+   .faq-trigger / .faq-content) para herdar o JS de abertura.
+   Esses overrides ajustam o visual sem mexer no JS.
+   ============================================================ */
+
+.support-topics__list {
+  /* Reset das restrições do scroll do FAQ original. */
+  max-height: none;
+  overflow: visible;
+  padding-right: 0;
+  gap: 14px;
+}
+.support-topics__list .faq-item {
+  background: var(--np-surface);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--np-radius-sm);
+}
+.support-topics__list .faq-item.active {
+  border-color: var(--np-primary);
+  background: rgba(147, 255, 24, 0.04);
+  box-shadow: 0 0 18px rgba(147, 255, 24, 0.08);
+}
+.support-topics__list .faq-trigger { padding: 18px 22px; }
+.support-topics__list .faq-question {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--np-font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.support-topics__list .faq-icon-indicator {
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 18px;
+  font-weight: 300;
+}
+.support-topics__list .faq-item.active .faq-icon-indicator,
+.support-topics__list .faq-item.active .support-topic-icon { color: var(--np-primary); }
+.support-topics__list .faq-answer-inner {
+  padding: 4px 22px 20px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.62);
+  text-align: left;
+}
+.support-topics__list .faq-answer-inner strong { color: #ffffff; }
+.support-topics__list .faq-answer-inner em {
+  font-style: normal;
+  color: var(--np-primary);
+}
+.support-topic-icon { color: var(--np-primary); flex-shrink: 0; }
+
+/* Hover glows dos cards de contato (Discord + ticket) — somam ao
+   transform/shadow controlados via Tailwind utilities. */
+.support-contact-card:hover .faq-btn.green  { box-shadow: 0 0 18px rgba(147, 255, 24, 0.45); }
+.support-contact-card:hover .faq-btn.purple { box-shadow: 0 0 18px rgba(84, 62, 255, 0.55); }
+
+/* ============================================================
+   /suporte — page shell (Bloco 3 — 2026-05-21 · revisado)
+   ------------------------------------------------------------
+   /support adota o page shell prescrito por
+   docs/layout/sections.md + decisions.md D-010:
+
+     body  { min-height: 100svh; flex flex-col }
+     main  { flex: 1 }
+     footer wrapper continua com altura própria do design system
+
+   Decisão de revisão (2026-05-21):
+   ------------------------------------------------------------
+   A primeira tentativa neutralizou
+   `.section-footer { height: 100vh; padding-top: 72px }` para
+   esta página, mas isso colapsou a respiração vertical interna
+   do footer (`.footer__top { flex-grow: 1; align-content: center }`),
+   produzindo um footer mais compacto que o aprovado em /affiliates.
+
+   A regra global do footer foi REINTRODUZIDA aqui — `/support`
+   compartilha exatamente o mesmo footer visual de `/affiliates`.
+
+   O page shell continua válido: como o conteúdo é maior que a
+   viewport, `main { flex: 1 }` é um no-op visual, mas a estrutura
+   está correta para quando uma futura página curta precisar dela.
+
+   Fallback explícito para browsers sem `100svh` mantido.
+   ============================================================ */
+
+@supports not (height: 100svh) {
+  .support-page { min-height: 100vh; }
+}
+
+/* ============================================================
+   /precos — page shell (Bloco 4 — 2026-05-21)
+   ------------------------------------------------------------
+   Mesma estratégia aplicada em /support: page shell ativo,
+   regra global de footer (.section-footer { height: 100vh })
+   PRESERVADA para manter consistência com /affiliates.
+
+   O page shell é um no-op visual em páginas longas e empurra
+   o footer para o fim em páginas curtas. /prices é curta —
+   o page shell faz sentido aqui.
+   ============================================================ */
+
+@supports not (height: 100svh) {
+  .prices-page { min-height: 100vh; }
+}
+
+/* ============================================================
+   /claro — page shell + container 1280 (Bloco 4 — 2026-05-21)
+   ------------------------------------------------------------
+   /claro não usa Tailwind (CSS legado em pages/home.css). Para
+   alinhar com as regras D-009/D-010/D-012 sem reescrever a
+   página, aplicamos o page shell + container 1280 como
+   override escopado por `.claro-page`.
+
+   `.hero` em pages/home.css usa `min-height: 100vh`. Subimos
+   para `100svh` apenas para esta página (não toca o CSS
+   global de outras páginas que possam reusar home.css no
+   futuro).
+
+   Container global é 1360 via var(--np-container-max). Para
+   /claro, forçamos 1280 inline (alinhado a D-008/D-014).
+   Backgrounds e o grid bg continuam full-width.
+   ============================================================ */
+
+.claro-page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.claro-page > main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.claro-page .hero {
+  min-height: calc(100svh - var(--np-header-height));
+}
+.claro-page .container {
+  max-width: 1280px;
+}
+
+@supports not (height: 100svh) {
+  .claro-page { min-height: 100vh; }
+  .claro-page .hero { min-height: calc(100vh - var(--np-header-height)); }
+}
+
+/* ============================================================
+   /download — page shell (Bloco 4 — 2026-05-21)
+   ------------------------------------------------------------
+   Mesma estratégia de page shell. A hero usa background-image
+   + canvas de partículas (#particles-canvas) — o canvas é
+   inicializado via interactions.js (NoPingFX.dataParticles)
+   e mede seu tamanho via canvas.parentElement.clientWidth/Height,
+   adaptando-se automaticamente ao novo tamanho da hero.
+
+   Particles, mouse-reactive pulses e botão .active continuam
+   funcionando — apenas a geometria do wrapper foi padronizada.
+   ============================================================ */
+
+@supports not (height: 100svh) {
+  .downloads-page { min-height: 100vh; }
+}
+
+/* ============================================================
+   /affiliates — APENAS body class + link de overrides.css
+   ------------------------------------------------------------
+   Bloco 5 (2026-05-21) tentou aplicar overrides de svh em
+   .section-one, .section-five, .hero-wrapper e .faq-grid,
+   mas isso quebrou a responsividade da página: o @media
+   (max-width: 1024px) de pages/affiliates.css usa
+   `.hero-wrapper { height: auto }` para liberar o conteúdo,
+   e a especificidade `.affiliates-page .hero-wrapper`
+   (0,2,0) vence o @media (0,1,0), forçando height fixo
+   indesejado.
+
+   Decisão: NÃO sobreescrever /affiliates. A página é a
+   REFERÊNCIA VISUAL APROVADA (D-002, D-015) e já usa
+   `min-height: 100vh + padding-top: 72px + box-sizing: border-box`,
+   que é VISUALMENTE EQUIVALENTE a `min-height: calc(100svh-72px)`
+   no padrão canônico de sections.md.
+
+   O ganho marginal de `100svh` em mobile Safari (resolver o
+   "salto" quando o chrome dinâmico recolhe) NÃO justifica
+   o risco de regressão na referência visual do projeto.
+
+   Apenas mantemos:
+   - body class `affiliates-page` (não tem efeito visual sem CSS)
+   - link de overrides.css (necessário para futuras exceções
+     escopadas SEM tocar pages/affiliates.css)
+   ============================================================ */
+
+/* ============================================================
+   /games — upgrade 100vh → 100svh (Bloco 5 — 2026-05-21)
+   ------------------------------------------------------------
+   pages/games.css define:
+     .jogos-page .hero-wrapper { min-height: 100vh; ... }
+     .sect-2 { min-height: 100vh; ... }
+   E o @media (max-width: 1024px) NÃO sobreescreve essas regras
+   (apenas .hero-split, .deck-grid, etc.). Por isso o upgrade
+   para 100svh aqui é SEGURO — usa min-height (não height),
+   não conflita com responsive, e melhora mobile Safari.
+
+   Deck 3D, dropdowns sort/genre, catálogo de games, animações
+   e JS de página continuam intactos. Container global (1360
+   via .shell) preservado — não migra para 1280 por enquanto
+   (deck 3D foi sized para 1360, alterar exige snapshot
+   antes/depois do deck).
+   ============================================================ */
+
+.jogos-page .hero-wrapper { min-height: 100svh; }
+.jogos-page .sect-2 { min-height: 100svh; }
+
+@supports not (height: 100svh) {
+  .jogos-page .hero-wrapper { min-height: 100vh; }
+  .jogos-page .sect-2 { min-height: 100vh; }
+}
+
+/* ============================================================
+   / (home v2) — upgrade 100vh → 100svh (Bloco 5 — 2026-05-21)
+   ------------------------------------------------------------
+   home-v2/_integration.css define:
+     #root { padding-top: 72px; min-height: calc(100vh - 72px) }
+     #root > .section, #root > .hero { min-height: calc(100vh - 72px) }
+
+   Upgrade APENAS de `#root` para `100svh`. NÃO sobreescrever
+   as sections internas — o react-app tem `.section-sm` com
+   `min-height: 0` que tinha menor especificidade que
+   `.home-page #root > .section` (0,2,1), causando regressão
+   (sections-sm cresciam de 218px para 468px).
+
+   `#root` é o único container que precisa do svh para evitar
+   "salto" em mobile Safari. As sections internas usam `100vh`
+   que é funcionalmente equivalente em desktop.
+
+   Globe, Coverage, AppDashboard, layout React inteiro
+   preservados.
+   ============================================================ */
+
+.home-page #root {
+  min-height: calc(100svh - var(--np-header-height));
+}
+
+@supports not (height: 100svh) {
+  .home-page #root {
+    min-height: calc(100vh - var(--np-header-height));
+  }
+}
+
+/* ============================================================
+   /download — botões de plataforma (.btn .active)
+   ------------------------------------------------------------
+   Estilos disparados pelo JS via classe .active. Sobrescrevem
+   o .btn global (buttons.css) com altura/min-width próprios
+   e estado ativo neon. Mantidos como CSS porque o toggle de
+   .active é controlado por JS — usar Tailwind exigiria
+   `[&.active]:` com vários `!important` por causa do .btn base.
+   ============================================================ */
+
+.downloads-page .hero__downloads .btn {
+  min-width: 180px;
+  padding: 14px 28px;
+  background: transparent;
+  color: #ffffff;
+  border: 1px solid var(--np-border-strong);
+  font-family: var(--np-font-display);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--np-radius-sm);
+  cursor: pointer;
+  transition: all 0.25s var(--np-ease);
+}
+.downloads-page .hero__downloads .btn:hover {
+  border-color: var(--np-border-hover);
+  background: rgba(255, 255, 255, 0.04);
+}
+.downloads-page .hero__downloads .btn.active {
+  background: var(--np-primary);
+  color: #000000;
+  border-color: var(--np-primary);
+  box-shadow: 0 0 24px var(--np-primary-glow);
+}
+.downloads-page .hero__downloads .btn .btn-icon {
+  width: 20px;
+  height: 20px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.25s ease;
+}
+.downloads-page .hero__downloads .btn.active .btn-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+@media (max-width: 720px) {
+  .downloads-page .hero__downloads-group { flex-direction: column; align-items: stretch; width: 100%; }
+  .downloads-page .hero__downloads .btn  { min-width: 0; width: 100%; justify-content: center; }
+}
+
