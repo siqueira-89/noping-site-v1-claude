@@ -17,6 +17,9 @@
   <!-- Global -->
   <link rel="stylesheet" href="../src/styles/global/variables.css">
   <link rel="stylesheet" href="../src/styles/global/reset.css">
+  <link rel="stylesheet" href="../src/styles/global/typography.css">
+  <link rel="stylesheet" href="../src/styles/global/layout.css">
+  <link rel="stylesheet" href="../src/styles/global/utilities.css">
   <!-- Components (globais — não mexer) -->
   <link rel="stylesheet" href="../src/styles/components/header.css">
   <link rel="stylesheet" href="../src/styles/components/footer.css">
@@ -28,17 +31,17 @@
   <!-- Overrides (exceções fora do Tailwind — keyframes, glow, blur, canvas) -->
   <link rel="stylesheet" href="../src/styles/overrides.css">
 </head>
-<body class="support-page" data-page="support" data-screen-label="Suporte">
+<body class="support-page min-h-[100svh] flex flex-col" data-page="support" data-screen-label="Suporte">
 
   <div class="grid-bg"></div>
 
   <!-- ========== HEADER (injected) ========== -->
   <header id="global-header" data-active="support"></header>
 
-  <main>
+  <main class="flex-1 flex flex-col pt-header">
     <!-- ========== HERO ========== -->
-    <section id="hero" class="relative pt-[calc(theme(spacing.header)+32px)] pb-np-2xl flex flex-col items-center text-center">
-      <div class="container relative z-[2] w-full max-w-[1080px] flex flex-col gap-12">
+    <section id="hero" class="relative min-h-[calc(100svh-theme(spacing.header))] py-np-md flex flex-col items-center justify-center text-center">
+      <div class="relative z-[2] w-full max-w-[1080px] mx-auto px-5 md:px-8 flex flex-col gap-12">
         <h1 class="font-np-display text-[clamp(2rem,3.6vw,2.8rem)] font-bold tracking-np-tight leading-[1.15] text-white mx-auto max-w-[720px] text-balance">Como podemos <em class="not-italic text-np-primary">ajudá-lo</em>?</h1>
 
         <!-- Topics — reusa o markup do FAQ para herdar comportamento do faq.js -->
@@ -148,7 +151,7 @@
 
     <!-- ========== FAQ (global) ========== -->
     <section class="section section-four bg-black" id="faq">
-      <div class="container">
+      <div class="w-full max-w-[1280px] mx-auto px-5 md:px-8">
         <div class="faq-grid">
           <div class="faq-left">
             <div class="eyebrow mb-3">SUPORTE</div>

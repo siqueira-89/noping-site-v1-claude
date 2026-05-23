@@ -13,9 +13,9 @@
   <!-- Global -->
   <link rel="stylesheet" href="../src/styles/global/variables.css">
   <link rel="stylesheet" href="../src/styles/global/reset.css">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="../src/scripts/global/tailwind-config.js"></script>
-  <link rel="stylesheet" href="../src/styles/overrides.css">
+  <link rel="stylesheet" href="../src/styles/global/typography.css">
+  <link rel="stylesheet" href="../src/styles/global/layout.css">
+  <link rel="stylesheet" href="../src/styles/global/utilities.css">
   <!-- Components -->
   <link rel="stylesheet" href="../src/styles/components/header.css">
   <link rel="stylesheet" href="../src/styles/components/footer.css">
@@ -23,21 +23,23 @@
   <link rel="stylesheet" href="../src/styles/components/cards.css">
   <link rel="stylesheet" href="../src/styles/components/forms.css">
   <!-- Page -->
-  <!-- affiliates.css import removido (exceções migradas para overrides.css e layout para Tailwind) -->
+  <link rel="stylesheet" href="../src/styles/pages/affiliates.css">
+  <!-- Overrides (exceções escopadas por página — upgrade svh) -->
+  <link rel="stylesheet" href="../src/styles/overrides.css">
 </head>
-<body data-page="affiliates" data-screen-label="Affiliates">
+<body data-page="affiliates" data-screen-label="Affiliates" class="affiliates-page">
 
 <div class="grid-bg"></div>
 
 <!-- ========== SECTION 1 — HEADER + HERO (ambassadors + cards) ========== -->
-<section class="min-h-screen pt-header box-border flex flex-col overflow-hidden relative">
+<section class="section-one">
   <header id="global-header" data-active="affiliates"></header>
 
-  <main class="flex flex-col relative z-10 py-6 gap-8 h-auto max-h-none lg:h-[calc(100vh-72px)] lg:max-h-[840px] lg:min-h-[600px] lg:gap-0 lg:pt-0 lg:pb-6" id="hero">
+  <main class="hero-wrapper" id="hero">
     <!-- Part 1: Ambassadors ---------------------------------------------- -->
     <div class="hero-ambassadors">
       <canvas id="hero-particles" class="hero-particles-canvas"></canvas>
-      <div class="container mx-auto px-6 max-w-[1360px] hero-ambassadors-inner">
+      <div class="shell hero-ambassadors-inner">
         <div class="ambassadors-left">
           <span class="eyebrow-affiliates">PROGRAMA DE PARCEIROS</span>
           <h1 class="hero-title">Faça como as Lendas,<br>use <em class="highlight-green">NoPing!</em></h1>
@@ -67,7 +69,7 @@
     </div>
 
     <!-- Part 2: Affiliate cards carousel -------------------------------- -->
-    <div class="hero-affiliates-cards container mx-auto px-6 max-w-[1360px]">
+    <div class="hero-affiliates-cards shell">
       <div class="affiliates-carousel-container" id="affiliates-carousel-container">
         <div class="affiliates-track" id="affiliates-track">
 
@@ -317,9 +319,9 @@
 </section>
 
 <!-- ========== SECTION 2 — TUTORIAL ========== -->
-<section class="min-h-screen flex items-center py-20 lg:py-[120px] bg-transparent">
-  <div class="container mx-auto px-6 max-w-[1360px]">
-    <div class="font-np-mono text-[11px] tracking-[0.18em] uppercase text-np-primary font-bold" style="margin-bottom: 12px;">PASSO A PASSO</div>
+<section class="section-viewport section-two">
+  <div class="shell">
+    <div class="eyebrow" style="margin-bottom: 12px;">PASSO A PASSO</div>
     <h2 class="hero-title" style="font-size: 28px; margin-bottom: 8px; max-width: 800px;">Como participar do programa de parceria NoPing</h2>
     <p class="hero-desc" style="max-width: 900px; margin-bottom: 24px; font-size: 12.5px;">Junte-se ao nosso exclusivo Clube de Benefícios para Parceiros! Em apenas três passos, você pode embarcar em uma jornada recompensadora em um mundo sem lag e com alto FPS. Registre-se, gere seu link de compartilhamento exclusivo e comece a aproveitar os benefícios agora mesmo!</p>
 
@@ -379,11 +381,11 @@
 </section>
 
 <!-- ========== SECTION 3 — RANK ========== -->
-<section class="min-h-screen flex items-center py-20 lg:py-[120px] bg-transparent">
-  <div class="container mx-auto px-6 max-w-[1360px]">
+<section class="section-viewport section-three">
+  <div class="shell">
     <div class="rank-header">
       <div style="display: flex; flex-direction: column; gap: 4px;">
-        <div class="font-np-mono text-[11px] tracking-[0.18em] uppercase text-np-primary font-bold">RECOMPENSAS</div>
+        <div class="eyebrow">RECOMPENSAS</div>
         <h2 class="rank-title">Cada nível oferecendo benefícios e recompensas únicas</h2>
       </div>
       <a href="#" class="rank-btn">AFILIE-SE AO NOPING</a>
@@ -459,11 +461,11 @@
 </section>
 
 <!-- ========== SECTION 4 — FAQ ========== -->
-<section class="min-h-screen flex items-center py-20 lg:py-[120px] bg-black" id="faq">
-  <div class="container mx-auto px-6 max-w-[1360px]">
+<section class="section-viewport section-four" id="faq">
+  <div class="shell">
     <div class="faq-grid">
       <div class="faq-left">
-        <div class="font-np-mono text-[11px] tracking-[0.18em] uppercase text-np-primary font-bold" style="margin-bottom: 12px;">SUPORTE</div>
+        <div class="eyebrow" style="margin-bottom: 12px;">SUPORTE</div>
         <h2 class="faq-title">Perguntas Frequentes</h2>
         <p class="faq-desc">Explore nossa seção de perguntas frequentes para encontrar respostas a todas as suas dúvidas. De detalhes sobre assinatura a suporte técnico, cobrimos tudo para garantir uma experiência de jogo tranquila e agradável.</p>
         <div class="faq-btn-group">
