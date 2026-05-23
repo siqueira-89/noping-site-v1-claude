@@ -251,7 +251,7 @@
 
 .hero-affiliates-cards {
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 32px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -260,21 +260,26 @@
 .affiliates-carousel-container {
   width: 100%;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   scroll-behavior: smooth;
   padding: 5px 0 10px;
   display: flex;
   justify-content: flex-start;
   scrollbar-width: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: grab;
 }
+.affiliates-carousel-container:active { cursor: grabbing; }
 .affiliates-carousel-container::-webkit-scrollbar { display: none; }
 .affiliates-track {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   padding: 0;
 }
 .affiliate-card {
-  width: 306px;
-  height: 420px;
+  width: 290px;
+  height: 398px;
   flex-shrink: 0;
   background: linear-gradient(180deg, rgba(29, 32, 40, 0.65) 0%, rgba(10, 12, 14, 0.96) 100%);
   border-radius: var(--np-radius-md);

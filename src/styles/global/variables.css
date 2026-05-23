@@ -159,7 +159,9 @@
   --ease:    var(--np-ease);
 
   /* ---------- Layout ---------- */
-  --np-container-max: 1360px;
+  /* Canonical container width — aligned with the /games reference (Bloco 8 — 2026-05-21).
+     Was 1360px (legacy); now 1280px globally per docs/layout/container.md + D-008. */
+  --np-container-max: 1280px;
   --np-header-height: 72px;
   --max-width:    1280px;
   --page-max:     var(--np-container-max);

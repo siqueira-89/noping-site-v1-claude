@@ -47,7 +47,7 @@
   width: 100%;
   max-width: var(--np-container-max);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 32px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -60,7 +60,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 0;
+  padding: 16px 0;
   flex-shrink: 0;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .footer__cert-logo {
-  height: 48px;
+  height: 40px;
   width: auto;
   object-fit: contain;
 }
@@ -105,7 +105,7 @@
   opacity: 0.9;
 }
 .footer__store-btn img {
-  height: 42px;
+  height: 36px;
   width: auto;
 }
 
@@ -124,8 +124,8 @@
 .footer__top {
   display: grid;
   grid-template-columns: 2fr repeat(5, 1fr);
-  gap: 32px;
-  padding: 0;
+  gap: 28px;
+  padding: 16px 0;
   flex-grow: 1;
   align-content: center;
 }
@@ -139,7 +139,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .footer__brand-logo {
@@ -156,7 +156,7 @@
 
 /* ---------- Promo box ---------- */
 
-.footer__promo { margin-bottom: 32px; }
+.footer__promo { margin-bottom: 24px; }
 
 .footer__promo-title {
   font-family: var(--np-font-display);
@@ -171,7 +171,7 @@
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
   line-height: 1.5;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   max-width: 360px;
 }
 
@@ -195,7 +195,7 @@
   border-radius: var(--np-radius-sm);
   text-decoration: none;
   transition: all 0.2s;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   box-shadow: 0 4px 20px rgba(147, 255, 24, 0.25);
   white-space: nowrap;
   width: 100%;

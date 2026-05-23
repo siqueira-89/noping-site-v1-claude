@@ -131,7 +131,7 @@ body { min-width: 0; }
 .affiliates-carousel-container::-webkit-scrollbar { display: none; }
 .affiliates-track {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   padding: 0;
 }
 .affiliates-progress-bar-container {
@@ -160,8 +160,8 @@ body { min-width: 0; }
 }
 
 .affiliate-card {
-  width: 306px;
-  height: 420px;
+  width: 290px;
+  height: 398px;
   flex-shrink: 0;
   background: linear-gradient(180deg, rgba(29, 32, 40, 0.65) 0%, rgba(10, 12, 14, 0.96) 100%);
   border-radius: var(--r-md);
